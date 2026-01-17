@@ -3,7 +3,6 @@ package com.bithack.apparatus.graphics;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.bithack.apparatus.ResourceFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,34 +59,12 @@ public class TextureFactory {
         return load_handle(filename, filetype, minfilter, maxfilter, wrap_x, wrap_y).texture;
     }
 
-    public static int load_id(String filename) {
-        return load_handle(filename, Files.FileType.Internal, Texture.TextureFilter.Linear, Texture.TextureFilter.Linear, Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat).id;
-    }
-
     public static Texture load(String filename) {
         return load_handle(filename, Files.FileType.Internal, Texture.TextureFilter.Linear, Texture.TextureFilter.Linear, Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat).texture;
     }
 
     public static Texture load_unfiltered(String filename) {
         return load_handle(filename, Files.FileType.Internal, Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest, Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat).texture;
-    }
-
-    public static Texture load(ResourceFactory.Resource res) {
-        return load(res, Texture.TextureFilter.Linear, Texture.TextureFilter.Linear, Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    }
-
-    public static Texture load(ResourceFactory.Resource res, Texture.TextureFilter minfilter, Texture.TextureFilter maxfilter, Texture.TextureWrap wrap_x, Texture.TextureWrap wrap_y) {
-        String key = String.valueOf(res.file) + minfilter.toString() + maxfilter.toString() + wrap_x.toString() + wrap_y.toString();
-        TextureHandle t = map.get(key);
-        if (t != null) {
-            return t.texture;
-        }
-        Texture tx = new Texture(res.get_handle());
-        tx.setFilter(minfilter, maxfilter);
-        tx.setWrap(wrap_x, wrap_y);
-        TextureHandle t2 = new TextureHandle(tx);
-        add(key, t2);
-        return t2.texture;
     }
 
     public static void unload(Texture t) {

@@ -61,11 +61,7 @@ public class Plank extends Bar implements FreeObject {
         if (!Bar._initialized) {
             Bar._init();
         }
-        if (G.realwidth < 600) {
-            texture = TextureFactory.load_mipmapped("data/wood_small.png");
-        } else {
-            texture = TextureFactory.load_mipmapped("data/wood.png");
-        }
+        texture = TextureFactory.load_mipmapped("data/wood.png");
         _bd = new BodyDef();
         _bd.type = BodyDef.BodyType.DynamicBody;
         _shape = new PolygonShape();

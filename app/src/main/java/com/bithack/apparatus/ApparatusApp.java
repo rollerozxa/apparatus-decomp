@@ -55,11 +55,7 @@ public class ApparatusApp implements ApplicationListener {
 
         void open_autosave_dialog();
 
-        void open_beginner_help_videos();
-
         void open_community();
-
-        void open_facebook();
 
         void open_infobox(String str);
 
@@ -75,8 +71,6 @@ public class ApparatusApp implements ApplicationListener {
 
         void open_level_list();
 
-        void open_market();
-
         void open_packchooser();
 
         void open_sandbox_info();
@@ -87,9 +81,6 @@ public class ApparatusApp implements ApplicationListener {
 
         void open_settings();
 
-        void open_twitter();
-
-        void open_youtube();
     }
 
     @Override // com.badlogic.gdx.ApplicationListener

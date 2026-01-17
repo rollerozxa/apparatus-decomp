@@ -114,7 +114,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     private static boolean a_down = false;
     public static int autosave_id = -1;
     static Texture bgtex;
-    static Texture bgtexlow;
     static Texture bloomtex;
     public static boolean camera_reset = true;
     public static int camera_smoothness = 50;
@@ -468,11 +467,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         this.hingeselecttex = TextureFactory.load("data/hingeselect.png");
         this.nextleveltex = TextureFactory.load_unfiltered("data/nextlvl.png");
         set_bg(0);
-        if (G.realwidth > 870) {
-            this.lvlcompletetex = TextureFactory.load_unfiltered("data/lvlcomplete.png");
-        } else {
-            this.lvlcompletetex = TextureFactory.load_unfiltered("data/lvlcomplete.png");
-        }
+        this.lvlcompletetex = TextureFactory.load_unfiltered("data/lvlcomplete.png");
     }
 
     private void generate_caches() {
@@ -4226,27 +4221,11 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
 
     public void set_bg(int x) {
         if (this.background_n != x) {
-            if (!(bgtexlow == null || bgtexlow == bgtex)) {
-                TextureFactory.unload(bgtexlow);
-            }
             if (bgtex != null) {
                 TextureFactory.unload(bgtex);
             }
-            bgtexlow = null;
-            bgtex = null;
-            if (x > 0) {
-                bgtex = TextureFactory.load_mipmapped("data/bg" + x + ".jpg");
-                bgtexlow = bgtex;
-            } else if (G.realwidth > 870) {
-                bgtex = TextureFactory.load_mipmapped("data/bg_medium.jpg");
-                bgtexlow = TextureFactory.load_mipmapped("data/bg_low.jpg");
-            } else if (G.realwidth < 600) {
-                bgtex = TextureFactory.load_mipmapped("data/bg_low.jpg");
-                bgtexlow = TextureFactory.load_mipmapped("data/bg_low.jpg");
-            } else {
-                bgtex = TextureFactory.load_mipmapped("data/bg_medium.jpg");
-                bgtexlow = TextureFactory.load_mipmapped("data/bg_low.jpg");
-            }
+            bgtex = TextureFactory.load_mipmapped("data/bg" + Math.max(x, 0) + ".jpg");
+
             this.background_n = x;
             if (this.level != null) {
                 this.level.background = this.background_n;

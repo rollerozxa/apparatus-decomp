@@ -288,10 +288,7 @@ public class LevelMenu extends Screen implements InputProcessor {
             this.tp.open_mainmenu();
             return false;
         }
-        if (x > G.realwidth - 300 && y > G.realheight - 64) {
-            ApparatusApp.backend.open_beginner_help_videos();
-            return false;
-        }
+
         return false;
     }
 

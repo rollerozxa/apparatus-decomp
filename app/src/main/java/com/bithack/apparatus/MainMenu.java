@@ -97,15 +97,7 @@ public class MainMenu extends Screen implements InputProcessor {
 		float px = ((float) x) / ((float) G.realwidth);
 		float py = ((float) y) / ((float) G.realheight);
         Gdx.app.log("px,py", String.valueOf(px) + " " + py + " " + G.realwidth + " " + G.realheight);
-        if (px > 0.75f && py < 0.11f) {
-            if (px > 0.93f) {
-                ApparatusApp.backend.open_twitter();
-            } else if (px > 0.8f) {
-                ApparatusApp.backend.open_youtube();
-            } else {
-                ApparatusApp.backend.open_facebook();
-            }
-        }
+
         if (py <= 0.26f || py >= 0.53f) {
             if (py > 0.53f && py < 0.73f) {
                 if (px > 0.04f && px < 0.34f) {

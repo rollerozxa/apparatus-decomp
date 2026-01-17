@@ -909,10 +909,6 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
     }
 
     @Override // com.bithack.apparatus.ApparatusApp.Backend
-    public void open_market() {
-    }
-
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
     public void open_settings() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.35
             @Override // java.lang.Runnable
@@ -920,30 +916,6 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 ApparatusApplication.this.showDialog(17);
             }
         });
-    }
-
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
-    public void open_twitter() {
-        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.twitter.com/bithack"));
-        startActivity(browserIntent);
-    }
-
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
-    public void open_youtube() {
-        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.youtube.com/user/bithacked"));
-        startActivity(browserIntent);
-    }
-
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
-    public void open_facebook() {
-        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.facebook.com/pages/Bithack-AB/213060255398337"));
-        startActivity(browserIntent);
-    }
-
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
-    public void open_beginner_help_videos() {
-        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.youtube.com/playlist?list=PLA3A145BCBAEA502D"));
-        startActivity(browserIntent);
     }
 
     @Override // com.bithack.apparatus.ApparatusApp.Backend

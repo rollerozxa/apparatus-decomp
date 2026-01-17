@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.bithack.apparatus.ResourceFactory;
 import com.bithack.apparatus.objects.BaseObject;
 import com.bithack.apparatus.objects.Damper;
 import com.bithack.apparatus.objects.GrabableObject;
@@ -30,12 +29,9 @@ public class ObjectFactory {
     private static PolygonShape _rect_shape;
     public static Adapter adapter;
     public static boolean _initialized = false;
-    public static ResourceFactory.Collection custom_collection = null;
 
     public static abstract class Adapter {
         public abstract BaseObject create(World world, int i, int i2);
-
-        public abstract ResourceFactory.Collection refresh_custom_objects();
 
         public abstract GrabableObject wrap(GrabableObject grabableObject);
     }
@@ -101,10 +97,6 @@ public class ObjectFactory {
         Body r = world.createBody(_k_bd);
         r.createFixture(_k_fd);
         return r;
-    }
-
-    public static void refresh_custom_objects() {
-        custom_collection = adapter.refresh_custom_objects();
     }
 
     public static BaseObject[] read_from_stream(World world, InputStream s) throws IOException {

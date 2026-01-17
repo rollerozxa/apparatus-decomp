@@ -626,7 +626,7 @@ public class IlluminationManager {
         G.gl.glDepthMask(true);
         G.gl.glColor4f(0.39999998f, 0.39999998f, 0.39999998f, 1.0f);
         G.gl.glEnable(3553);
-        Game.bgtexlow.bind();
+        Game.bgtex.bind();
         G.gl.glMatrixMode(5890);
         G.gl.glLoadIdentity();
         G.gl.glScalef(9.765625E-4f, -0.00390625f, 1.0f);

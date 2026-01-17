@@ -3,7 +3,6 @@ package com.bithack.apparatus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.World;
 import com.bithack.apparatus.ObjectFactory;
-import com.bithack.apparatus.ResourceFactory;
 import com.bithack.apparatus.objects.BaseObject;
 import com.bithack.apparatus.objects.Battery;
 import com.bithack.apparatus.objects.Bucket;
@@ -39,11 +38,6 @@ public class ObjectFactoryAdapter extends ObjectFactory.Adapter {
     public static final String[] category_names = {"Custom", "Static", "Dynamic", "Mechanics"};
     public final int num_categories = category_names.length;
     public final String[][] object_names = {new String[0], new String[]{"Metal Bar", "Weight", "Bucket", "Metal Wheel"}, new String[]{"Plank", "Marble", "Small Plank", "Mini Plank", "Big Wheel", "Rope", "Cable", "Dynamic Motor", "Metal Corner", "Panel", "PanelCable"}, new String[]{"Static Hinge", "Hinge"}};
-
-    @Override // com.bithack.apparatus.ObjectFactory.Adapter
-    public ResourceFactory.Collection refresh_custom_objects() {
-        return null;
-    }
 
     @Override // com.bithack.apparatus.ObjectFactory.Adapter
     public BaseObject create(World world, int g, int c) {

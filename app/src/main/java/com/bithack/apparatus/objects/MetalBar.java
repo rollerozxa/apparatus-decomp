@@ -162,11 +162,7 @@ public class MetalBar extends Bar {
 
     public static void _init() {
         _initialized = true;
-        if (G.realwidth <= 870 && G.realwidth < 600) {
-            texture = TextureFactory.load_mipmapped("data/metal_medium.jpg");
-        } else {
-            texture = TextureFactory.load_mipmapped("data/metal_medium.jpg");
-        }
+        texture = TextureFactory.load_mipmapped("data/metal.jpg");
         _bd = new BodyDef();
         _bd.type = BodyDef.BodyType.StaticBody;
         _bd.fixedRotation = true;
