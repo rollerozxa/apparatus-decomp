@@ -11,81 +11,134 @@ import java.util.Map;
 
 /* loaded from: classes.dex */
 public class L {
-    protected static Map<String, String> map = new HashMap();
+    protected static Map<String, String> strings = new HashMap();
     private static Map<String, String> fallback = new HashMap();
 
+    static {
+        strings.put("mainmenu", "Main Menu");
+        strings.put("levelselect", "Level Select");
+        strings.put("graphicssettings", "Graphics Settings");
+        strings.put("controlssettings", "Controls Settings");
+        strings.put("backtogame", "Back to game");
+        strings.put("new", "New");
+        strings.put("save", "Save");
+        strings.put("open", "Open");
+        strings.put("publish_as_community", "Publish as Community Level");
+        strings.put("backtomainmenu", "Back to main menu");
+        strings.put("registeringaccount", "Registering account...");
+        strings.put("loading", "Loading...");
+        strings.put("publishinglevel", "Publishing level...");
+        strings.put("signingin", "Signing in...");
+        strings.put("quit", "Quit");
+        strings.put("play_challenge", "Would you like to test play the challenge or just simulate?");
+        strings.put("test_play", "Test play");
+        strings.put("simulate", "Simulate");
+        strings.put("exit_level", "Exit level?");
+        strings.put("yes_back_community", "Yes, back to community");
+        strings.put("yes_back_mainmenu", "Yes, back to main menu");
+        strings.put("exit_game_level_menu", "Exit game back to level menu?");
+        strings.put("yes", "Yes");
+        strings.put("cancel", "Cancel");
+        strings.put("sandbox_types", "Sandbox types");
+        strings.put("sandbox_types_txt", "There are two types of sandbox modes, apparatus and challenge. The Apparatus mode is probably what you are looking for. This mode is completely free and without objective. The challenge mode, on the other hand, should be used if you want to create a challenge for others to play. The objective of a challenge is to get the marble into the bucket. When you build a challenge, you must at least create one marble and one goal (\"bucket\"). Both level types can be uploaded to the community section. When another person plays an Apparatus type level, they will not be able to move around wooden objects. When playing the challenge level type, the player can move around wooden objects to solve the challenge you created.");
+        strings.put("ok", "OK");
+        strings.put("help", "Help");
+        strings.put("buy_full_version", "Buy the full version to enable this feature.");
+        strings.put("graphics", "Graphics");
+        strings.put("input", "Input");
+        strings.put("load_saved_solution", "Load saved solution");
+        strings.put("log_in_required", "You must log in before you can publish your level.");
+        strings.put("save_changes_to_level", "Save changes to level?");
+        strings.put("no", "No");
+        strings.put("error_occured_while_loading", "An error occured while loading the level!");
+        strings.put("error_connecting_to_community_server", "Error connecting to community server. Check your internet connection.");
+        strings.put("open_level", "Open level");
+        strings.put("publish_community_level", "Publish Community Level");
+        strings.put("publish", "Publish");
+        strings.put("publish_update", "Publish Update");
+        strings.put("published_successfully", "Published Successfully!");
+        strings.put("log_in_to_publish", "Please log in to publish this level.");
+        strings.put("name_required", "The level must have a name.");
+        strings.put("server_error", "An error occured on the server. Try again later.");
+        strings.put("register", "Register");
+        strings.put("register_account", "Register Account");
+        strings.put("temporary_server_error", "Temporary server error.");
+        strings.put("registered_and_logged_in", "You are now registered and logged in!");
+        strings.put("filename_too_short", "Filename is too short.");
+        strings.put("save_level", "Save level");
+        strings.put("help1", "Get the blue ball to the goal!\nUse the play button in the top left corner to test the level and see how the marble fails to hit the goal.\nUse this knowledge to move wooden objects around to make a path for the marble.\nAll wooden objects can be moved.");
+        strings.put("help2_1", "Drag your finger on the background to move the camera, use two fingers to zoom.");
+        strings.put("help2_2", "Drag your finger on the background to move the camera, use the zoom buttons toString zoom.");
+        strings.put("help3", "Move one edge of a plank close to the side of another, and a hammer icon will appear.\nClick the hammer icon to nail the two planks together.\nAfter attachment, a new button will appear in the top right corner. Click on this button to release the planks from each other.");
+        strings.put("help4", "Select a plank by clicking on it. A small circular arrow will appear beside it, drag this button to rotate the object.");
+        strings.put("help6", "Drag the edges of the cable to connect them to batteries and engines.\nDrag the plank over the round motor in the wall and a small wrench icon will appear. Click on it to attach the plank to the motor.\nThe small round arrow on the engine tells you which way the motor will rotate when it is connected to a battery.");
+        strings.put("help10", "A green light in the lower right corner of a battery will indicate whether it is turned on or off.\nIn this case, the battery is OFF since there is no green light.\nTo turn the battery ON, an object must hit the blue button on the top of the battery. Make sure the button is hit hard and not just touched, or it will not trigger.");
+        strings.put("help8", "Click on one edge of the rope. A new button will appear in the top right corner. This is the layer button.\nThe layer button will move the selected object out from the wall. Objects that are further away from the wall can be attached to objects that are closer to the wall.\nHint: Attach the rope to ONE end of the plank.");
+        strings.put("help15", "The two dark planks to the left cannot be moved, but you can attach other objects to them.\nMove one of the free planks to the outer layer and above another plank. Click the wrench icon and a small menu will appear. You can attach objects using either the hammer or the wrench.\nThe wrench allows relative rotation around their nailing point, while the hammer attaches them rigidly.");
+        strings.put("help43", "There are 3 new object types in this level. First of all, do you see that very small, dark box with a white top? That is a trigger button.\nYou can connect the trigger button to batteries, and when the trigger button is hit by another object,\nit will either activate or deactivate the battery depending on the state it is previously in.\n\nSecondly, see the wide wooden box with 5 sockets in it? That is a hub. The hub is very versatile, for example: Connect 1 battery to the hub, and then 2 motors. The battery will now power both motors.\nSimilarly, you can connect 2 batteries and 1 motor to the hub, and the motor will receive power from both batteries.\n\nThird, we have the rocket engine. In this level, you can't do much with the rocket engine, but as you can see it is connected to a trigger button. Press the trigger button by hitting it with an object, and the rocket engine activates. In the next level, you will work more with the rocket engines.");
+        strings.put("help44", "The top side of the rocket engines can be attached to other wooden objects. Again, the triggers can be connected to the rocket engines using red cables.");
+        strings.put("gfxadjust", "NOTICE: Auto-adjusting graphics. Press MENU button to manually configure graphics.");
+        strings.put("notattached", "The object is not attached to any other objects.");
+        strings.put("motorcantmove", "This object can not be moved to other layers.");
+        strings.put("btnavailablelvl8", "This button is not available until level 8.");
+        strings.put("mustdetach", "The object must be detached from all other objects before you can move it to another layer.");
+        strings.put("dragbtn", "Drag the button to where you want to put the object.");
+        strings.put("unable_to_open_level", "ERROR: Could not open level!");
+        strings.put("nicejob", "NICE JOB! More levels coming soon!");
+        strings.put("complete_more_levels", "Complete more levels to unlock this level.");
+        strings.put("loading", "Loading");
+        strings.put("update_required", "You must update Apparatus to the latest version to play this level!");
+        strings.put("start_game", "Start Game");
+        strings.put("sandbox", "Sandbox");
+        strings.put("community_levels", "Community Levels");
+        strings.put("get_full_version", "Get the full version!");
+        strings.put("music", "music");
+        strings.put("sound_effects", "sound effects");
+        strings.put("more_info", "More info");
+        strings.put("back_to_menu", "Back to menu");
+        strings.put("_new", "new");
+        strings.put("_new_challenge", "new challenge");
+        strings.put("_select_sandbox_type", "select a sandbox type");
+        strings.put("_select_a_level", "select a level");
+        strings.put("testingchallenge", "Testing challenge. Press the back button to go back to the sandbox.");
+        strings.put("current", "Current");
+        strings.put("voltage", "Voltage");
+        strings.put("size", "Size");
+        strings.put("hascontrolpanel", "This level contains a control panel. If the control panel is connected to batteries using red cables, you can control the output of the batteries and thus control the motors they are connected to.\nTo test it, click the play button and then simply tap the control panel to activate it.");
+        strings.put("expwarning", "Warning! This object is experimental, use it with caution and save often.");
+        strings.put("ihelp1", "Welcome to the Interactive Challenge mode!\nTo complete the level, take the blue ball to the goal. See those RED objects? Drag them to interact with the level.\nPress the reset button in the top left corner to restart the level.");
+        strings.put("close", "Close");
+        strings.put("testplay", "Test play");
+        strings.put("delete", "Delete");
+        strings.put("recover", "Recover");
+        strings.put("menu", "Menu");
+        strings.put("uploading_solution_error", "Uploading solutions will be supported soon.");
+        strings.put("audio_failed", "Audio init failed!");
+        strings.put("coming_soon", "Coming soon!");
+        strings.put("invalid_id", "Error: Invalid level ID!");
+        strings.put("no_saved_solution_found", "No saved solution found.");
+        strings.put("level_saved", "Level saved!");
+        strings.put("login", "Login");
+        strings.put("settings", "Settings");
+        strings.put("paused", "Paused");
+        strings.put("autosave_detected", "Auto-save file detected");
+        strings.put("autosave_detected_txt", "An auto-save file has been detected, would you like to recover and open this file or delete it?");
+        strings.put("thx_for_downloading", "Thanks for downloading Apparatus!");
+        strings.put("simulation_settings", "Simulation Settings");
+        strings.put("physics", "Physics");
+        strings.put("physicssettings", "Physics Settings");
+        strings.put("new_apparatus", "New Apparatus");
+        strings.put("new_challenge", "New Challenge");
+        strings.put("delete_play", "Delete and play");
+        strings.put("set_background", "Set background");
+    }
+
     public static String get(String key) {
-        String ret = map.get(key);
+        String ret = strings.get(key);
         if (ret == null) {
-            Gdx.app.log("MSG", "Translation for " + key + " is null, falling back to english.");
-            String ret2 = fallback.get(key);
-            Gdx.app.log("MSG", "new translation is: " + ret2);
-            return ret2;
+            Gdx.app.log("MSG", "Translation for " + key + " is null!");
+            return "null";
         }
         return ret;
-    }
-
-    private static Map<String, String> _load(String lang) throws IOException {
-        Map<String, String> ret = new HashMap<>();
-        FileHandle file = Gdx.files.internal("data/lang/" + lang);
-        if (file.exists()) {
-            InputStream is = file.read();
-            InputStreamReader bajs = new InputStreamReader(is);
-            BufferedReader in = new BufferedReader(bajs);
-            String value = null;
-            String name = null;
-            int state = 0;
-            while (true) {
-                try {
-                    String line = in.readLine();
-                    if (line != null) {
-                        String line2 = line.trim();
-                        if (line2.equals("---")) {
-                            if (value != null && name != null) {
-                                ret.put(name, value);
-                            }
-                            name = null;
-                            value = null;
-                            state = 0;
-                        } else {
-                            switch (state) {
-                                case 0:
-                                    if (!line2.equals("")) {
-                                        name = line2;
-                                        state = 1;
-                                        break;
-                                    } else {
-                                        break;
-                                    }
-                                case 1:
-                                    if (value == null) {
-                                        value = line2;
-                                        break;
-                                    } else {
-                                        value = String.valueOf(value) + "\n" + line2;
-                                        break;
-                                    }
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return ret;
-    }
-
-    public static void load(String lang) {
-        Gdx.app.log("Language", lang);
-        if (fallback.isEmpty()) {
-            fallback = _load("en");
-        }
-        map.clear();
-        map = _load(lang);
-        if (map.isEmpty()) {
-            Gdx.app.log("Language", "Falling back to english :(");
-            map = _load("en");
-        }
     }
 }
