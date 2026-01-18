@@ -1,3 +1,3 @@
 rootProject.name = 'Apparatus'
 
-include 'app'
+include "core", "desktop", "android"

@@ -1,0 +1,24 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            // Use the shared `data` directory at the repository root for assets
+            srcDirs = [rootProject.file('data')]
+        }
+    }
+}
+
+dependencies {
+    implementation files(rootProject.file('lib/gdx.jar'))
+}

@@ -30,12 +30,21 @@ android {
         abortOnError false
     }
 
-    buildFeatures {
-        buildConfig = false
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            jniLibs.srcDirs = [rootProject.file('lib/android')]
+            assets.srcDirs = ['assets']
+        }
     }
 }
 
 dependencies {
-	implementation files('libs.jar')
 	implementation 'com.android.support:support-v4:23.+'
+
+    implementation project(':core')
+    implementation files(rootProject.file('lib/gdx.jar'))
+    implementation files(rootProject.file('lib/gdx-backend-android.jar'))
 }

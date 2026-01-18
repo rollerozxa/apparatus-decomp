@@ -1,0 +1,31 @@
+plugins {
+	id 'application'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
+}
+
+dependencies {
+	implementation project(':core')
+	implementation files(rootProject.file('lib/gdx.jar'))
+	implementation files(rootProject.file('lib/gdx-backend-lwjgl.jar'))
+	implementation files(rootProject.file('lib/gdx-openal.jar'))
+
+	runtimeOnly files(rootProject.file('lib/gdx-backend-lwjgl-natives.jar'), rootProject.file('lib/gdx-natives.jar'))
+
+	implementation files(rootProject.file('lib/org.apache.http.jar'))
+}
+
+application {
+	mainClass = 'com.bithack.apparatus.ApparatusDesktop'
+}
