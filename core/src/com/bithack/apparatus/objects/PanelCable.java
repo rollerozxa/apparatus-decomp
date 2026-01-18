@@ -57,14 +57,14 @@ public class PanelCable extends BaseCable {
     }
 
     public void on_disconnect() {
-        if (Game.mode == 3) {
+        if (Game.mode == Game.MODE_PLAY) {
             boolean z = ((PanelCableEnd) this.g1).attached_object instanceof Panel;
             boolean z2 = ((PanelCableEnd) this.g2).attached_object instanceof Panel;
         }
     }
 
     public void on_connect() {
-        if (Game.mode == 3) {
+        if (Game.mode == Game.MODE_PLAY) {
             boolean z = ((PanelCableEnd) this.g1).attached_object instanceof Panel;
             boolean z2 = ((PanelCableEnd) this.g2).attached_object instanceof Panel;
         }

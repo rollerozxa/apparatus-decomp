@@ -180,7 +180,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
             Object objA = A.getUserData();
             Object objB = B.getUserData();
             if (((BaseObject) A.getUserData()).layer != ((BaseObject) B.getUserData()).layer) {
-                if (Game.mode != 3 && (A.getUserData() instanceof GrabableObject) && (B.getUserData() instanceof GrabableObject)) {
+                if (Game.mode != Game.MODE_PLAY && (A.getUserData() instanceof GrabableObject) && (B.getUserData() instanceof GrabableObject)) {
                     _tmp.set(a, b);
                     if (!contains_fixture_pair(_tmp)) {
                         add_fixture_pair(_tmp, false);
@@ -253,7 +253,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
 
     @Override
     public void beginContact(Contact c) {
-        if (Game.mode == 3) {
+        if (Game.mode == Game.MODE_PLAY) {
             if ((c.getFixtureA().getUserData() instanceof Battery) && c.getFixtureB().getBody().getLinearVelocity().len2() > 10.0f) {
                 Battery b = (Battery) c.getFixtureA().getUserData();
                 b.toggle_onoff();

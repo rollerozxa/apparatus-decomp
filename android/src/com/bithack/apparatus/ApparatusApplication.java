@@ -125,12 +125,12 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             @Override
             public void run() {
                 if (ApparatusApp.current == ApparatusApp.game) {
-                    if (Game.sandbox && Game.mode != 3) {
+                    if (Game.sandbox && Game.mode != Game.MODE_PLAY) {
                         Gdx.app.log("apparatus", "Autosaving sandbox!");
                         ApparatusApp.game.autosave();
                     }
                     if (!Game.sandbox) {
-                        if (Game.mode == 3) {
+                        if (Game.mode == Game.MODE_PLAY) {
                             ApparatusApp.game.pause_world();
                         }
                         Gdx.app.log("apparatus", "Autosaving challenge!");
@@ -258,11 +258,11 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.3
                                     @Override
                                     public void run() {
-                                        if (Game.mode == 3) {
+                                        if (Game.mode == Game.MODE_PLAY) {
                                             ApparatusApp.game.pause_world();
                                         }
                                         ApparatusApp.game.end_challenge_testing();
-                                        ApparatusApp.game.set_mode(4);
+                                        ApparatusApp.game.set_mode(Game.MODE_PAUSE);
                                     }
                                 });
                                 String token = Settings.get("community-token");
@@ -278,9 +278,9 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.4
                                     @Override
                                     public void run() {
-                                        if (Game.mode == 3) {
+                                        if (Game.mode == Game.MODE_PLAY) {
                                             ApparatusApp.game.pause_world();
-                                            ApparatusApp.game.set_mode(4);
+                                            ApparatusApp.game.set_mode(Game.MODE_PAUSE);
                                         }
                                     }
                                 });

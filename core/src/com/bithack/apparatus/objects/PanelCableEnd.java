@@ -261,7 +261,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
             fix_anchor_pos();
             float reaction = this.joint.getReactionForce(50.0f).len2();
             boolean destroy = false;
-            if (Game.mode == 3) {
+            if (Game.mode == Game.MODE_PLAY) {
                 if (reaction > 62500.0f) {
                     destroy = true;
                 }
@@ -269,7 +269,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
                 destroy = true;
             }
             if (destroy) {
-                if (Game.mode != 3) {
+                if (Game.mode != Game.MODE_PLAY) {
                     Game.connectanims.add(new Game.ConnectAnim(1, this.anchor.x, this.anchor.y));
                 }
                 this.cable.on_disconnect();
@@ -366,7 +366,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
                 this.world.destroyJoint(this.joint);
                 this.joint = null;
             }
-            if (Game.mode == 3) {
+            if (Game.mode == Game.MODE_PLAY) {
                 this.oid = -1;
             } else {
                 this.oid = -1;
@@ -379,32 +379,32 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
             this.attached_button = null;
             this.attached_rengine = null;
             this.attached_type = -1;
-            if (Game.do_connectanims || Game.mode == 3) {
+            if (Game.do_connectanims || Game.mode == Game.MODE_PLAY) {
                 SoundManager.play_disconnect();
             }
         }
     }
 
     public void attach_to_hub(Hub b) {
-        if (!this.attached && Game.mode != 3) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY) {
             this.pending = b;
         }
     }
 
     public void attach_to_battery(Battery b) {
-        if (!this.attached && Game.mode != 3) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY) {
             this.pending = b;
         }
     }
 
     public void attach_to_panel(Panel p) {
-        if (!this.attached && Game.mode != 3) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY) {
             this.pending = p;
         }
     }
 
     public void attach_to_rengine(RocketEngine p) {
-        if (!this.attached && Game.mode != 3) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY) {
             this.pending = p;
         }
     }
@@ -421,7 +421,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
     }
 
     public void attach_to_button(Button b) {
-        if (!this.attached && Game.mode != 3) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY) {
             this.pending = b;
         }
     }

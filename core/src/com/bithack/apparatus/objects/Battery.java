@@ -396,7 +396,7 @@ public class Battery extends GrabableObject {
         if (socket < this.used_socket.length && socket >= 0) {
             this.used_socket[socket] = false;
             this.pcable[socket] = null;
-            if (Game.mode != 3) {
+            if (Game.mode != Game.MODE_PLAY) {
                 set_output(1.0f);
             }
         }

@@ -202,7 +202,7 @@ public abstract class BaseMotor extends JointObject {
                 this.dir = Math.round(this.dir);
                 this.joint.setMotorSpeed(this.motor_speed * this.dir);
                 this.joint.setMaxMotorTorque(this.motor_torque);
-                if (Game.mode == 3) {
+                if (Game.mode == Game.MODE_PLAY) {
                     this.joint.enableMotor(true);
                     return;
                 }

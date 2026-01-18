@@ -247,7 +247,7 @@ public class CableEnd extends GrabableObject implements BaseCableEnd {
             fix_anchor();
             float reaction = this.joint.getReactionForce(50.0f).len2();
             boolean destroy = false;
-            if (Game.mode == 3) {
+            if (Game.mode == Game.MODE_PLAY) {
                 if (reaction > 62500.0f) {
                     destroy = true;
                 }
@@ -255,9 +255,9 @@ public class CableEnd extends GrabableObject implements BaseCableEnd {
                 destroy = true;
             }
             if (destroy) {
-                if (Game.mode != 3 && Game.do_connectanims) {
+                if (Game.mode != Game.MODE_PLAY && Game.do_connectanims) {
                     Game.connectanims.add(new Game.ConnectAnim(1, this.anchor.x, this.anchor.y));
-                } else if (Game.mode == 3) {
+                } else if (Game.mode == Game.MODE_PLAY) {
                     SoundManager.play_disconnect();
                 }
                 if (this.joint != null) {
@@ -285,7 +285,7 @@ public class CableEnd extends GrabableObject implements BaseCableEnd {
     public void detach() {
         if (this.attached) {
             this.oid = -1;
-            if (Game.mode != 3) {
+            if (Game.mode != Game.MODE_PLAY) {
                 this.saved_oid = -1;
             }
             this.attached_object.cabled = false;
@@ -302,7 +302,7 @@ public class CableEnd extends GrabableObject implements BaseCableEnd {
             this.attached = false;
             this.attached_object = null;
             this.attached_hub = null;
-            if (Game.mode == 3 || Game.do_connectanims) {
+            if (Game.mode == Game.MODE_PLAY || Game.do_connectanims) {
                 SoundManager.play_disconnect();
             }
             this.cable.update();
@@ -316,7 +316,7 @@ public class CableEnd extends GrabableObject implements BaseCableEnd {
     }
 
     public void attach_to_hub(Hub b) {
-        if (!this.attached && Game.mode != 3 && this.cable.get_hub() == null) {
+        if (!this.attached && Game.mode != Game.MODE_PLAY && this.cable.get_hub() == null) {
             this.pending = b;
         }
     }

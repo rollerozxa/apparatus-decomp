@@ -84,28 +84,47 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Game extends Screen implements InputProcessor, WidgetValueCallback {
-    static final int HINGE_HAMMER = 1;
-    static final int HINGE_WRENCH = 0;
-    static final int MODE_DEFAULT = 0;
-    static final int MODE_GRAB = 1;
-    static final int MODE_PAUSE = 4;
+    public static final int MODE_DEFAULT = 0;
+    public static final int MODE_GRAB = 1;
+    // no 2?
     public static final int MODE_PLAY = 3;
-    static final int STATE_FAIL = 3;
-    static final int STATE_FINISHED = 2;
-    static final int STATE_PAUSED = 1;
+    public static final int MODE_PAUSE = 4;
+    public static int mode = MODE_DEFAULT;
+
     static final int STATE_PLAYING = 0;
-    private static final float T_EPSILON = 1.5f;
-    private static final int WIDGET_CURRENT = 2;
-    private static final int WIDGET_DFORCE = 10;
-    private static final int WIDGET_DIR_CCW = 4;
-    private static final int WIDGET_DIR_CW = 3;
-    private static final int WIDGET_DSPEED = 9;
-    private static final int WIDGET_ELASTICITY = 7;
+    static final int STATE_PAUSED = 1;
+    static final int STATE_FINISHED = 2;
+    static final int STATE_FAIL = 3;
+    public int state = STATE_PLAYING;
+
+    static final int HINGE_WRENCH = 0;
+    static final int HINGE_HAMMER = 1;
+    public int hinge_type = 0;
+
     private static final int WIDGET_SIZE = 0;
-    private static final int WIDGET_SIZEB = 6;
-    private static final int WIDGET_THRUST = 8;
-    private static final int WIDGET_VELOCITY = 5;
+    private final HorizontalSliderWidget widget_size;
     private static final int WIDGET_VOLTAGE = 1;
+    private final HorizontalSliderWidget widget_voltage;
+    private static final int WIDGET_CURRENT = 2;
+    private final HorizontalSliderWidget widget_current;
+    private static final int WIDGET_DIR_CW = 3;
+    private static final int WIDGET_DIR_CCW = 4;
+    private static final int WIDGET_VELOCITY = 5;
+    private static final int WIDGET_SIZEB = 6;
+    private final HorizontalSliderWidget widget_sizeb;
+    private static final int WIDGET_ELASTICITY = 7;
+    private final HorizontalSliderWidget widget_elasticity;
+    private static final int WIDGET_THRUST = 8;
+    private final HorizontalSliderWidget widget_thrust;
+    private static final int WIDGET_DSPEED = 9;
+    private final HorizontalSliderWidget widget_dspeed;
+    private static final int WIDGET_DFORCE = 10;
+    private final HorizontalSliderWidget widget_dforce;
+    private boolean[] widget = new boolean[10];
+    private final WidgetManager widgets;
+
+    private static final float T_EPSILON = 1.5f;
+
     static final float[] _def_material = {0.5f, 0.5f, 0.5f, 1.0f, 0.75f, 0.75f, 0.75f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 10.0f, 0.0f, 0.0f, 0.0f};
     static final float[] _metal_material = {0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 0.2f, 0.2f, 1.0f, 0.8f, 0.8f, 0.8f, 1.0f, 3.0f, 0.0f, 0.0f, 0.0f};
     private static MouseJointDef _mjd = new MouseJointDef();
@@ -138,7 +157,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     static int id_counter = 0;
     public static int level_type = 1;
     public static final float[] light_pos = {-0.3f, 0.5f, 1.0f, 0.0f};
-    public static int mode = 0;
+
     static float[] nangle = new float[5];
     static Texture newbgtex;
     public static int physics_stability = 1;
@@ -200,7 +219,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     private Body ground;
     private Joint ground_joint;
     private final Texture hammertex;
-    public int hinge_type = 0;
+
     private ContactHandler.FixturePair hingepair = null;
     protected final ArrayList<Hinge> hinges = new ArrayList<>();
     private boolean hingeselect = false;
@@ -252,7 +271,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         public boolean reportFixture(Fixture fixt) {
             Body b = fixt.getBody();
             if (b.getUserData() instanceof GrabableObject) {
-                if (Game.mode != 3 && ((((GrabableObject) b.getUserData()).sandbox_only || ((GrabableObject) b.getUserData()).fixed_dynamic) && !Game.sandbox)) {
+                if (Game.mode != MODE_PLAY && ((((GrabableObject) b.getUserData()).sandbox_only || ((GrabableObject) b.getUserData()).fixed_dynamic) && !Game.sandbox)) {
                     return true;
                 }
                 if (Game.this.query_input_layer == 1) {
@@ -271,7 +290,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     return true;
                 }
                 if (fixt.testPoint(Game.this.query_input_pos)) {
-                    if (Game.mode == 3 && !(o instanceof Plank) && !(o instanceof Panel) && !(o instanceof Wheel) && !(o instanceof ChristmasGift) && !(o instanceof Marble) && !(o instanceof Weight) && !(o instanceof RocketEngine)) {
+                    if (Game.mode == MODE_PLAY && !(o instanceof Plank) && !(o instanceof Panel) && !(o instanceof Wheel) && !(o instanceof ChristmasGift) && !(o instanceof Marble) && !(o instanceof Weight) && !(o instanceof RocketEngine)) {
                         return true;
                     }
                     Game.this.query_result_body = b;
@@ -287,9 +306,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         @Override
         public boolean reportFixture(Fixture fixt) {
             Body b = fixt.getBody();
-            if ((b.getUserData() instanceof GrabableObject) && ((Game.mode == 3 || ((!((GrabableObject) b.getUserData()).sandbox_only && !((GrabableObject) b.getUserData()).fixed_dynamic) || Game.sandbox)) && (Game.this.query_input_layer != 1 ? Game.this.query_input_layer != 2 ? Game.this.query_input_layer != 3 || ((GrabableObject) b.getUserData()).layer == 2 : ((GrabableObject) b.getUserData()).layer == 1 : ((GrabableObject) b.getUserData()).layer < 1))) {
+            if ((b.getUserData() instanceof GrabableObject) && ((Game.mode == MODE_PLAY || ((!((GrabableObject) b.getUserData()).sandbox_only && !((GrabableObject) b.getUserData()).fixed_dynamic) || Game.sandbox)) && (Game.this.query_input_layer != 1 ? Game.this.query_input_layer != 2 ? Game.this.query_input_layer != 3 || ((GrabableObject) b.getUserData()).layer == 2 : ((GrabableObject) b.getUserData()).layer == 1 : ((GrabableObject) b.getUserData()).layer < 1))) {
                 GrabableObject o = (GrabableObject) b.getUserData();
-                if ((!fixt.isSensor() || !(o instanceof Plank)) && (Game.mode != 3 || (o instanceof Plank) || (o instanceof Panel) || (o instanceof Wheel) || (o instanceof ChristmasGift) || (o instanceof Marble) || (o instanceof Weight) || (o instanceof RocketEngine))) {
+                if ((!fixt.isSensor() || !(o instanceof Plank)) && (Game.mode != MODE_PLAY || (o instanceof Plank) || (o instanceof Panel) || (o instanceof Wheel) || (o instanceof ChristmasGift) || (o instanceof Marble) || (o instanceof Weight) || (o instanceof RocketEngine))) {
                     if (fixt.testPoint(Game.this.query_input_pos)) {
                         Game.this.query_result_body = b;
                         Game.this.query_result_dist2 = b.getPosition().dst2(Game.this.query_input_pos);
@@ -333,7 +352,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     private Mesh shadowmesh = null;
     private SimulationThread sim_thread = null;
     private int special_menu_cache_id;
-    public int state = 0;
+
     private long time_accum = 0;
     private long time_last = 0;
     private final Vector3 tmp3 = new Vector3();
@@ -342,16 +361,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     public final UndoManager um = new UndoManager(this);
     private boolean undo_begun = false;
     private int undo_cache_id;
-    private boolean[] widget = new boolean[10];
-    private final HorizontalSliderWidget widget_current;
-    private final HorizontalSliderWidget widget_dforce;
-    private final HorizontalSliderWidget widget_dspeed;
-    private final HorizontalSliderWidget widget_elasticity;
-    private final HorizontalSliderWidget widget_size;
-    private final HorizontalSliderWidget widget_sizeb;
-    private final HorizontalSliderWidget widget_thrust;
-    private final HorizontalSliderWidget widget_voltage;
-    private final WidgetManager widgets;
+
     private Vector2 wrench_anim_pos = new Vector2();
     private long wrench_anim_start = 0;
     private final Texture wrenchtex;
@@ -412,31 +422,41 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         IlluminationManager.init(this);
         this.menu_cache = new SpriteCache();
         generate_caches();
+
         this.widgets = new WidgetManager("uicontrols.png", this);
+
         HorizontalSliderWidget horizontalSliderWidget = new HorizontalSliderWidget(0, 180, 1.0f);
         this.widget_size = horizontalSliderWidget;
         this.widgets.add_widget(horizontalSliderWidget, G.width - 320, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget2 = new HorizontalSliderWidget(7, 64, 1.0f);
         this.widget_elasticity = horizontalSliderWidget2;
         this.widgets.add_widget(horizontalSliderWidget2, (G.width - 320) - 100, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget3 = new HorizontalSliderWidget(2, 180);
         this.widget_current = horizontalSliderWidget3;
         this.widgets.add_widget(horizontalSliderWidget3, G.width - 256, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget4 = new HorizontalSliderWidget(1, 180);
         this.widget_voltage = horizontalSliderWidget4;
         this.widgets.add_widget(horizontalSliderWidget4, ((G.width - 256) - 180) - 16, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget5 = new HorizontalSliderWidget(8, 180);
         this.widget_thrust = horizontalSliderWidget5;
         this.widgets.add_widget(horizontalSliderWidget5, G.width - 320, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget6 = new HorizontalSliderWidget(6, 64, 2.0f);
         this.widget_sizeb = horizontalSliderWidget6;
         this.widgets.add_widget(horizontalSliderWidget6, (G.width - 320) - 250, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget7 = new HorizontalSliderWidget(9, 180);
         this.widget_dspeed = horizontalSliderWidget7;
         this.widgets.add_widget(horizontalSliderWidget7, G.width - 320, G.height - 48);
+
         HorizontalSliderWidget horizontalSliderWidget8 = new HorizontalSliderWidget(10, 180);
         this.widget_dforce = horizontalSliderWidget8;
         this.widgets.add_widget(horizontalSliderWidget8, ((G.width - 320) - 180) - 16, G.height - 48);
+
         this.widgets.disable(this.widget_size);
         this.widgets.disable(this.widget_elasticity);
         this.widgets.disable(this.widget_sizeb);
@@ -895,7 +915,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         if (!this.ready) {
             return 0;
         }
-        if (mode != 3) {
+        if (mode != MODE_PLAY) {
             if (this.do_autosave && !this.hingeselect) {
                 autosave();
                 this.do_autosave = false;
@@ -922,7 +942,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 update_ropes();
             }
         }
-        if (this.num_touch_points == 2 && !this.widget[0] && !this.widget[1] && !this.rotating && mode != 1 && has_multitouch) {
+        if (this.num_touch_points == 2 && !this.widget[0] && !this.widget[1] && !this.rotating && mode != MODE_GRAB && has_multitouch) {
             float dist = this._last_vec[0].dst(this._last_vec[1]);
             float diff = dist - this._last_dist;
             if (Math.abs(diff) > 4.0f) {
@@ -942,8 +962,8 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         for (long delta = (now - this.time_last) + this.time_accum; delta >= 8000000; delta -= 8000000) {
             this.camera_h.tick(0.08f, false);
         }
-        if (this.state == 0) {
-            if (mode == 3) {
+        if (this.state == STATE_PLAYING) {
+            if (mode == MODE_PLAY) {
                 SoundManager.tick();
                 if (!enable_multithreading) {
                     if (this.time_accum > 100000000) {
@@ -987,7 +1007,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     this.commit_next = false;
                 }
             }
-        } else if (this.state == 2) {
+        } else if (this.state == STATE_FINISHED) {
             if (this.time_accum > 100000000) {
                 this.time_accum = 20000000;
             }
@@ -1005,7 +1025,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this.time_accum = delta3;
         }
         this.time_last = now;
-        if (mode != 3 || Level.version < 7) {
+        if (mode != MODE_PLAY || Level.version < 7) {
             for (Rope rope : this.om.ropes)
                 rope.tick();
 
@@ -1015,7 +1035,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             for (Cable cable : this.om.cables)
                 cable.tick();
         }
-        if (sandbox && mode != 3) {
+        if (sandbox && mode != MODE_PLAY) {
             for (MetalBar bar : this.om.layer0.bars)
                 bar.tick();
 
@@ -1026,7 +1046,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     }
 
     private void win() {
-        this.state = 2;
+        this.state = STATE_FINISHED;
         this.finished_fade = 0.0f;
         Settings.set(String.valueOf(LevelMenu.lvl_prefix) + "0/" + this.level_n, "1");
         SoundManager.stop_all();
@@ -1206,7 +1226,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             G.gl.glDepthMask(true);
             boundscheck_camera();
             this.camera_h.update();
-            if (mode != 3 || !enable_multithreading) {
+            if (mode != MODE_PLAY || !enable_multithreading) {
                 cull_and_swap();
             } else {
                 this.sim_thread.swap_state_buffers();
@@ -1254,7 +1274,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     }
                 }
             }
-            if (!(mode == 3 || this.grabbed_object == null)) {
+            if (!(mode == MODE_PLAY || this.grabbed_object == null)) {
                 G.gl.glDisable(3553);
                 G.gl.glEnable(3042);
                 G.gl.glPushMatrix();
@@ -1373,18 +1393,18 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 G.batch.begin();
                 G.font.draw(G.batch, "Auto-saving...", 0.0f, 24.0f);
                 G.batch.end();
-            } else if (from_sandbox && mode != 3) {
+            } else if (from_sandbox && mode != MODE_PLAY) {
                 G.batch.begin();
                 G.font.draw(G.batch, L.get("testingchallenge"), 0.0f, 24.0f);
                 G.batch.end();
             }
-            if (this.pending_follow && mode == 3) {
+            if (this.pending_follow && mode == MODE_PLAY) {
                 G.batch.begin();
                 G.font.draw(G.batch, "Click on an object to follow it, or on the background to cancel.", 0.0f, 24.0f);
-                this.state = 1;
+                this.state = STATE_PAUSED;
                 G.batch.end();
             }
-            if ((!this.pending_follow && this.state != 0) || this.finished_fade > 0.0f) {
+            if ((!this.pending_follow && this.state != STATE_PLAYING) || this.finished_fade > 0.0f) {
                 G.gl.glEnable(3042);
                 G.gl.glMatrixMode(GL10.GL_PROJECTION);
                 G.gl.glPushMatrix();
@@ -1398,12 +1418,12 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 G.gl.glPopMatrix();
                 G.gl.glMatrixMode(GL10.GL_MODELVIEW);
                 G.gl.glPopMatrix();
-                if (this.state != 0) {
+                if (this.state != STATE_PLAYING) {
                     this.finished_fade += G.delta * 4.0f;
                     if (this.finished_fade >= 1.0f) {
                         this.finished_fade = 1.0f;
                     }
-                } else if (this.state == 0) {
+                } else if (this.state == STATE_PLAYING) {
                     this.finished_fade -= G.delta * 4.0f;
                     if (this.finished_fade <= 0.0f) {
                         this.finished_fade = 0.0f;
@@ -1441,7 +1461,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     } else if ((fp.a.getBody().getUserData() instanceof DynamicMotor) || (fp.a.getBody().getUserData() instanceof Panel) || (fp.a.getBody().getUserData() instanceof RocketEngine) || (fp.a.getBody().getUserData() instanceof Hub) || (fp.a.getBody().getUserData() instanceof DamperEnd)) {
                         G.batch.draw(this.hammertex, this.tmp3.x - 18.0f, this.tmp3.y - 112.0f, 32.0f, 112.0f, 64.0f, 128.0f, 1.0f, 1.0f, 45.0f, 0, 0, 64, 128, false, false);
                     }
-                } else if (this.hinge_type == 1) {
+                } else if (this.hinge_type == HINGE_HAMMER) {
                     G.batch.draw(this.hammertex, this.tmp3.x - 18.0f, this.tmp3.y - 112.0f, 14.0f, 112.0f, 64.0f, 128.0f, 1.0f, 1.0f, 45.0f, 0, 0, 64, 128, false, false);
                 } else {
                     G.batch.draw(this.wrenchtex, this.tmp3.x - 18.0f, this.tmp3.y - 112.0f, 14.0f, 112.0f, 32.0f, 128.0f, 1.0f, 1.0f, 45.0f, 0, 0, 32, 128, false, false);
@@ -1465,14 +1485,14 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
         G.batch.end();
         G.cam_p.apply(G.gl);
-        if (this.active_panel != null && mode == 3) {
+        if (this.active_panel != null && mode == MODE_PLAY) {
             this.active_panel.widgets.render_all(G.batch);
         }
         if (enable_menu) {
             G.gl.glEnable(3042);
             G.gl.glBlendFunc(770, 771);
             this.menu_cache.begin();
-            if (mode != 3) {
+            if (mode != MODE_PLAY) {
                 if (this.msg != null) {
                     this.menu_cache.draw(this.left_menu_cache_id, 0, 2);
                 } else {
@@ -1546,7 +1566,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 this.menu_cache.draw(this.left_menu_cache_id, 4, 2);
             }
             this.menu_cache.end();
-            if (mode != 3) {
+            if (mode != MODE_PLAY) {
                 G.batch.begin();
                 if (from_game) {
                     G.batch.draw(this.nextleveltex, 80.0f, G.realheight - 48, 0.0f, 0.0f, 128.0f, 32.0f, 1.0f, 1.0f, 0.0f, 0, 0, 128, 32, false, false);
@@ -1589,14 +1609,14 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         this.num_touch_points = 0;
         this.num_balls_in_goal = 0;
         this.num_balls = 0;
-        this.state = 0;
+        this.state = STATE_PLAYING;
         this.last_autosave = System.currentTimeMillis();
         world.setContactFilter(null);
         world.setContactListener(null);
         this.um.reset();
         this.om.clear();
         this.hinges.clear();
-        mode = 4;
+        mode = MODE_PAUSE;
         this.grabbed_object = null;
         this.last_grabbed = null;
         this.contact_handler.reset();
@@ -1635,7 +1655,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     private void load() {
         Vector2 pos;
         Gdx.app.log("LOAD", "LOAD");
-        set_mode(4);
+        set_mode(MODE_PAUSE);
         this.contact_handler.reset();
         this.modified = false;
         this.lowfpsfixed = false;
@@ -1912,7 +1932,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             enable_shadows = tmp.isEmpty() || tmp.equals("yes");
         }
         draw_fps = Settings.get("drawfps").equals("yes");
-        draw_fps = Settings.get("drawfps").equals("yes");
         String tmp2 = Settings.get("ropequality");
         rope_quality = (tmp2 == null || tmp2.isEmpty()) ? 100 : Integer.parseInt(tmp2);
         String tmp4 = Settings.get("bloom");
@@ -1946,11 +1965,11 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         has_multitouch = Gdx.input.isPeripheralAvailable(Input.Peripheral.MultitouchScreen);
         G.batch.setColor(Color.WHITE);
         if (level_type != 2) {
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         } else if (!sandbox) {
             pause_world();
             resume_world();
-            set_mode(3);
+            set_mode(MODE_PLAY);
         }
         MiscRenderer.update_quality();
     }
@@ -2037,13 +2056,13 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 } else if (from_community) {
                     ApparatusApp.backend.open_ingame_back_community_menu();
                 } else {
-                    if (this.state == 2) {
+                    if (this.state == STATE_FINISHED) {
                         this.level_filename = ".lvl" + this.level_n + (this.level_category != 0 ? "_" + this.level_category : "");
                         pause_world();
                         save();
                         this.level_filename = null;
                     } else if (this.modified) {
-                        if (mode == 3) {
+                        if (mode == MODE_PLAY) {
                             pause_world();
                         }
                         autosave_challenge();
@@ -2209,19 +2228,19 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     public void set_mode(int mode2) {
         switch (mode2) {
             case 0:
-                mode = 0;
+                mode = MODE_DEFAULT;
                 return;
             case 1:
-                mode = 1;
+                mode = MODE_GRAB;
                 return;
             case 2:
             default:
                 return;
             case 3:
-                mode = 3;
+                mode = MODE_PLAY;
                 return;
             case 4:
-                mode = 4;
+                mode = MODE_PAUSE;
                 return;
         }
     }
@@ -2256,7 +2275,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
 
     /* access modifiers changed from: package-private */
     public void pause_world() {
-        this.state = 0;
+        this.state = STATE_PLAYING;
         this.lowfpscount = 0;
         if (enable_multithreading && this.sim_thread != null) {
             this.sim_thread.terminate();
@@ -2315,7 +2334,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             it13.next().stabilize();
         }
         this.contact_handler.clean();
-        set_mode(4);
+        set_mode(MODE_PAUSE);
         do_connectanims = false;
         if (Level.version >= 3) {
             resolve_cable_connections();
@@ -2366,9 +2385,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     }
 
     public void resume_world() {
-        this.state = 0;
+        this.state = STATE_PLAYING;
         this.pending_follow = false;
-        set_mode(3);
+        set_mode(MODE_PLAY);
         this.lowfpscount = 0;
         this.contact_handler.reset();
         this.camera_h.velocity.set(0.0f, 0.0f, 0.0f);
@@ -2443,7 +2462,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             release_object();
         }
         this.grabbed_object = o;
-        set_mode(1);
+        set_mode(MODE_GRAB);
         if (sandbox) {
             if (o instanceof Bar) {
                 Bar b = (Bar) o;
@@ -2509,7 +2528,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this.grabbed_object.release();
             this.last_grabbed = this.grabbed_object;
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         }
     }
 
@@ -2527,7 +2546,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 this.um.commit_step();
             }
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
             if (this.last_grabbed == o) {
                 this.last_grabbed = null;
             }
@@ -2543,17 +2562,17 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             remove_potential_hinges(((RopeEnd) o).rope.g2);
             ((RopeEnd) o).rope.dispose(world);
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         } else if (o instanceof CableEnd) {
             this.om.remove(o);
             ((CableEnd) o).cable.dispose(world);
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         } else if (o instanceof PanelCableEnd) {
             this.om.remove(o);
             ((PanelCableEnd) o).cable.dispose(world);
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         } else if (o instanceof DamperEnd) {
             this.om.remove(((DamperEnd) o).damper);
             remove_potential_fixture_pair(((DamperEnd) o).damper.g1.body.getFixtureList().get(0));
@@ -2564,7 +2583,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             remove_potential_hinges(((DamperEnd) o).damper.g2);
             ((DamperEnd) o).damper.dispose(world);
             this.grabbed_object = null;
-            set_mode(4);
+            set_mode(MODE_PAUSE);
         } else {
             this.om.remove(o);
             remove_potential_hinges(o);
@@ -2680,7 +2699,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
         this.widget[p] = false;
         Gdx.app.log("x ", "x " + x);
-        if (this.state == 2) {
+        if (this.state == STATE_FINISHED) {
             if (((float) x) > 0.4f * ((float) G.realwidth) && ((float) x) < 0.6195313f * ((float) G.realwidth) && ((float) y) > 0.5f * ((float) G.realheight) && ((float) y) < 0.62777776f * ((float) G.realheight)) {
                 if (this.level_n != -1) {
                     int next = this.level_n + 1;
@@ -2696,10 +2715,10 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 if (this.level_n == -1) {
                     Settings.msg(L.get("uploading_solution_error"));
                     pause_world();
-                    this.state = 0;
+                    this.state = STATE_PLAYING;
                 } else {
                     sandbox = true;
-                    this.state = 0;
+                    this.state = STATE_PLAYING;
                     level_type = 0;
                     this.level_filename = ".lvl" + this.level_n + (this.level_category != 0 ? "_" + this.level_category : "");
                     this.level.type = "apparatus";
@@ -2725,7 +2744,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             } else {
                 this.allow_swipe = false;
             }
-            if (mode != 3) {
+            if (mode != MODE_PLAY) {
                 this.widget[p] = true;
                 this._tmpv.set(v.x * (((float) G.width) / ((float) G.realwidth)), v.y * (((float) G.height) / ((float) G.realheight)));
                 Gdx.app.log("pospos", "pos " + this._tmpv.x + " " + this._tmpv.y);
@@ -2762,9 +2781,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                                 this.grab_offs.sub(result.getPosition());
                                 destroy_drag_body();
                                 grab_object((GrabableObject) result.getUserData());
-                                set_mode(1);
+                                set_mode(MODE_GRAB);
                             } else {
-                                set_mode(4);
+                                set_mode(MODE_PAUSE);
                             }
                         }
                         this.last_touch_time = time;
@@ -2782,7 +2801,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                         if (this.pending_follow) {
                             this.pending_follow = false;
                             this.camera_h.set_target((GrabableObject) this.query_result_body.getUserData(), 3.0f, -3.0f);
-                            this.state = 0;
+                            this.state = STATE_PLAYING;
                             this.time_last = System.nanoTime();
                             this.time_accum = 0;
                             world.step(0.001f, 1, 1);
@@ -2801,7 +2820,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     } else if (this.pending_follow) {
                         this.camera_h.release_target();
                         this.pending_follow = false;
-                        this.state = 0;
+                        this.state = STATE_PLAYING;
                         this.time_last = System.nanoTime();
                         this.time_accum = 0;
                         world.step(0.001f, 1, 1);
@@ -2969,7 +2988,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 return true;
             }
         }
-        if (mode == 3) {
+        if (mode == MODE_PLAY) {
             if (this.active_panel != null) {
                 this._tmpv.set(v.x, v.y);
                 if (this.active_panel.widgets.touch_down((int) this._tmpv.x, (int) this._tmpv.y, p)) {
@@ -2986,7 +3005,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         if (p == 0 && v.x < 64.0f) {
             switch ((h - ((int) v.y)) / 56) {
                 case 0:
-                    if (mode == 3) {
+                    if (mode == MODE_PLAY) {
                         pause_world();
                         pause_world();
                     } else if (!sandbox || testing_challenge || level_type != 1) {
@@ -2997,14 +3016,14 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     r = true;
                     break;
                 case 1:
-                    if (mode != 3) {
+                    if (mode != MODE_PLAY) {
                         this.um.undo();
                         r = true;
                         break;
                     }
                     break;
                 case 2:
-                    if (mode == 3) {
+                    if (mode == MODE_PLAY) {
                         if (level_type == 2 && this.msg != null) {
                             ApparatusApp.backend.open_infobox(this.msg);
                             r = true;
@@ -3029,7 +3048,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     r = true;
                     break;
             }
-        } else if (p == 0 && sandbox && from_game && mode != 3 && v.x < 208.0f && v.y > ((float) (h - 48))) {
+        } else if (p == 0 && sandbox && from_game && mode != MODE_PLAY && v.x < 208.0f && v.y > ((float) (h - 48))) {
             release_object();
             SoundManager.play_startlevel();
             open(this.level_category, this.level_n + 1);
@@ -3206,10 +3225,10 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 this.num_touch_points = 0;
                 this.allow_swipe = true;
             }
-            if (this.widget[p] && mode != 3) {
+            if (this.widget[p] && mode != MODE_PLAY) {
                 this.um.commit_step();
             }
-            if (p == 0 && mode != 3) {
+            if (p == 0 && mode != MODE_PLAY) {
                 long time = System.currentTimeMillis();
                 Intersector.intersectRayPlane(G.p_cam.getPickRay((float) x, (float) y), yaxis, this.tmp3);
                 if (time - this.last_touch_time < 333 && time - this.wrench_anim_start > 150) {
@@ -3238,9 +3257,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                         this.grab_offs.sub(result.getPosition());
                         destroy_drag_body();
                         grab_object((GrabableObject) result.getUserData());
-                        set_mode(1);
+                        set_mode(MODE_GRAB);
                     } else {
-                        set_mode(4);
+                        set_mode(MODE_PAUSE);
                     }
                 }
                 this.rotating = false;
@@ -3252,7 +3271,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 }
                 destroy_drag_body();
                 this.commit_next = true;
-            } else if (mode == 3) {
+            } else if (mode == MODE_PLAY) {
                 if (p == 0 && this.mousejoint != null) {
                     world.destroyJoint(this.mousejoint);
                     this.mousejoint = null;
@@ -3396,7 +3415,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this._touch_vec[p].set((float) x, (float) (G.realheight - y));
             if (this.widget[p]) {
                 this._tmpv.set(((float) x) * (((float) G.width) / ((float) G.realwidth)), ((float) y) * (((float) G.height) / ((float) G.realheight)));
-                if (mode == 3) {
+                if (mode == MODE_PLAY) {
                     if (this.active_panel != null) {
                         this.active_panel.widgets.touch_drag((int) this._tmpv.x, (int) this._tmpv.y, p);
                     }
@@ -3526,7 +3545,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         this._tmp.set(this.iresult.x, this.iresult.y);
         Intersector.intersectRayPlane(r, this.yaxis2, this.iresult);
         this._tmp2.set(this.iresult.x, this.iresult.y);
-        if (sandbox || mode == 3) {
+        if (sandbox || mode == MODE_PLAY) {
             Intersector.intersectRayPlane(r, this.yaxis3, this.iresult);
             this._tmp3.set(this.iresult.x, this.iresult.y);
             this.query_result_body = null;
@@ -3835,7 +3854,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
 
         @Override
         public void beginContact(Contact c) {
-            if (Game.mode == 3) {
+            if (Game.mode == MODE_PLAY) {
                 if ((c.getFixtureA().getBody().getUserData() instanceof Mine) && !c.getFixtureB().isSensor() && c.getFixtureA().getBody().getLinearVelocity().dst(c.getFixtureB().getBody().getLinearVelocity()) > 1.8f) {
                     ((Mine) c.getFixtureA().getBody().getUserData()).trigger(Game.world);
                 }
