@@ -190,15 +190,15 @@ public class MetalCorner extends GrabableObject {
     private void init_properties() {
         BaseObject.Property[] propertyArr = new BaseObject.Property[10];
         propertyArr[0] = new BaseObject.Property("r", BaseObject.Property.Type.BOOLEAN, this.should_render ? Boolean.TRUE : Boolean.FALSE);
-        propertyArr[1] = new BaseObject.Property("cx", BaseObject.Property.Type.FLOAT, new Float(this.center.x));
-        propertyArr[2] = new BaseObject.Property("cy", BaseObject.Property.Type.FLOAT, new Float(this.center.y));
-        propertyArr[3] = new BaseObject.Property("b1", BaseObject.Property.Type.INT, new Integer(this.b1_id));
-        propertyArr[4] = new BaseObject.Property("b2", BaseObject.Property.Type.INT, new Integer(this.b2_id));
-        propertyArr[5] = new BaseObject.Property("blen", BaseObject.Property.Type.FLOAT, new Float(this.baselen));
-        propertyArr[6] = new BaseObject.Property("h", BaseObject.Property.Type.FLOAT, new Float(this.height));
-        propertyArr[7] = new BaseObject.Property("a", BaseObject.Property.Type.FLOAT, new Float(this.angle));
-        propertyArr[8] = new BaseObject.Property("sidea", BaseObject.Property.Type.INT, new Integer(this.side_a));
-        propertyArr[9] = new BaseObject.Property("sideb", BaseObject.Property.Type.INT, new Integer(this.side_b));
+        propertyArr[1] = new BaseObject.Property("cx", BaseObject.Property.Type.FLOAT, this.center.x);
+        propertyArr[2] = new BaseObject.Property("cy", BaseObject.Property.Type.FLOAT, this.center.y);
+        propertyArr[3] = new BaseObject.Property("b1", BaseObject.Property.Type.INT, this.b1_id);
+        propertyArr[4] = new BaseObject.Property("b2", BaseObject.Property.Type.INT, this.b2_id);
+        propertyArr[5] = new BaseObject.Property("blen", BaseObject.Property.Type.FLOAT, this.baselen);
+        propertyArr[6] = new BaseObject.Property("h", BaseObject.Property.Type.FLOAT, this.height);
+        propertyArr[7] = new BaseObject.Property("a", BaseObject.Property.Type.FLOAT, this.angle);
+        propertyArr[8] = new BaseObject.Property("sidea", BaseObject.Property.Type.INT, this.side_a);
+        propertyArr[9] = new BaseObject.Property("sideb", BaseObject.Property.Type.INT, this.side_b);
         this.properties = propertyArr;
     }
 
@@ -230,26 +230,26 @@ public class MetalCorner extends GrabableObject {
     @Override // com.bithack.apparatus.objects.BaseObject
     public void set_property(String name, Object value) {
         if (name.equals("r")) {
-            this.should_render = ((Boolean) value).booleanValue();
+            this.should_render = (Boolean) value;
             Gdx.app.log("sjk", new StringBuilder(String.valueOf(this.should_render)).toString());
         } else if (name.equals("cx")) {
-            this.center.x = ((Float) value).floatValue();
+            this.center.x = (Float) value;
         } else if (name.equals("cy")) {
-            this.center.y = ((Float) value).floatValue();
+            this.center.y = (Float) value;
         } else if (name.equals("b1")) {
-            this.b1_id = ((Integer) value).intValue();
+            this.b1_id = (Integer) value;
         } else if (name.equals("b2")) {
-            this.b2_id = ((Integer) value).intValue();
+            this.b2_id = (Integer) value;
         } else if (name.equals("blen")) {
-            this.baselen = ((Float) value).floatValue();
+            this.baselen = (Float) value;
         } else if (name.equals("h")) {
-            this.height = ((Float) value).floatValue();
+            this.height = (Float) value;
         } else if (name.equals("sidea")) {
-            this.side_a = ((Integer) value).intValue();
+            this.side_a = (Integer) value;
         } else if (name.equals("sideb")) {
-            this.side_b = ((Integer) value).intValue();
+            this.side_b = (Integer) value;
         } else if (name.equals("a")) {
-            this.angle = ((Float) value).floatValue();
+            this.angle = (Float) value;
         }
         super.set_property(name, value);
     }

@@ -94,7 +94,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         if (i != null) {
             int id2 = i.getIntExtra("id", -1);
             if (id2 != -1) {
-                new LoadCommunityLevelTask().execute(new Integer(id2));
+                new LoadCommunityLevelTask().execute(id2);
                 return;
             }
             if (i.getScheme() != null && i.getScheme().equals("apparatus")) {
@@ -105,7 +105,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                     id = -1;
                 }
                 if (id > 0) {
-                    new LoadCommunityLevelTask().execute(new Integer(id));
+                    new LoadCommunityLevelTask().execute(id);
                 } else {
                     Settings.msg(L.get("invalid_id"));
                 }

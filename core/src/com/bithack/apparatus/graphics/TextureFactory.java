@@ -24,7 +24,7 @@ public class TextureFactory {
 
     private static void add(String key, TextureHandle h) {
         map.put(key, h);
-        by_id.put(new Integer(h.id), h);
+        by_id.put(h.id, h);
     }
 
     private static TextureHandle load_handle(String filename, Files.FileType filetype, Texture.TextureFilter minfilter, Texture.TextureFilter maxfilter, Texture.TextureWrap wrap_x, Texture.TextureWrap wrap_y) {

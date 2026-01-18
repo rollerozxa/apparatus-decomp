@@ -23,7 +23,7 @@ public class Pipeline {
     public void remove(BaseObject o) {
         switch (o.pipeline) {
             case 0:
-                Integer id = new Integer(o.texture_id);
+                Integer id = o.texture_id;
                 ArrayList<BaseObject> l = this.texture_pipeline.get(id);
                 if (l != null) {
                     l.remove(o);
@@ -31,7 +31,7 @@ public class Pipeline {
                 }
                 break;
             case 1:
-                Integer id2 = new Integer(o.texture_id);
+                Integer id2 = o.texture_id;
                 ArrayList<BaseObject> l2 = this.sprite_pipeline.get(id2);
                 if (l2 != null) {
                     l2.remove(o);
@@ -50,7 +50,7 @@ public class Pipeline {
     public void add(BaseObject o) {
         switch (o.pipeline) {
             case 0:
-                Integer id = new Integer(o.texture_id);
+                Integer id = o.texture_id;
                 ArrayList<BaseObject> l = this.texture_pipeline.get(id);
                 if (l == null) {
                     l = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Pipeline {
                 l.add(o);
                 break;
             case 1:
-                Integer id2 = new Integer(o.texture_id);
+                Integer id2 = o.texture_id;
                 ArrayList<BaseObject> l2 = this.sprite_pipeline.get(id2);
                 if (l2 == null) {
                     l2 = new ArrayList<>();
@@ -91,26 +91,20 @@ public class Pipeline {
             ArrayList<BaseObject> v = entry.getValue();
             Texture t = TextureFactory.by_id.get(k).texture;
             t.bind();
-            Iterator<BaseObject> it = v.iterator();
-            while (it.hasNext()) {
-                BaseObject o = it.next();
+            for (BaseObject o : v) {
                 o.render();
             }
         }
         G.gl.glDisable(3553);
-        if (this.color_pipeline.size() > 0) {
-            Iterator<BaseObject> it2 = this.color_pipeline.iterator();
-            while (it2.hasNext()) {
-                BaseObject o2 = it2.next();
+        if (!this.color_pipeline.isEmpty()) {
+            for (BaseObject o2 : this.color_pipeline) {
                 o2.render();
             }
         }
     }
 
     public void render_batch() {
-        Iterator<BaseObject> it = this.batch_pipeline.iterator();
-        while (it.hasNext()) {
-            BaseObject o = it.next();
+        for (BaseObject o : this.batch_pipeline) {
             o.render();
         }
     }

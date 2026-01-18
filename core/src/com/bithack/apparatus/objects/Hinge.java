@@ -41,7 +41,14 @@ public class Hinge extends BaseObject {
             _init();
         }
         this.world = world;
-        this.properties = new BaseObject.Property[]{new BaseObject.Property("body1", BaseObject.Property.Type.INT, new Integer(0)), new BaseObject.Property("body2", BaseObject.Property.Type.INT, new Integer(0)), new BaseObject.Property("jx", BaseObject.Property.Type.FLOAT, new Float(0.0f)), new BaseObject.Property("jy", BaseObject.Property.Type.FLOAT, new Float(0.0f)), new BaseObject.Property("type", BaseObject.Property.Type.INT, new Integer(0)), new BaseObject.Property("rot_extra", BaseObject.Property.Type.FLOAT, new Float(90.0f)), new BaseObject.Property("same_layer", BaseObject.Property.Type.BOOLEAN, Boolean.FALSE)};
+        this.properties = new BaseObject.Property[]{
+                new BaseObject.Property("body1", BaseObject.Property.Type.INT, 0),
+                new BaseObject.Property("body2", BaseObject.Property.Type.INT, 0),
+                new BaseObject.Property("jx", BaseObject.Property.Type.FLOAT, 0.0f),
+                new BaseObject.Property("jy", BaseObject.Property.Type.FLOAT, 0.0f),
+                new BaseObject.Property("type", BaseObject.Property.Type.INT, 0),
+                new BaseObject.Property("rot_extra", BaseObject.Property.Type.FLOAT, 90.0f),
+                new BaseObject.Property("same_layer", BaseObject.Property.Type.BOOLEAN, Boolean.FALSE)};
     }
 
     public static void _init() {

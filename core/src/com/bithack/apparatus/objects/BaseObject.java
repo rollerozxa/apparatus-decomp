@@ -124,20 +124,20 @@ public abstract class BaseObject {
         }
 
         public Property(String name, Type type, Object value) {
-            this.name = new String(name);
+            this.name = name;
             this.type = type;
             switch ($SWITCH_TABLE$com$bithack$apparatus$objects$BaseObject$Property$Type()[type.ordinal()]) {
                 case 1:
-                    this.value = new String((String) value);
+                    this.value = (String) value;
                     break;
                 case 2:
-                    this.value = new Integer(((Integer) value).intValue());
+                    this.value = (Integer) value;
                     break;
                 case 3:
-                    this.value = new Boolean(((Boolean) value).booleanValue());
+                    this.value = (Boolean) value;
                     break;
                 case 4:
-                    this.value = new Float(((Float) value).floatValue());
+                    this.value = (Float) value;
                     break;
             }
         }

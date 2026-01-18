@@ -43,7 +43,10 @@ public abstract class BaseMotor extends JointObject {
         Hinge._init();
         this.world = world;
         create_body();
-        this.properties = new BaseObject.Property[]{new BaseObject.Property("oid", BaseObject.Property.Type.INT, new Integer(-1)), new BaseObject.Property("attached", BaseObject.Property.Type.BOOLEAN, Boolean.FALSE), new BaseObject.Property("dir", BaseObject.Property.Type.FLOAT, new Float(1.0f))};
+        this.properties = new BaseObject.Property[]{
+                new BaseObject.Property("oid", BaseObject.Property.Type.INT, -1),
+                new BaseObject.Property("attached", BaseObject.Property.Type.BOOLEAN, Boolean.FALSE),
+                new BaseObject.Property("dir", BaseObject.Property.Type.FLOAT, 1.0f)};
     }
 
     @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject

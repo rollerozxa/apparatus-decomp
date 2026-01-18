@@ -97,21 +97,20 @@ public class Damper extends GrabableObject {
         this.size = 2.0f;
         _init();
         this.joint2 = null;
-        this.size = 2.0f;
         this.world = world;
         create_ends(world);
         this.properties = new BaseObject.Property[]{
-            new BaseObject.Property("e1x", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e1y", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e2x", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e2y", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e1a", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e2a", BaseObject.Property.Type.FLOAT, new Float(0.0f)),
-            new BaseObject.Property("e1id", BaseObject.Property.Type.INT, new Integer(0)),
-            new BaseObject.Property("e2id", BaseObject.Property.Type.INT, new Integer(0)),
-            new BaseObject.Property("force", BaseObject.Property.Type.FLOAT, new Float(100.0f)),
-            new BaseObject.Property("speed", BaseObject.Property.Type.FLOAT, new Float(50.0f)),
-            new BaseObject.Property("size", BaseObject.Property.Type.FLOAT, new Float(size))};
+            new BaseObject.Property("e1x", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e1y", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e2x", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e2y", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e1a", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e2a", BaseObject.Property.Type.FLOAT, 0.0f),
+            new BaseObject.Property("e1id", BaseObject.Property.Type.INT, 0),
+            new BaseObject.Property("e2id", BaseObject.Property.Type.INT, 0),
+            new BaseObject.Property("force", BaseObject.Property.Type.FLOAT, 100.0f),
+            new BaseObject.Property("speed", BaseObject.Property.Type.FLOAT, 50.0f),
+            new BaseObject.Property("size", BaseObject.Property.Type.FLOAT, size)};
         this.fixed_rotation = true;
         create_ropejoint();
     }
@@ -234,30 +233,30 @@ public class Damper extends GrabableObject {
     @Override // com.bithack.apparatus.objects.BaseObject
     public void set_property(String name, Object value) {
         if (name.equals("e1x")) {
-            tmp.set(((Float) value).floatValue(), this.g1.body.getPosition().y);
+            tmp.set((Float) value, this.g1.body.getPosition().y);
             this.g1.translate(tmp.x, tmp.y);
         } else if (name.equals("e1y")) {
-            tmp.set(this.g1.body.getPosition().x, ((Float) value).floatValue());
+            tmp.set(this.g1.body.getPosition().x, (Float) value);
             this.g1.translate(tmp.x, tmp.y);
         } else if (name.equals("e2x")) {
-            tmp.set(((Float) value).floatValue(), this.g2.body.getPosition().y);
+            tmp.set((Float) value, this.g2.body.getPosition().y);
             this.g2.translate(tmp.x, tmp.y);
         } else if (name.equals("e2y")) {
-            tmp.set(this.g2.body.getPosition().x, ((Float) value).floatValue());
+            tmp.set(this.g2.body.getPosition().x, (Float) value);
             this.g2.translate(tmp.x, tmp.y);
         } else if (name.equals("e1id")) {
-            this.g1.__unique_id = ((Integer) value).intValue();
+            this.g1.__unique_id = (Integer) value;
         } else if (name.equals("e1a")) {
-            this.g1.set_angle(((Float) value).floatValue());
+            this.g1.set_angle((Float) value);
         } else if (name.equals("e2a")) {
-            this.g2.set_angle(((Float) value).floatValue());
+            this.g2.set_angle((Float) value);
         } else if (name.equals("e2id")) {
-            this.g2.__unique_id = ((Integer) value).intValue();
+            this.g2.__unique_id = (Integer) value;
         } else if (name.equals("force")) {
-            this.force = ((Float) value).floatValue();
+            this.force = (Float) value;
             ((PrismaticJoint) this.joint1).setMaxMotorForce(this.force);
         } else if (name.equals("speed")) {
-            this.speed = ((Float) value).floatValue();
+            this.speed = (Float) value;
             ((PrismaticJoint) this.joint1).setMotorSpeed(this.speed);
         }
         super.set_property(name, value);
@@ -265,17 +264,17 @@ public class Damper extends GrabableObject {
 
     @Override // com.bithack.apparatus.objects.BaseObject
     public void update_properties() {
-        super.set_property("e1x", Float.valueOf(this.g1.body.getPosition().x));
-        super.set_property("e1y", Float.valueOf(this.g1.body.getPosition().y));
-        super.set_property("e2x", Float.valueOf(this.g2.body.getPosition().x));
-        super.set_property("e2y", Float.valueOf(this.g2.body.getPosition().y));
-        super.set_property("e1a", Float.valueOf(this.g1.body.getAngle()));
-        super.set_property("e2a", Float.valueOf(this.g2.body.getAngle()));
-        super.set_property("e1id", Integer.valueOf(this.g1.__unique_id));
-        super.set_property("e2id", Integer.valueOf(this.g2.__unique_id));
-        super.set_property("size", new Float(this.size));
-        super.set_property("speed", Float.valueOf(this.speed));
-        super.set_property("force", Float.valueOf(this.force));
+        super.set_property("e1x", this.g1.body.getPosition().x);
+        super.set_property("e1y", this.g1.body.getPosition().y);
+        super.set_property("e2x", this.g2.body.getPosition().x);
+        super.set_property("e2y", this.g2.body.getPosition().y);
+        super.set_property("e1a", this.g1.body.getAngle());
+        super.set_property("e2a", this.g2.body.getAngle());
+        super.set_property("e1id", this.g1.__unique_id);
+        super.set_property("e2id", this.g2.__unique_id);
+        super.set_property("size", this.size);
+        super.set_property("speed", this.speed);
+        super.set_property("force", this.force);
     }
 
     @Override // com.bithack.apparatus.objects.BaseObject

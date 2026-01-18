@@ -165,18 +165,18 @@ public abstract class BaseRope extends GrabableObject {
         this.g1.body.setTransform(new Vector2(0.0f, -(size - 2.0f)), 0.0f);
         create_ropejoint();
         BaseObject.Property[] propertyArr = new BaseObject.Property[12];
-        propertyArr[0] = new BaseObject.Property("e1x", BaseObject.Property.Type.FLOAT, new Float(0.0f));
-        propertyArr[1] = new BaseObject.Property("e1y", BaseObject.Property.Type.FLOAT, new Float(0.0f));
-        propertyArr[2] = new BaseObject.Property("e2x", BaseObject.Property.Type.FLOAT, new Float(0.0f));
-        propertyArr[3] = new BaseObject.Property("e2y", BaseObject.Property.Type.FLOAT, new Float(0.0f));
-        propertyArr[4] = new BaseObject.Property("e1id", BaseObject.Property.Type.INT, new Integer(0));
-        propertyArr[5] = new BaseObject.Property("e2id", BaseObject.Property.Type.INT, new Integer(0));
-        propertyArr[6] = new BaseObject.Property("e1l", BaseObject.Property.Type.INT, new Integer(0));
-        propertyArr[7] = new BaseObject.Property("e2l", BaseObject.Property.Type.INT, new Integer(0));
-        propertyArr[8] = new BaseObject.Property("e1oid", BaseObject.Property.Type.INT, new Integer(-1));
-        propertyArr[9] = new BaseObject.Property("e2oid", BaseObject.Property.Type.INT, new Integer(-1));
-        propertyArr[10] = new BaseObject.Property("size", BaseObject.Property.Type.FLOAT, new Float(size));
-        propertyArr[11] = new BaseObject.Property("type", BaseObject.Property.Type.INT, new Integer(this.rubber ? 1 : 0));
+        propertyArr[0] = new BaseObject.Property("e1x", BaseObject.Property.Type.FLOAT, 0.0f);
+        propertyArr[1] = new BaseObject.Property("e1y", BaseObject.Property.Type.FLOAT, 0.0f);
+        propertyArr[2] = new BaseObject.Property("e2x", BaseObject.Property.Type.FLOAT, 0.0f);
+        propertyArr[3] = new BaseObject.Property("e2y", BaseObject.Property.Type.FLOAT, 0.0f);
+        propertyArr[4] = new BaseObject.Property("e1id", BaseObject.Property.Type.INT, 0);
+        propertyArr[5] = new BaseObject.Property("e2id", BaseObject.Property.Type.INT, 0);
+        propertyArr[6] = new BaseObject.Property("e1l", BaseObject.Property.Type.INT,0);
+        propertyArr[7] = new BaseObject.Property("e2l", BaseObject.Property.Type.INT, 0);
+        propertyArr[8] = new BaseObject.Property("e1oid", BaseObject.Property.Type.INT, -1);
+        propertyArr[9] = new BaseObject.Property("e2oid", BaseObject.Property.Type.INT, -1);
+        propertyArr[10] = new BaseObject.Property("size", BaseObject.Property.Type.FLOAT, size);
+        propertyArr[11] = new BaseObject.Property("type", BaseObject.Property.Type.INT, this.rubber ? 1 : 0);
         this.properties = propertyArr;
         this.fixed_rotation = true;
     }
@@ -388,34 +388,34 @@ public abstract class BaseRope extends GrabableObject {
     @Override // com.bithack.apparatus.objects.BaseObject
     public void set_property(String name, Object value) {
         if (name.equals("e1x")) {
-            tmp.set(((Float) value).floatValue(), this.g1.body.getPosition().y);
+            tmp.set((Float) value, this.g1.body.getPosition().y);
             this.g1.translate(tmp.x, tmp.y);
         } else if (name.equals("e1y")) {
-            tmp.set(this.g1.body.getPosition().x, ((Float) value).floatValue());
+            tmp.set(this.g1.body.getPosition().x, (Float) value);
             this.g1.translate(tmp.x, tmp.y);
         } else if (name.equals("e2x")) {
-            tmp.set(((Float) value).floatValue(), this.g2.body.getPosition().y);
+            tmp.set((Float) value, this.g2.body.getPosition().y);
             this.g2.translate(tmp.x, tmp.y);
         } else if (name.equals("e2y")) {
-            tmp.set(this.g2.body.getPosition().x, ((Float) value).floatValue());
+            tmp.set(this.g2.body.getPosition().x, (Float) value);
             this.g2.translate(tmp.x, tmp.y);
         } else if (name.equals("e1id")) {
-            this.g1.__unique_id = ((Integer) value).intValue();
+            this.g1.__unique_id = (Integer) value;
         } else if (name.equals("e2id")) {
-            this.g2.__unique_id = ((Integer) value).intValue();
+            this.g2.__unique_id = (Integer) value;
         } else if (name.equals("e2l")) {
-            this.g2.layer = ((Integer) value).intValue();
+            this.g2.layer = (Integer) value;
         } else if (name.equals("e1l")) {
-            this.g1.layer = ((Integer) value).intValue();
+            this.g1.layer = (Integer) value;
         } else if (name.equals("size")) {
-            float nsize = ((Float) value).floatValue();
+            float nsize = (Float) value;
             if (nsize != this.size) {
                 this.size = nsize;
                 create_rope();
                 create_ropejoint();
             }
         } else if (name.equals("type")) {
-            this.rubber = ((Integer) value).intValue() == 1;
+            this.rubber = (Integer) value == 1;
             create_ropejoint();
         }
         super.set_property(name, value);
@@ -423,16 +423,16 @@ public abstract class BaseRope extends GrabableObject {
 
     @Override // com.bithack.apparatus.objects.BaseObject
     public void update_properties() {
-        super.set_property("e1x", Float.valueOf(this.g1.body.getPosition().x));
-        super.set_property("e1y", Float.valueOf(this.g1.body.getPosition().y));
-        super.set_property("e2x", Float.valueOf(this.g2.body.getPosition().x));
-        super.set_property("e2y", Float.valueOf(this.g2.body.getPosition().y));
-        super.set_property("e1id", Integer.valueOf(this.g1.__unique_id));
-        super.set_property("e2id", Integer.valueOf(this.g2.__unique_id));
-        super.set_property("e1l", new Integer(this.g1.layer));
-        super.set_property("e2l", new Integer(this.g2.layer));
-        super.set_property("size", new Float(this.size));
-        super.set_property("type", this.rubber ? new Integer(1) : new Integer(0));
+        super.set_property("e1x", this.g1.body.getPosition().x);
+        super.set_property("e1y", this.g1.body.getPosition().y);
+        super.set_property("e2x", this.g2.body.getPosition().x);
+        super.set_property("e2y", this.g2.body.getPosition().y);
+        super.set_property("e1id", this.g1.__unique_id);
+        super.set_property("e2id", this.g2.__unique_id);
+        super.set_property("e1l", this.g1.layer);
+        super.set_property("e2l", this.g2.layer);
+        super.set_property("size", this.size);
+        super.set_property("type", this.rubber ? 1 : 0);
     }
 
     @Override // com.bithack.apparatus.objects.BaseObject

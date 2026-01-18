@@ -141,8 +141,8 @@ public class Battery extends GrabableObject {
         this.body.setUserData(this);
         this.layer = 0;
         this.properties = new BaseObject.Property[]{
-                new BaseObject.Property("v", BaseObject.Property.Type.FLOAT, new Float(0.5f)),
-                new BaseObject.Property("a", BaseObject.Property.Type.FLOAT, Float.valueOf(0.5f)),
+                new BaseObject.Property("v", BaseObject.Property.Type.FLOAT, 0.5f),
+                new BaseObject.Property("a", BaseObject.Property.Type.FLOAT, 0.5f),
                 new BaseObject.Property("s", BaseObject.Property.Type.INT, this.size),
                 new BaseObject.Property("on", BaseObject.Property.Type.BOOLEAN, Boolean.TRUE)};
         this.fixed_layer = true;

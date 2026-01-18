@@ -63,18 +63,19 @@ public class RocketEngine extends GrabableObject {
         this.sensor = this.body.createFixture(_sfd);
         this.sensor.setUserData(this.hejhej);
         this.body.setUserData(this);
-        this.properties = new BaseObject.Property[]{new BaseObject.Property("thrust", BaseObject.Property.Type.FLOAT, new Float(0.5f))};
+        this.properties = new BaseObject.Property[]{
+                new BaseObject.Property("thrust", BaseObject.Property.Type.FLOAT, 0.5f)};
     }
 
     @Override // com.bithack.apparatus.objects.BaseObject
     public void update_properties() {
-        set_property("thrust", Float.valueOf(this.thrust));
+        set_property("thrust", this.thrust);
     }
 
     @Override // com.bithack.apparatus.objects.BaseObject
     public void set_property(String name, Object value) {
         if (name.equals("thrust")) {
-            this.thrust = ((Float) value).floatValue();
+            this.thrust = (Float) value;
         }
         super.set_property(name, value);
     }
@@ -255,7 +256,7 @@ public class RocketEngine extends GrabableObject {
                             i.remove();
                         }
                     }
-                    float t1 = time < 0.0f ? 0.0f : time;
+                    float t1 = Math.max(time, 0.0f);
                     float t2 = t1 * t1;
                     G.batch.setColor(1.0f - (0.8f * t2), 1.0f - t2, 1.0f - t1, alpha);
                     G.batch.draw(Explosive._firetex, f.pos.x - 0.5f, f.pos.y - 0.5f, 0.25f, 0.25f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0, 0, 128, 128, false, false);
@@ -269,9 +270,7 @@ public class RocketEngine extends GrabableObject {
         if (!lights.isEmpty()) {
             G.batch.setBlendFunction(770, 771);
             G.batch.begin();
-            Iterator<Light> i = lights.iterator();
-            while (i.hasNext()) {
-                Light l = i.next();
+            for (Light l : lights) {
                 G.batch.setColor(1.0f, 0.99f, 0.99f, 0.3f);
                 float s = 5.0f + (_r.nextFloat() * 2.0f);
                 G.batch.draw(Explosive._lighttex, l.pos.x - (s / 2.0f), l.pos.y - (s / 2.0f), 0.0f, 0.0f, s, s, 1.0f, 1.0f, 0.0f, 0, 0, 32, 32, false, false);
