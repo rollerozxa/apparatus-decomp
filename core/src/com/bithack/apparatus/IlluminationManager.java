@@ -1905,6 +1905,7 @@ public class IlluminationManager {
             }
         }
         if (layer.buckets.size() > 0) {
+            // Make bucket red when in Christmas mode
             if (ApparatusApp.game.background_n == 10) {
                 Marble._init_diffuse_christmas_materials();
             } else {

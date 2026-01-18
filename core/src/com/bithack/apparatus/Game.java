@@ -1746,7 +1746,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
         MiscRenderer.update_quality();
         if (this.level_category == 2) {
-            set_bg(11);
+            set_bg(10);
         } else {
             set_bg(this.level.background);
         }
@@ -2054,7 +2054,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 Settings.save();
                 break;
             case 7:
-                set_bg(11);
+                set_bg(10);
                 this.level_category = 2;
                 break;
             case 8:
