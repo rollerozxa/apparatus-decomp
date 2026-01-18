@@ -29,7 +29,6 @@ public class ApparatusApp implements ApplicationListener {
     Screen loading_screen;
     MainMenu mainmenu;
     Screen menu;
-    ModeMenu modemenu;
     private String next_level;
     Screen next_screen;
     Screen sandbox;
@@ -218,15 +217,6 @@ public class ApparatusApp implements ApplicationListener {
 
     @Override // com.badlogic.gdx.ApplicationListener
     public void resume() {
-    }
-
-    public void open_modemenu() {
-        this.next_screen = this.modemenu;
-        this.fading = true;
-        if (this.fade <= 1.0E-4f) {
-            this.fade = 1.0f;
-        }
-        this.fade_dir = 0;
     }
 
     public void open_levelmenu() {
