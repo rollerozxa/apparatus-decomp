@@ -23,7 +23,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
-/* loaded from: classes.dex */
 public class RegisterDialog {
     final Activity activity;
     Dialog dialog;
@@ -35,13 +34,13 @@ public class RegisterDialog {
         builder.setTitle(L.get("register_account"));
         builder.setView(view);
         builder.setNeutralButton(L.get("register"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.RegisterDialog.1
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 RegisterDialog.this.new RegisterTask().execute(((TextView) view.findViewById(R.id.username)).getText().toString(), ((TextView) view.findViewById(R.id.password)).getText().toString(), ((TextView) view.findViewById(R.id.password_rpt)).getText().toString(), ((TextView) view.findViewById(R.id.email)).getText().toString());
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.RegisterDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
@@ -57,7 +56,7 @@ public class RegisterDialog {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.os.AsyncTask
+        @Override
         public String doInBackground(String... params) throws IllegalStateException {
             String result = "";
             try {
@@ -83,7 +82,7 @@ public class RegisterDialog {
             }
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         protected void onPreExecute() {
             try {
                 if (RegisterDialog.this.activity instanceof CommunityActivity) {
@@ -97,7 +96,7 @@ public class RegisterDialog {
 
         /* JADX INFO: Access modifiers changed from: protected */
         /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x00a8 -> B:35:0x0030). Please report as a decompilation issue!!! */
-        @Override // android.os.AsyncTask
+        @Override
         public void onPostExecute(String result) {
             String result2 = result.trim();
             boolean error = false;

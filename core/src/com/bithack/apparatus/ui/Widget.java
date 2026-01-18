@@ -1,6 +1,5 @@
 package com.bithack.apparatus.ui;
 
-/* loaded from: classes.dex */
 public abstract class Widget implements IWidget {
     WidgetValueCallback callback;
     int height;

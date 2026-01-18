@@ -29,7 +29,6 @@ import com.bithack.apparatus.objects.Wheel;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class ObjectManager {
     protected final ArrayList<Rope> ropes = new ArrayList<>();
     protected final ArrayList<Cable> cables = new ArrayList<>();

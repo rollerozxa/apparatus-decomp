@@ -26,7 +26,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-/* loaded from: classes.dex */
 public class ApparatusApplication extends AndroidApplication implements ApparatusApp.Backend {
     protected static final int AUTOSAVE_CHALLENGE_DIALOG = 22;
     protected static final int AUTOSAVE_DIALOG = 21;
@@ -65,7 +64,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
     String version = "1.2.2 Beta 3";
     private Dialog info_dialog = null;
 
-    @Override // android.app.Activity
+    @Override
     public void onCreate(Bundle savedInstanceState) throws NumberFormatException {
         super.onCreate(savedInstanceState);
         this.self = this;
@@ -113,17 +112,17 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         }
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onNewIntent(Intent i) throws NumberFormatException {
         super.onNewIntent(i);
         handle_intent(i);
     }
 
-    @Override // com.badlogic.gdx.backends.android.AndroidApplication, android.app.Activity
+    @Override
     public void onPause() {
         Gdx.app.log("onPause()", "onPause");
         run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.1
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 if (ApparatusApp.current == ApparatusApp.game) {
                     if (Game.sandbox && Game.mode != 3) {
@@ -144,14 +143,14 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         super.onPause();
     }
 
-    @Override // com.badlogic.gdx.backends.android.AndroidApplication, android.app.Activity
+    @Override
     public void onResume() {
         Gdx.app.log("onResume()", "onResume");
         super.onResume();
         SoundManager.play_music();
     }
 
-    @Override // com.badlogic.gdx.backends.android.AndroidApplication, android.app.Activity
+    @Override
     public void onDestroy() {
         Gdx.app.log("onDestroy()", "onDestroy");
         Settings.save();
@@ -164,7 +163,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         ApparatusApp.schedule(r);
     }
 
-    @Override // android.app.Activity
+    @Override
     protected Dialog onCreateDialog(int id) {
         Dialog ret = null;
         switch (id) {
@@ -173,7 +172,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 CharSequence[] items = {L.get("load_saved_solution"), L.get("mainmenu"), L.get("levelselect"), L.get("graphicssettings"), L.get("controlssettings"), L.get("physicssettings"), L.get("backtogame")};
                 bld.setTitle(L.get("paused"));
                 bld.setItems(items, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.3
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
@@ -182,7 +181,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 final int n = ApparatusApp.game.level_n;
                                 if (f.exists()) {
                                     ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.3.1
-                                        @Override // java.lang.Runnable
+                                        @Override
                                         public void run() {
                                             ApparatusApp.game.open_solution(f, LevelMenu.category, n);
                                             Game.level_type = 1;
@@ -199,7 +198,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 }
                             case 1:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.3.2
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         ApparatusApp.instance.open_mainmenu();
                                     }
@@ -207,7 +206,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 break;
                             case 2:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.3.3
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         ApparatusApp.instance.open_levelmenu();
                                     }
@@ -233,12 +232,12 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 CharSequence[] sbitems = {L.get("new_apparatus"), L.get("new_challenge"), L.get("set_background"), L.get("publish_as_community"), L.get("save"), String.valueOf(L.get("open")) + "...", L.get("graphicssettings"), L.get("controlssettings"), L.get("physicssettings"), L.get("backtomainmenu")};
                 bld2.setTitle(L.get("menu"));
                 bld2.setItems(sbitems, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.4
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.1
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         ApparatusApp.game.create_level(0);
                                     }
@@ -246,7 +245,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 break;
                             case 1:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.2
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         ApparatusApp.game.create_level(1);
                                     }
@@ -257,7 +256,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 break;
                             case 3:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.3
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         if (Game.mode == 3) {
                                             ApparatusApp.game.pause_world();
@@ -277,7 +276,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 }
                             case 4:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.4
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         if (Game.mode == 3) {
                                             ApparatusApp.game.pause_world();
@@ -301,7 +300,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                                 break;
                             case 9:
                                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.4.5
-                                    @Override // java.lang.Runnable
+                                    @Override
                                     public void run() {
                                         ApparatusApp.instance.open_mainmenu();
                                     }
@@ -324,20 +323,20 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 4:
                 AlertDialog.Builder bld3 = new AlertDialog.Builder(this);
                 bld3.setMessage(L.get("play_challenge")).setCancelable(true).setPositiveButton(L.get("testplay"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.9
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.9.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.game.begin_challenge_testing();
                             }
                         });
                     }
                 }).setNegativeButton(L.get("simulate"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.10
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.10.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.game.resume_world();
                             }
@@ -357,10 +356,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 7:
                 AlertDialog.Builder bld4 = new AlertDialog.Builder(this);
                 bld4.setMessage(L.get("save_changes_to_level")).setCancelable(true).setPositiveButton(L.get("yes"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.11
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.11.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 if (ApparatusApp.game.level_filename == null) {
                                     ApparatusApp.backend.open_save_dialog();
@@ -376,10 +375,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                         });
                     }
                 }).setNegativeButton(L.get("no"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.12
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.12.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.instance.open_mainmenu();
                                 FileHandle h = Gdx.files.getFileHandle("/ApparatusLevels/.autosave.jar", Files.FileType.External);
@@ -395,17 +394,17 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 8:
                 AlertDialog.Builder bld5 = new AlertDialog.Builder(this);
                 bld5.setMessage(L.get("exit_game_level_menu")).setCancelable(true).setPositiveButton(L.get("yes"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.16
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.16.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.instance.open_levelmenu();
                             }
                         });
                     }
                 }).setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.17
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
@@ -417,22 +416,22 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 10:
                 AlertDialog.Builder bld6 = new AlertDialog.Builder(this);
                 bld6.setMessage(L.get("exit_level")).setCancelable(true).setPositiveButton(L.get("yes_back_community"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.13
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApp.backend.open_community();
                     }
                 }).setNeutralButton(L.get("yes_back_main_menu"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.14
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.14.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.instance.open_mainmenu();
                             }
                         });
                     }
                 }).setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.15
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
@@ -451,7 +450,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 AlertDialog.Builder bld7 = new AlertDialog.Builder(this);
                 bld7.setTitle(L.get("sandbox_types"));
                 bld7.setMessage(L.get("sandbox_types_txt")).setCancelable(true).setPositiveButton(L.get("ok"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.18
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
@@ -461,7 +460,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 AlertDialog.Builder bld8 = new AlertDialog.Builder(this);
                 bld8.setTitle(L.get("help"));
                 bld8.setMessage(this.msg).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.21
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
@@ -478,7 +477,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 CharSequence[] sitems = {L.get("graphics"), L.get("input"), L.get("physics")};
                 bld9.setTitle(L.get("settings"));
                 bld9.setItems(sitems, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.2
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
@@ -509,7 +508,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 AlertDialog.Builder bld10 = new AlertDialog.Builder(this);
                 bld10.setTitle("Thanks for downloading Apparatus!");
                 bld10.setMessage(changelog).setCancelable(true).setPositiveButton("Close", new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.22
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
@@ -520,10 +519,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 AlertDialog.Builder bld11 = new AlertDialog.Builder(this);
                 bld11.setTitle(L.get("autosave_detected"));
                 bld11.setMessage(L.get("autosave_detected_txt")).setCancelable(true).setPositiveButton(L.get("recover"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.5
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.5.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 Game.sandbox = true;
                                 ApparatusApp.game.open(".autosave");
@@ -533,10 +532,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                         });
                     }
                 }).setNegativeButton(L.get("delete"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.6
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.6.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 FileHandle h = Gdx.files.getFileHandle("/ApparatusLevels/.autosave.jar", Files.FileType.External);
                                 if (h.exists()) {
@@ -554,10 +553,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 AlertDialog.Builder bld12 = new AlertDialog.Builder(this);
                 bld12.setTitle(L.get("autosave_detected"));
                 bld12.setMessage(L.get("autosave_detected_txt")).setCancelable(true).setPositiveButton(L.get("recover"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.7
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.7.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 int n = Game.autosave_id;
                                 ApparatusApp.instance.play(1, n);
@@ -567,10 +566,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                         });
                     }
                 }).setNegativeButton(L.get("delete_play"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.8
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.8.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 int n = Game.autosave_id;
                                 FileHandle h = Gdx.files.getFileHandle("/ApparatusLevels/.autosave_" + n + (LevelMenu.category == 2 ? "_2" : "") + ".jar", Files.FileType.External);
@@ -588,10 +587,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 23:
                 AlertDialog.Builder bld13 = new AlertDialog.Builder(this);
                 bld13.setItems(new CharSequence[]{"Default", "BG 1 (Butterfly 1)", "BG 2 (Stripes 1)", "BG 3 (Flowers)", "BG 4 (Butterfly 2)", "BG 5 (Stripes 2)", "BG 6 (Cats)", "BG 7 (Sun)", "BG 8 (Stripes 3)", "BG 9 (Trees)", "BG 10 (Christmas!)", "BG 11 (Classic Default)"}, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.19
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, final int which) {
                         ApparatusApplication.this.self.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.19.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 ApparatusApp.game.set_bg(which);
                             }
@@ -604,10 +603,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             case 24:
                 AlertDialog.Builder bld14 = new AlertDialog.Builder(this);
                 bld14.setItems(new CharSequence[]{"Main challenges", "Christmas level pack"}, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ApparatusApplication.20
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, final int which) {
                         ApparatusApplication.this.self.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.20.1
-                            @Override // java.lang.Runnable
+                            @Override
                             public void run() {
                                 if (which == 0) {
                                     LevelMenu.category = 0;
@@ -630,7 +629,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         return null;
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onPrepareDialog(int id, Dialog dialog) {
         switch (id) {
             case 2:
@@ -660,57 +659,57 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         }
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_community() {
         Intent i = new Intent(this, (Class<?>) CommunityActivity.class);
         i.setFlags(65536);
         startActivity(i);
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_save_dialog() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.23
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(5);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_ingame_menu() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.24
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(0);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_ingame_sandbox_menu() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.25
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(1);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_sandbox_play_options() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.26
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(4);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_level_list() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.27
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 try {
                     ApparatusApplication.this.removeDialog(6);
@@ -721,20 +720,20 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_ingame_sandbox_back_menu() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.28
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(7);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_ingame_back_menu() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.29
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(8);
             }
@@ -754,7 +753,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             java.lang.Thread.sleep(1000);
             com.badlogic.gdx.Gdx.app.log("Community Level Loader", "Waiting for GL thread to get ready...");
          */
-        @Override // android.os.AsyncTask
+        @Override
         /*
             Code decompiled incorrectly, please refer to instructions dump.
         */
@@ -783,7 +782,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             Gdx.app.log("Community Level Loader", "Level downloaded");
             if (this.status != 2) {
                 ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.LoadCommunityLevelTask.1
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         int _s;
                         Gdx.app.log("Community Level Loader", "Preparing game");
@@ -824,7 +823,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
                 return result;
             }
             ApparatusApplication.this.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.LoadCommunityLevelTask.2
-                @Override // java.lang.Runnable
+                @Override
                 public void run() {
                     ApparatusApp.instance.play();
                     ApparatusApp.instance.fade = 0.0f;
@@ -833,7 +832,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
             return "";
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         protected void onPreExecute() {
             if (ApparatusApp.instance != null) {
                 ApparatusApp.instance.fading = true;
@@ -843,7 +842,7 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.os.AsyncTask
+        @Override
         public void onPostExecute(String result) {
             if (!result.equals("")) {
                 Toast.makeText(ApparatusApplication.this, result, 0).show();
@@ -851,20 +850,20 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         }
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_autosave_dialog() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.30
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(21);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_autosave_challenge_dialog() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.31
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(22);
             }
@@ -875,11 +874,11 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         showDialog(20);
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_infobox(String msg) {
         this.msg = msg;
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.32
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 if (ApparatusApplication.this.info_dialog != null) {
                     ApparatusApplication.this.removeDialog(15);
@@ -889,37 +888,37 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_sandbox_info() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.33
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(14);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_ingame_back_community_menu() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.34
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(10);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_settings() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.35
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(17);
             }
         });
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void exit2() {
         Gdx.app.log("apparatus", "exit called in backend");
         Settings.save();
@@ -927,10 +926,10 @@ public class ApparatusApplication extends AndroidApplication implements Apparatu
         System.exit(0);
     }
 
-    @Override // com.bithack.apparatus.ApparatusApp.Backend
+    @Override
     public void open_packchooser() {
         runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.ApparatusApplication.36
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 ApparatusApplication.this.showDialog(24);
             }

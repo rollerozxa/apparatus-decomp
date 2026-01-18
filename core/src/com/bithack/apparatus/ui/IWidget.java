@@ -3,7 +3,6 @@ package com.bithack.apparatus.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/* loaded from: classes.dex */
 public interface IWidget {
     void render(Texture texture, SpriteBatch spriteBatch);
 

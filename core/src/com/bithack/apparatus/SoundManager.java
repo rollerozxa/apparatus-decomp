@@ -14,7 +14,6 @@ import com.bithack.apparatus.objects.Wheel;
 import java.util.Arrays;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public class SoundManager {
     static Sound snd_marble_hit = null;
     static Sound snd_metal_hit = null;

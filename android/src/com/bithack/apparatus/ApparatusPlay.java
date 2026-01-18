@@ -5,9 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.badlogic.gdx.Gdx;
 
-/* loaded from: classes.dex */
 public class ApparatusPlay extends Activity {
-    @Override // android.app.Activity
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = new Intent(this, (Class<?>) ApparatusApplication.class);
@@ -19,12 +18,12 @@ public class ApparatusPlay extends Activity {
         startActivity(i);
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onResume() {
         super.onResume();
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onDestroy() {
         Settings.save();
         super.onDestroy();

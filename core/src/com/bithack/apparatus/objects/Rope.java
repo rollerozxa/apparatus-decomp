@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 
-/* loaded from: classes.dex */
 public class Rope extends BaseRope {
     public static Color color = new Color(0.087f, 0.165f, 0.249f, 1.0f);
     public static int _size = 11;
@@ -15,7 +14,7 @@ public class Rope extends BaseRope {
         this.fixed_rotation = true;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     protected void create_ends(World world) {
         _bd.position.set(0.0f, 1.0f);
         this.g1 = new RopeEnd(world, this);
@@ -23,11 +22,11 @@ public class Rope extends BaseRope {
         this.g2 = new RopeEnd(world, this);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void draw_edges_shadow_volume(Vector3 light_pos) {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

@@ -16,7 +16,6 @@ import com.bithack.apparatus.SilhouetteMesh;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.TextureFactory;
 
-/* loaded from: classes.dex */
 public class Weight extends GrabableObject {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -57,7 +56,7 @@ public class Weight extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
         if (Game.sandbox) {
@@ -67,7 +66,7 @@ public class Weight extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
         this.body.setType(BodyDef.BodyType.DynamicBody);
@@ -87,7 +86,7 @@ public class Weight extends GrabableObject {
         this.build_type = BodyDef.BodyType.StaticBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public final void render() {
         if (!this.culled) {
             Vector2 pos = this.body.getPosition();
@@ -116,36 +115,36 @@ public class Weight extends GrabableObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.body.destroyFixture(this.f);
         this.f = this.body.createFixture(_fd);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 }

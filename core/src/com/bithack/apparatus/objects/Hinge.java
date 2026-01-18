@@ -15,7 +15,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Hinge extends BaseObject {
     public static Mesh _silhouette_mesh;
     public GrabableObject b1;
@@ -129,7 +128,7 @@ public class Hinge extends BaseObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         if (!this.disposed) {
             if (this.joint != null) {
@@ -147,7 +146,7 @@ public class Hinge extends BaseObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -158,7 +157,7 @@ public class Hinge extends BaseObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled && this.joint != null) {
             if (!this.same_layer) {
@@ -188,7 +187,7 @@ public class Hinge extends BaseObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String property, Object value) {
         if (property.equals("body1")) {
             this.body1_id = ((Integer) value).intValue();
@@ -208,7 +207,7 @@ public class Hinge extends BaseObject {
         super.set_property(property, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("body1", Integer.valueOf(this.body1_id));
         set_property("body2", Integer.valueOf(this.body2_id));
@@ -220,22 +219,22 @@ public class Hinge extends BaseObject {
         set_property("same_layer", this.same_layer ? Boolean.TRUE : Boolean.FALSE);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         update_properties();
         super.write_to_stream(o);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         this.anchor.set(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         if (this.joint != null) {
             return this.joint.getAnchorA();
@@ -243,17 +242,17 @@ public class Hinge extends BaseObject {
         return null;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_angle() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_angle(float angle) {
     }
 }

@@ -16,7 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 
-/* loaded from: classes.dex */
 public class CommunityActivity extends Activity {
     public static final int LOADING_DIALOG = 2;
     public static final int MENU = 4;
@@ -25,14 +24,14 @@ public class CommunityActivity extends Activity {
     Bundle bundle;
     public WebView webview;
 
-    @Override // android.app.Activity
+    @Override
     public void onResume() {
         super.onResume();
         Gdx.app.log("RESUMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", "DSAAAAAAAAAAAAAAAAAA");
         this.webview.restoreState(this.bundle);
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onCreate(Bundle b) {
         Gdx.app.log("CREATEEEEEEEEEEEEEEEEE", "DSAJKJKLKKKKKKKKKKKKKKKKKKKK");
         super.onCreate(b);
@@ -47,7 +46,7 @@ public class CommunityActivity extends Activity {
         settings.setSupportZoom(true);
         settings.setUserAgentString("Apparatus Android (1.2.2 Beta 3)");
         this.webview.setWebViewClient(new WebViewClient() { // from class: com.bithack.apparatus.CommunityActivity.1
-            @Override // android.webkit.WebViewClient
+            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) throws NumberFormatException {
                 Uri uri = Uri.parse(url);
                 if (url.substring(0, 12).equals("apparatus://")) {
@@ -73,12 +72,12 @@ public class CommunityActivity extends Activity {
                 return true;
             }
 
-            @Override // android.webkit.WebViewClient
+            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 CommunityActivity.this.showDialog(3);
             }
 
-            @Override // android.webkit.WebViewClient
+            @Override
             public void onPageFinished(WebView view, String url) {
                 try {
                     CommunityActivity.this.dismissDialog(3);
@@ -86,7 +85,7 @@ public class CommunityActivity extends Activity {
                 }
             }
 
-            @Override // android.webkit.WebViewClient
+            @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 try {
                     CommunityActivity.this.dismissDialog(3);
@@ -111,14 +110,14 @@ public class CommunityActivity extends Activity {
         }
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onPause() {
         super.onPause();
         Settings.set("c_url", this.webview.getUrl());
         this.webview.saveState(this.bundle);
     }
 
-    @Override // android.app.Activity
+    @Override
     protected Dialog onCreateDialog(int id) {
         Dialog ret = null;
         switch (id) {
@@ -139,7 +138,7 @@ public class CommunityActivity extends Activity {
                 CharSequence[] sbitems = {L.get("mainmenu"), L.get("quit")};
                 bld.setTitle(L.get("menu"));
                 bld.setItems(sbitems, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.CommunityActivity.2
-                    @Override // android.content.DialogInterface.OnClickListener
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
@@ -173,7 +172,7 @@ public class CommunityActivity extends Activity {
         return null;
     }
 
-    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyDown(int code, KeyEvent ev) {
         if (code == 4) {
             if (this.webview.canGoBack()) {

@@ -29,10 +29,9 @@ import com.bithack.apparatus.objects.StaticMotor;
 import com.bithack.apparatus.objects.Weight;
 import com.bithack.apparatus.objects.Wheel;
 
-/* loaded from: classes.dex */
 public class ObjectFactoryAdapter extends ObjectFactory.Adapter {
 
-    @Override // com.bithack.apparatus.ObjectFactory.Adapter
+    @Override
     public BaseObject create(World world, int g, int c) {
         BaseObject o;
         Gdx.app.log("ObjectFactoryAdapter", "Creating object group " + g + " child " + c);
@@ -147,7 +146,7 @@ public class ObjectFactoryAdapter extends ObjectFactory.Adapter {
         return o;
     }
 
-    @Override // com.bithack.apparatus.ObjectFactory.Adapter
+    @Override
     public GrabableObject wrap(GrabableObject o) {
         if (o instanceof MetalCorner) {
             o.__child_id = 9;

@@ -18,7 +18,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Wheel extends GrabableObject implements FreeObject {
     protected static BodyDef _bd;
     protected static FixtureDef _fd;
@@ -98,11 +97,11 @@ public class Wheel extends GrabableObject implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         G.gl.glPushMatrix();
         BaseObject.State s = get_state();
@@ -153,21 +152,21 @@ public class Wheel extends GrabableObject implements FreeObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("size")) {
             this.size = ((Float) value).floatValue();
@@ -176,12 +175,12 @@ public class Wheel extends GrabableObject implements FreeObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         super.set_property("size", Float.valueOf(this.size));
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
@@ -190,11 +189,11 @@ public class Wheel extends GrabableObject implements FreeObject {
     public static void init_materials() {
     }
 
-    @Override // com.bithack.apparatus.objects.FreeObject
+    @Override
     public void set_layer() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         ApparatusApp.game.remove_potential_fixture_pair(this.body);
         if (this.f != null) {
@@ -210,7 +209,7 @@ public class Wheel extends GrabableObject implements FreeObject {
         this.f = this.body.createFixture(_fd);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

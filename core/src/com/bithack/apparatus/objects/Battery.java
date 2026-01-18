@@ -19,7 +19,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Battery extends GrabableObject {
     private static BodyDef _bd;
     private static FixtureDef _bfd;
@@ -80,7 +79,7 @@ public class Battery extends GrabableObject {
         return -1;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         for (int i = 0; i < this.used_socket.length; i++) {
             if (this.used_socket[i]) {
@@ -97,17 +96,17 @@ public class Battery extends GrabableObject {
         super.translate(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void grab() {
         this.grabbed = true;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void release() {
         this.grabbed = false;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
         this.on = this.real_on;
@@ -118,7 +117,7 @@ public class Battery extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
         if (this.cabled) {
@@ -150,7 +149,7 @@ public class Battery extends GrabableObject {
         this.build_type = BodyDef.BodyType.StaticBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public final void render() {
         if (!this.culled) {
             Vector2 pos = get_state().position;
@@ -292,25 +291,25 @@ public class Battery extends GrabableObject {
         render_deco(G.p_cam);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         if (this.f != null) {
             this.body.destroyFixture(this.f);
@@ -348,7 +347,7 @@ public class Battery extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("v")) {
             this.voltage = (Float) value;
@@ -365,7 +364,7 @@ public class Battery extends GrabableObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("a", this.current);
         set_property("v", this.voltage);
@@ -373,7 +372,7 @@ public class Battery extends GrabableObject {
         set_property("s", this.size);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
@@ -424,13 +423,13 @@ public class Battery extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         detach_pcables();
         super.dispose(world);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

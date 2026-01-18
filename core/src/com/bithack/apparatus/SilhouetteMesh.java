@@ -13,7 +13,6 @@ import com.bithack.apparatus.graphics.G;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/* loaded from: classes.dex */
 public class SilhouetteMesh {
     private Edge[] edges;
     private Face[] faces;

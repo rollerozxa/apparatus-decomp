@@ -7,7 +7,6 @@ import com.bithack.apparatus.Game;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class MetalWheel extends Wheel {
     public MetalWheel(World world, float size) {
         super(world, size);
@@ -16,7 +15,7 @@ public class MetalWheel extends Wheel {
         this.build_type = BodyDef.BodyType.StaticBody;
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -29,7 +28,7 @@ public class MetalWheel extends Wheel {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel
+    @Override
     public void render_lq() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -66,7 +65,7 @@ public class MetalWheel extends Wheel {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
         if (Game.sandbox) {
@@ -76,25 +75,25 @@ public class MetalWheel extends Wheel {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_save() {
         super.sandbox_save();
         this.body.setType(BodyDef.BodyType.StaticBody);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_load() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         super.sandbox_load();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
         this.body.setType(BodyDef.BodyType.DynamicBody);
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         if (this.f != null) {
             this.body.destroyFixture(this.f);

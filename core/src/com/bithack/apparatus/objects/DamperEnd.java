@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class DamperEnd extends GrabableObject {
     protected static FixtureDef _fd;
     public final Damper damper;
@@ -32,11 +31,11 @@ public class DamperEnd extends GrabableObject {
         this.build_type = BodyDef.BodyType.DynamicBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         G.gl.glPushMatrix();
         Vector2 pos = get_state().position;
@@ -59,36 +58,36 @@ public class DamperEnd extends GrabableObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         world.destroyBody(this.body);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.body.destroyFixture(this.f);
         this.f = this.body.createFixture(_fd);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

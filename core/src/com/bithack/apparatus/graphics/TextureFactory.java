@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class TextureFactory {
     public static final Map<String, TextureHandle> map = new HashMap();
     public static final Map<Integer, TextureHandle> by_id = new HashMap();

@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Cable extends BaseCable {
     static CircleShape _s;
     public static Color color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
@@ -25,7 +24,7 @@ public class Cable extends BaseCable {
         CableEnd._init();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     protected void create_ends(World world) {
         _bd.position.set(0.0f, 1.0f);
         this.g1 = new CableEnd(world, this);
@@ -33,20 +32,20 @@ public class Cable extends BaseCable {
         this.g2 = new CableEnd(world, this);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void tick() {
         ((CableEnd) this.g1).tick();
         ((CableEnd) this.g2).tick();
         super.tick();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.g1.play();
         this.g2.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("e1oid")) {
             ((CableEnd) this.g1).saved_oid = (Integer) value;
@@ -56,7 +55,7 @@ public class Cable extends BaseCable {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         set_property("e1oid", ((CableEnd) this.g1).saved_oid);
         set_property("e2oid", ((CableEnd) this.g2).saved_oid);
@@ -91,17 +90,17 @@ public class Cable extends BaseCable {
         update();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void draw_edges_shadow_volume(Vector3 light_pos) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void render_edges() {
         ((CableEnd) this.g2).render(((this.angles[this.quality - 2] + this.angles[this.quality - 3]) / 2.0f) + 90.0f);
         ((CableEnd) this.g1).render(((this.angles[0] + this.angles[1]) / 2.0f) - 90.0f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         CableEnd e1 = (CableEnd) this.g1;
         CableEnd e2 = (CableEnd) this.g2;
@@ -147,7 +146,7 @@ public class Cable extends BaseCable {
         return null;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

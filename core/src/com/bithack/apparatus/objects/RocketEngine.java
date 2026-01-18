@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class RocketEngine extends GrabableObject {
     static BodyDef _bd;
     static FixtureDef _fd;
@@ -67,12 +66,12 @@ public class RocketEngine extends GrabableObject {
                 new BaseObject.Property("thrust", BaseObject.Property.Type.FLOAT, 0.5f)};
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("thrust", this.thrust);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("thrust")) {
             this.thrust = (Float) value;
@@ -80,7 +79,7 @@ public class RocketEngine extends GrabableObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         update_properties();
         super.write_to_stream(o);
@@ -130,7 +129,7 @@ public class RocketEngine extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         if (!this.attached) {
             this.output = 1.0f;
@@ -139,21 +138,21 @@ public class RocketEngine extends GrabableObject {
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         deactivate();
         super.pause();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             Vector2 pos = get_state().position;
@@ -181,7 +180,7 @@ public class RocketEngine extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
         if (this.active) {
             this.counter++;
@@ -279,12 +278,12 @@ public class RocketEngine extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
@@ -298,12 +297,12 @@ public class RocketEngine extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         if (this.attached_cable_end != null) {
             this.attached_cable_end.detach();

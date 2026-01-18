@@ -14,7 +14,6 @@ import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 import com.bithack.apparatus.graphics.TextureFactory;
 
-/* loaded from: classes.dex */
 public class MainMenu extends Screen implements InputProcessor {
     private final Texture bgtex = TextureFactory.load("data/apparatusmenu.png");
     final ApparatusApp tp;
@@ -23,12 +22,12 @@ public class MainMenu extends Screen implements InputProcessor {
         this.tp = tp;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public int tick() {
         return 0;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void render() {
         G.gl.glMatrixMode(GL10.GL_PROJECTION);
         G.gl.glLoadIdentity();
@@ -61,23 +60,23 @@ public class MainMenu extends Screen implements InputProcessor {
         G.gl.glEnable(2929);
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void resume() {
         Gdx.input.setInputProcessor(this);
         SoundManager.play_music();
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean screen_to_world(int x, int y, Vector2 out) {
         return false;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean ready() {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyDown(int arg0) {
         if (arg0 == 4) {
             Settings.save();
@@ -87,17 +86,17 @@ public class MainMenu extends Screen implements InputProcessor {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyTyped(char arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyUp(int arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDown(int x, int y, int pointer, int btn) {
 		float px = ((float) x) / ((float) G.realwidth);
 		float py = ((float) y) / ((float) G.realheight);
@@ -139,22 +138,22 @@ public class MainMenu extends Screen implements InputProcessor {
         return true;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDragged(int x, int y, int pointer) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchUp(int x, int y, int pointer, int btn) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean scrolled(int arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean mouseMoved(int arg0, int arg1) {
         return false;
     }

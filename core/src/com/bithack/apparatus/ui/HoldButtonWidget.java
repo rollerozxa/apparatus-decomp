@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.bithack.apparatus.graphics.G;
 
-/* loaded from: classes.dex */
 public class HoldButtonWidget extends Widget {
     public boolean holding = false;
     private Mesh mesh;
@@ -45,7 +44,7 @@ public class HoldButtonWidget extends Widget {
         this.mesh2.setVertices(v);
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void render(Texture texture, SpriteBatch batch) {
         G.gl.glEnable(3042);
         G.gl.glEnable(3553);
@@ -61,7 +60,7 @@ public class HoldButtonWidget extends Widget {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_down_local(int x, int y) {
         this.holding = true;
         if (this.callback != null) {
@@ -69,11 +68,11 @@ public class HoldButtonWidget extends Widget {
         }
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_drag_local(int x, int y) {
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_up_local(int x, int y) {
         this.holding = false;
         if (this.callback != null) {

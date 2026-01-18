@@ -44,7 +44,6 @@ import com.bithack.apparatus.objects.Wheel;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class IlluminationManager {
     static final float SHADOW_COLOR = 0.6f;
     static final float SHADOW_FACTOR = 1.2f;

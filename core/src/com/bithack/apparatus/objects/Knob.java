@@ -9,7 +9,6 @@ import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 import com.bithack.apparatus.objects.BaseObject;
 
-/* loaded from: classes.dex */
 public class Knob extends Wheel {
     static final float[] _material = {0.15f, 0.0f, 0.0f, 1.0f, 0.4f, 0.0f, 0.0f, 1.0f, 0.8f, 0.0f, 0.0f, 1.0f, 1.5f, 0.0f, 0.0f, 0.0f};
 
@@ -20,16 +19,16 @@ public class Knob extends Wheel {
         this.build_type = BodyDef.BodyType.DynamicBody;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         G.gl.glPushMatrix();
         BaseObject.State s = get_state();
@@ -41,7 +40,7 @@ public class Knob extends Wheel {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel
+    @Override
     public void render_lq() {
         G.gl.glPushMatrix();
         BaseObject.State s = get_state();
@@ -53,7 +52,7 @@ public class Knob extends Wheel {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.Wheel, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         ApparatusApp.game.remove_potential_fixture_pair(this.body);
         if (this.f != null) {

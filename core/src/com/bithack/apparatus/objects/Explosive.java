@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public abstract class Explosive extends GrabableObject implements QueryCallback, RayCastCallback {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -63,7 +62,7 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
         G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         this.f.setSensor(false);
         super.pause();
@@ -75,7 +74,7 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
         this.triggered = false;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.f.setSensor(false);
         this.triggered = false;
@@ -97,31 +96,31 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
         this.build_type = BodyDef.BodyType.StaticBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.body.destroyFixture(this.f);
         this.f = this.body.createFixture(_fd);
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.RayCastCallback
+    @Override
     public float reportRayFixture(Fixture f, Vector2 point, Vector2 arg2, float arg3) {
         Body b = f.getBody();
         if (b != this.body && b.getType() == BodyDef.BodyType.DynamicBody) {
@@ -140,7 +139,7 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
         return 1.0f;
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+    @Override
     public boolean reportFixture(Fixture f1) {
         Body b = f1.getBody();
         if (b != this.body && b.getType() == BodyDef.BodyType.DynamicBody) {

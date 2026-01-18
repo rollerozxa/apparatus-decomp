@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class GraphicsDialog {
     final ApparatusApplication activity;
     final CheckBox bg_cb;
@@ -38,21 +37,21 @@ public class GraphicsDialog {
         this.hqmeshes_cb = (CheckBox) this.view.findViewById(R.id.hqmeshes);
         this.bg_cb = (CheckBox) this.view.findViewById(R.id.bg);
         this.sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.bithack.apparatus.GraphicsDialog.1
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar seek) {
                 GraphicsDialog.this.rope_quality = seek.getProgress();
             }
         });
         builder.setNeutralButton(L.get("ok"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.GraphicsDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 final boolean sf_checked = GraphicsDialog.this.sf.isChecked();
                 final boolean hqmeshes_checked = GraphicsDialog.this.hqmeshes_cb.isChecked();
@@ -69,7 +68,7 @@ public class GraphicsDialog {
                 Settings.set("bloom", bloom_checked ? "yes" : "no");
                 Settings.set("reflection", reflection_checked ? "yes" : "no");
                 GraphicsDialog.this.activity.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.GraphicsDialog.2.1
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         Game.draw_fps = sf_checked;
                         Game.enable_shadows = sh_checked;
@@ -86,7 +85,7 @@ public class GraphicsDialog {
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.GraphicsDialog.3
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });

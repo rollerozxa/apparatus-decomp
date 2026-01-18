@@ -22,7 +22,6 @@ import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
-/* loaded from: classes.dex */
 public class Level {
     public static final int TYPE_APPARATUS = 0;
     public static final int TYPE_CHALLENGE = 1;

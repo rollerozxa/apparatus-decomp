@@ -18,7 +18,6 @@ import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 import com.bithack.apparatus.objects.BaseObject;
 
-/* loaded from: classes.dex */
 public class Marble extends GrabableObject implements PrimaryObject {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -77,7 +76,7 @@ public class Marble extends GrabableObject implements PrimaryObject {
         silhouette_mesh.setVertices(v);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -106,7 +105,7 @@ public class Marble extends GrabableObject implements PrimaryObject {
         G.gl.glColor4f(0.232f, 0.44000003f, 0.664f, 1.0f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         BaseObject.State s = get_state();
         Vector2 pos = s.position;
@@ -118,27 +117,27 @@ public class Marble extends GrabableObject implements PrimaryObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
         if (Game.sandbox) {
@@ -148,19 +147,19 @@ public class Marble extends GrabableObject implements PrimaryObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void grab() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         this.grabbed = true;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void release() {
         this.grabbed = false;
         this.body.setTransform(this.body.getPosition(), this.body.getAngle());
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Body[] get_body_list() {
         return null;
     }
@@ -176,16 +175,16 @@ public class Marble extends GrabableObject implements PrimaryObject {
     public static void init_materials() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class OpenDialog {
     ApparatusApplication app;
     Dialog dialog;
@@ -31,11 +30,11 @@ public class OpenDialog {
         }
         builder.setTitle(L.get("open_level"));
         builder.setItems(this.filelist, new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.OpenDialog.1
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface d, int which) {
                 final CharSequence levelname = OpenDialog.this.filelist[which];
                 app.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.OpenDialog.1.1
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         Game.sandbox = true;
                         ApparatusApp.game.open(levelname.toString());
@@ -47,7 +46,7 @@ public class OpenDialog {
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.OpenDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });

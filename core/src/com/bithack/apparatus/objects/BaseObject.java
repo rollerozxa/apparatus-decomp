@@ -9,7 +9,6 @@ import com.bithack.apparatus.Game;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public abstract class BaseObject {
     private static /* synthetic */ int[] $SWITCH_TABLE$com$bithack$apparatus$objects$BaseObject$Property$Type;
     public int __child_id;

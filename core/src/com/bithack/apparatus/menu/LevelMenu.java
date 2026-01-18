@@ -31,7 +31,6 @@ import com.bithack.apparatus.graphics.TextureFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class LevelMenu extends Screen implements InputProcessor {
     public static Texture lchecktex;
     BodyDef bd;
@@ -94,7 +93,7 @@ public class LevelMenu extends Screen implements InputProcessor {
         }
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public int tick() {
         this.page = Math.round(this.camera_h.camera_pos.x / 28.0f);
         if (this.camera_h.velocity.len() < 10.0f && !this.moving) {
@@ -104,7 +103,7 @@ public class LevelMenu extends Screen implements InputProcessor {
         return 0;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void render() {
         G.clear();
         Vector3 cam_pos = G.cam.position;
@@ -195,7 +194,7 @@ public class LevelMenu extends Screen implements InputProcessor {
         G.gl.glLoadIdentity();
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void resume() {
         Gdx.input.setInputProcessor(this);
         G.set_clear_color(0.0f, 0.0f, 0.0f);
@@ -251,17 +250,17 @@ public class LevelMenu extends Screen implements InputProcessor {
         }
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean screen_to_world(int x, int y, Vector2 out) {
         return false;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean ready() {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyDown(int key) {
         switch (key) {
             case 4:
@@ -272,17 +271,17 @@ public class LevelMenu extends Screen implements InputProcessor {
         return true;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyTyped(char arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyUp(int arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDown(int x, int y, int pointer, int btn) {
         if (pointer == 0) {
             this.moving = true;
@@ -299,7 +298,7 @@ public class LevelMenu extends Screen implements InputProcessor {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDragged(int x, int y, int pointer) {
         if (pointer == 0) {
             this.cam_vec.set(x, y, 0.0f);
@@ -311,7 +310,7 @@ public class LevelMenu extends Screen implements InputProcessor {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchUp(int x, int y, int pointer, int btn) {
         if (pointer == 0) {
             this.moving = false;
@@ -319,7 +318,7 @@ public class LevelMenu extends Screen implements InputProcessor {
             G.cam.unproject(this.cam_vec);
             if (this.initial_touch_vec.dst(this.cam_vec) < 2.0f) {
                 this.world.QueryAABB(new QueryCallback() { // from class: com.bithack.apparatus.LevelMenu.1
-                    @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+                    @Override
                     public boolean reportFixture(Fixture f) {
                         Lvl l = (Lvl) f.getUserData();
                         if (!l.disabled) {
@@ -347,12 +346,12 @@ public class LevelMenu extends Screen implements InputProcessor {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean scrolled(int arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean mouseMoved(int arg0, int arg1) {
         return false;
     }

@@ -21,7 +21,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public abstract class BaseRope extends GrabableObject {
     protected static BodyDef _bd;
     protected static DistanceJointDef _distjd;
@@ -114,7 +113,7 @@ public abstract class BaseRope extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void save_state() {
         this.g1.save_state();
         this.g2.save_state();
@@ -230,38 +229,38 @@ public abstract class BaseRope extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void set_active(boolean a) {
         this.g1.set_active(a);
         this.g2.set_active(a);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         this.g1.pause();
         this.g2.pause();
         stabilize();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_save() {
         this.g1.sandbox_save();
         this.g2.sandbox_save();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_load() {
         this.g1.sandbox_load();
         this.g2.sandbox_load();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.g1.play();
         this.g2.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -330,37 +329,37 @@ public abstract class BaseRope extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         for (int x = 0; x < this.quality - 1; x++) {
             G.batch.draw(_texture, this.points[x].x, this.points[x].y, 0.0f, 0.1f, 1.0f, 0.15f, this.lengths[x], 1.0f, this.angles[x], 4, 0, 0, 8, false, false);
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return nullpos.set(this.g1.get_position()).add(this.g2.get_position()).mul(0.5f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_angle() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         if (this.joint1 != null) {
             world.destroyJoint(this.joint1);
@@ -369,7 +368,7 @@ public abstract class BaseRope extends GrabableObject {
         this.g2.dispose(world);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_angle(float angle) {
     }
 
@@ -385,7 +384,7 @@ public abstract class BaseRope extends GrabableObject {
     public void draw_shadow_volume(Vector3 lightdir) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("e1x")) {
             tmp.set((Float) value, this.g1.body.getPosition().y);
@@ -421,7 +420,7 @@ public abstract class BaseRope extends GrabableObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         super.set_property("e1x", this.g1.body.getPosition().x);
         super.set_property("e1y", this.g1.body.getPosition().y);
@@ -435,13 +434,13 @@ public abstract class BaseRope extends GrabableObject {
         super.set_property("type", this.rubber ? 1 : 0);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         update_properties();
         super.write_to_stream(o);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.g1.reshape();
         this.g2.reshape();

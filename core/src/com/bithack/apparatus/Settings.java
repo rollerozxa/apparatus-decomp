@@ -2,7 +2,6 @@ package com.bithack.apparatus;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
 public class Settings {
     private static Adapter adapter = new DummyAdapter();
 
@@ -23,33 +22,33 @@ public class Settings {
     }
 
     public static class DummyAdapter extends Adapter {
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public String get(String key) {
             return "";
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public void set(String key, String value) {
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public void save() {
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public void msg(String s) {
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public File get_tmp_file() {
             return null;
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public void start_tracing() {
         }
 
-        @Override // com.bithack.apparatus.Settings.Adapter
+        @Override
         public void stop_tracing() {
         }
     }

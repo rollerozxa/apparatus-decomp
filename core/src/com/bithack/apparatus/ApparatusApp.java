@@ -13,7 +13,6 @@ import com.bithack.apparatus.menu.MainMenu;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class ApparatusApp implements ApplicationListener {
     public static String PATH_BACKGROUNDS;
     public static String PATH_BASE;
@@ -85,7 +84,7 @@ public class ApparatusApp implements ApplicationListener {
 
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void create() {
         instance = this;
         G.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -132,15 +131,15 @@ public class ApparatusApp implements ApplicationListener {
         }
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void dispose() {
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void pause() {
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void render() {
         G.delta = Gdx.graphics.getDeltaTime();
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -212,11 +211,11 @@ public class ApparatusApp implements ApplicationListener {
         }
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void resize(int arg0, int arg1) {
     }
 
-    @Override // com.badlogic.gdx.ApplicationListener
+    @Override
     public void resume() {
     }
 

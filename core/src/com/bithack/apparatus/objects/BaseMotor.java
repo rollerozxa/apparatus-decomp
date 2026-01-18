@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public abstract class BaseMotor extends JointObject {
     public static Texture _dirtex;
     private static RevoluteJointDef _jd;
@@ -49,7 +48,7 @@ public abstract class BaseMotor extends JointObject {
                 new BaseObject.Property("dir", BaseObject.Property.Type.FLOAT, 1.0f)};
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         this.position.set(x, y);
         this.body.setTransform(this.position, get_angle());
@@ -79,30 +78,30 @@ public abstract class BaseMotor extends JointObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
@@ -155,7 +154,7 @@ public abstract class BaseMotor extends JointObject {
         Gdx.app.log("detach", "num hinges:" + this.num_hinges);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("oid")) {
             this.attached_id = (Integer) value;
@@ -167,20 +166,20 @@ public abstract class BaseMotor extends JointObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("oid", this.attached_id);
         set_property("dir", this.dir);
         set_property("attached", this.attached ? Boolean.TRUE : Boolean.FALSE);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
     }
 

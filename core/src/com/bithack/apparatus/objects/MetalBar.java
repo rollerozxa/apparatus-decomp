@@ -19,7 +19,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class MetalBar extends Bar {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -73,7 +72,7 @@ public class MetalBar extends Bar {
         this.z = 0.5f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void rotate(float a) {
         escape_corners();
         super.rotate(a);
@@ -133,7 +132,7 @@ public class MetalBar extends Bar {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         BaseObject.State s = get_state();
         Vector2 pos = s.position;
@@ -177,26 +176,26 @@ public class MetalBar extends Bar {
         _sfd.shape = _sshape;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         destroy_sensors();
         this.body.setType(BodyDef.BodyType.StaticBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         create_sensors();
         super.pause();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void grab() {
         this.grabbed = true;
         this.body.setType(BodyDef.BodyType.DynamicBody);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void release() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         translate(get_position().x, get_position().y);
@@ -204,7 +203,7 @@ public class MetalBar extends Bar {
         this.grabbed = false;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         if (!this.attached_b && !this.attached_a) {
             this.position.set(x, y);
@@ -229,17 +228,17 @@ public class MetalBar extends Bar {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         escape_corners();
         super.dispose(world);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("size")) {
             boolean reshape = false;
@@ -255,32 +254,32 @@ public class MetalBar extends Bar {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("size", Float.valueOf(this.size.x));
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Body[] get_body_list() {
         return null;
     }
@@ -296,7 +295,7 @@ public class MetalBar extends Bar {
         G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
     }
 
-    @Override // com.bithack.apparatus.objects.Bar, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         int i = 0;
         ApparatusApp.game.remove_potential_fixture_pair(this.body);
@@ -403,7 +402,7 @@ public class MetalBar extends Bar {
         return side;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

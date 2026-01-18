@@ -15,7 +15,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Damper extends GrabableObject {
     public static final float MAX_FORCE = 1000.0f;
     public static final float MAX_SPEED = 200.0f;
@@ -43,7 +42,7 @@ public class Damper extends GrabableObject {
     public float speed = 50.0f;
     public float force = 100.0f;
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void save_state() {
         this.g1.save_state();
         this.g2.save_state();
@@ -134,39 +133,39 @@ public class Damper extends GrabableObject {
         this.joint1 = this.world.createJoint(_jd);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void set_active(boolean a) {
         this.g1.set_active(a);
         this.g2.set_active(a);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         this.g1.pause();
         this.g2.pause();
         ((PrismaticJoint) this.joint1).enableMotor(false);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_save() {
         this.g1.sandbox_save();
         this.g2.sandbox_save();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void sandbox_load() {
         this.g1.sandbox_load();
         this.g2.sandbox_load();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.g1.play();
         this.g2.play();
         ((PrismaticJoint) this.joint1).enableMotor(true);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -180,36 +179,36 @@ public class Damper extends GrabableObject {
         this.g2.render();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         this.g1.layer = this.layer;
         this.g2.layer = this.layer;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return nullpos.set(this.g1.get_position()).add(this.g2.get_position()).mul(0.5f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_angle() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         if (this.joint1 != null) {
             world.destroyJoint(this.joint1);
@@ -219,7 +218,7 @@ public class Damper extends GrabableObject {
         this.g2.dispose(world);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_angle(float angle) {
     }
 
@@ -230,7 +229,7 @@ public class Damper extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("e1x")) {
             tmp.set((Float) value, this.g1.body.getPosition().y);
@@ -262,7 +261,7 @@ public class Damper extends GrabableObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         super.set_property("e1x", this.g1.body.getPosition().x);
         super.set_property("e1y", this.g1.body.getPosition().y);
@@ -277,19 +276,19 @@ public class Damper extends GrabableObject {
         super.set_property("force", this.force);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         update_properties();
         super.write_to_stream(o);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.g1.reshape();
         this.g2.reshape();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
     }
 

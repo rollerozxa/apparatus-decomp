@@ -8,7 +8,6 @@ import com.bithack.apparatus.Game;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class PanelCable extends BaseCable {
     static CircleShape _s;
     public static Color color = new Color(0.5f, 0.0f, 0.0f, 1.0f);
@@ -25,7 +24,7 @@ public class PanelCable extends BaseCable {
         CableEnd._init();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     protected void create_ends(World world) {
         _bd.position.set(0.0f, 1.0f);
         this.g1 = new PanelCableEnd(world, this);
@@ -33,14 +32,14 @@ public class PanelCable extends BaseCable {
         this.g2 = new PanelCableEnd(world, this);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void tick() {
         ((PanelCableEnd) this.g1).tick();
         ((PanelCableEnd) this.g2).tick();
         super.tick();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("e1oid")) {
             ((PanelCableEnd) this.g1).saved_oid = (Integer) value;
@@ -50,7 +49,7 @@ public class PanelCable extends BaseCable {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream o) throws IOException {
         set_property("e1oid", ((PanelCableEnd) this.g1).saved_oid);
         set_property("e2oid", ((PanelCableEnd) this.g2).saved_oid);
@@ -71,23 +70,23 @@ public class PanelCable extends BaseCable {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void draw_edges_shadow_volume(Vector3 light_pos) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope
+    @Override
     public void render_edges() {
         ((PanelCableEnd) this.g2).render(((this.angles[this.quality - 2] + this.angles[this.quality - 3]) / 2.0f) + 90.0f);
         ((PanelCableEnd) this.g1).render(((this.angles[0] + this.angles[1]) / 2.0f) - 90.0f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.g1.play();
         this.g2.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRope, com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         PanelCableEnd e1 = (PanelCableEnd) this.g1;
         PanelCableEnd e2 = (PanelCableEnd) this.g2;
@@ -166,7 +165,7 @@ public class PanelCable extends BaseCable {
         return null;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

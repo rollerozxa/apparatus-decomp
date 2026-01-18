@@ -17,7 +17,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class MetalCorner extends GrabableObject {
     static BodyDef _bd;
     static FixtureDef _fd;
@@ -78,14 +77,14 @@ public class MetalCorner extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         if (this.body != null) {
             this.body.setActive(true);
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         if (this.body != null) {
             this.body.setActive(true);
@@ -202,7 +201,7 @@ public class MetalCorner extends GrabableObject {
         this.properties = propertyArr;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         super.write_to_stream(s);
     }
@@ -223,11 +222,11 @@ public class MetalCorner extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("r")) {
             this.should_render = (Boolean) value;
@@ -254,7 +253,7 @@ public class MetalCorner extends GrabableObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         G.gl.glPushMatrix();
         G.gl.glTranslatef(this.center.x, this.center.y, this.layer);
@@ -264,30 +263,30 @@ public class MetalCorner extends GrabableObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return pos;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_angle() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         if (this.m_a != null) {
             if (this.side_a == 0) {
@@ -314,19 +313,19 @@ public class MetalCorner extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_angle(float angle) {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

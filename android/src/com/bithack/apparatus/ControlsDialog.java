@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 
-/* loaded from: classes.dex */
 public class ControlsDialog {
     final ApparatusApplication activity;
     final CheckBox c_reset;
@@ -30,35 +29,35 @@ public class ControlsDialog {
         this.s_speed = (SeekBar) this.view.findViewById(R.id.cameraspeed);
         this.c_reset = (CheckBox) this.view.findViewById(R.id.resetcam);
         this.s_speed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.bithack.apparatus.ControlsDialog.1
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar seek) {
                 ControlsDialog.this.speed = seek.getProgress();
             }
         });
         this.s_smoothness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.bithack.apparatus.ControlsDialog.2
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar seek) {
                 ControlsDialog.this.smoothness = seek.getProgress();
             }
         });
         builder.setNeutralButton("OK", new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ControlsDialog.3
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 final int camerasmoothness = ControlsDialog.this.smoothness;
                 final int cameraspeed = ControlsDialog.this.speed;
@@ -67,7 +66,7 @@ public class ControlsDialog {
                 Settings.set("enablespeed", Integer.toString(cameraspeed));
                 Settings.set("camerareset", reset ? "yes" : "no");
                 ControlsDialog.this.activity.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.ControlsDialog.3.1
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         Game.camera_smoothness = camerasmoothness;
                         Game.camera_speed = cameraspeed;
@@ -78,7 +77,7 @@ public class ControlsDialog {
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.ControlsDialog.4
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });

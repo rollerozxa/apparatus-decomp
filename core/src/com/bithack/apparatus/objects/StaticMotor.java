@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class StaticMotor extends BaseMotor {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -24,7 +23,7 @@ public class StaticMotor extends BaseMotor {
         this.build_type = BodyDef.BodyType.StaticBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         super.translate(x, y);
         if (this.attached_object != null) {
@@ -49,7 +48,7 @@ public class StaticMotor extends BaseMotor {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor
+    @Override
     protected void create_body() {
         init();
         this.body = this.world.createBody(_bd);
@@ -57,14 +56,14 @@ public class StaticMotor extends BaseMotor {
         this.body.setUserData(this);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.layer = -1;
         this.body.setType(BodyDef.BodyType.StaticBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         this.layer = -1;
         this.body.setType(BodyDef.BodyType.StaticBody);
@@ -81,7 +80,7 @@ public class StaticMotor extends BaseMotor {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -111,7 +110,7 @@ public class StaticMotor extends BaseMotor {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

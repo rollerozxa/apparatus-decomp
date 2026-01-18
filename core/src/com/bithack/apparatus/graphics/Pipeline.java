@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class Pipeline {
     public static final int BATCH = 4;
     public static final int COLOR = 2;

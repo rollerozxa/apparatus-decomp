@@ -14,7 +14,6 @@ import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 import com.bithack.apparatus.graphics.TextureFactory;
 
-/* loaded from: classes.dex */
 public class LoadingScreen extends Screen {
     public static final int LEVELMENU = 2;
     public static final int MAINMENU = 3;
@@ -34,12 +33,12 @@ public class LoadingScreen extends Screen {
         this.tp = tp;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public int tick() {
         return 0;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void render() {
         G.set_clear_color(0.15294118f, 0.15294118f, 0.15294118f);
         G.clear();
@@ -111,19 +110,19 @@ public class LoadingScreen extends Screen {
         MiscRenderer.draw_textured_box();
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void resume() {
         G.set_clear_color(1.0f, 1.0f, 1.0f);
         this.init_counter = 0;
         initialized = false;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean screen_to_world(int x, int y, Vector2 out) {
         return false;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean ready() {
         return false;
     }

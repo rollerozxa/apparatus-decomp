@@ -4,13 +4,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.bithack.apparatus.graphics.G;
 
-/* loaded from: classes.dex */
 public class Mine extends Explosive {
     public Mine(World world) {
         super(world);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public final void render() {
         if (!this.culled && !this.triggered) {
             Vector2 pos = this.body.getPosition();
@@ -24,11 +23,11 @@ public class Mine extends Explosive {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

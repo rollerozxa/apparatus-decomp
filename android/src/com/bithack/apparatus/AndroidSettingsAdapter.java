@@ -8,7 +8,6 @@ import com.bithack.apparatus.Settings;
 import java.io.File;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class AndroidSettingsAdapter extends Settings.Adapter {
     public static AndroidSettingsAdapter instance;
     AndroidApplication app;
@@ -22,32 +21,32 @@ public class AndroidSettingsAdapter extends Settings.Adapter {
         this.app = app;
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public String get(String key) {
         return this.prefs.getString(key, "");
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public void set(String key, String value) {
         this.editor.putString(key, value);
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public void save() {
         this.editor.commit();
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public void msg(final String s) {
         this.app.runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.AndroidSettingsAdapter.1
-            @Override // java.lang.Runnable
+            @Override
             public void run() {
                 Toast.makeText(AndroidSettingsAdapter.this.app, s, 0).show();
             }
         });
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public File get_tmp_file() {
         try {
             return File.createTempFile("lvl", "tmp", this.app.getCacheDir());
@@ -57,12 +56,12 @@ public class AndroidSettingsAdapter extends Settings.Adapter {
         }
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public void start_tracing() {
         Debug.startMethodTracing("apparatus");
     }
 
-    @Override // com.bithack.apparatus.Settings.Adapter
+    @Override
     public void stop_tracing() {
         Debug.stopMethodTracing();
     }

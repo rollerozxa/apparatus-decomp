@@ -8,7 +8,6 @@ import com.bithack.apparatus.graphics.TextureFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class WidgetManager {
     private final Texture ui_texture;
     private WidgetValueCallback w_callback;

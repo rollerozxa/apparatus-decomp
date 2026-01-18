@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.bithack.apparatus.SilhouetteMesh;
 
-/* loaded from: classes.dex */
 public abstract class Bar extends GrabableObject {
     public static SilhouetteMesh _silhouette;
     public Mesh projected_silhouette_mesh;
@@ -16,7 +15,7 @@ public abstract class Bar extends GrabableObject {
     public Vector3 size = new Vector3();
     public float z = 0.8f;
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public abstract void reshape();
 
     public static void _init() {

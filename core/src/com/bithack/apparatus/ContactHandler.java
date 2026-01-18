@@ -32,7 +32,6 @@ import com.bithack.apparatus.objects.RopeEnd;
 import com.bithack.apparatus.objects.StaticMotor;
 import com.bithack.apparatus.objects.Wheel;
 
-/* loaded from: classes.dex */
 public class ContactHandler implements ContactListener, ContactFilter {
     Game game;
     protected static FixturePair _tmp = new FixturePair(null, null);
@@ -164,7 +163,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
         return true;
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.ContactFilter
+    @Override
     public boolean shouldCollide(Fixture a, Fixture b) {
         if (a == null || b == null) {
             return false;
@@ -252,7 +251,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
         hinge.attach(plank);
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.ContactListener
+    @Override
     public void beginContact(Contact c) {
         if (Game.mode == 3) {
             if ((c.getFixtureA().getUserData() instanceof Battery) && c.getFixtureB().getBody().getLinearVelocity().len2() > 10.0f) {
@@ -291,7 +290,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
         }
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.ContactListener
+    @Override
     public void endContact(Contact c) {
         Fixture a = c.getFixtureA();
         Fixture b = c.getFixtureB();
@@ -647,7 +646,7 @@ public class ContactHandler implements ContactListener, ContactFilter {
             return (p.a.getBody() == this.a.getBody() && p.b.getBody() == this.b.getBody()) || (p.a.getBody() == this.b.getBody() && p.b.getBody() == this.a.getBody());
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+        @Override
         public boolean reportFixture(Fixture f) {
             if (f == this.a || f == this.b) {
                 this.query_count++;
@@ -664,11 +663,11 @@ public class ContactHandler implements ContactListener, ContactFilter {
         }
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.ContactListener
+    @Override
     public void postSolve(Contact arg0, ContactImpulse arg1) {
     }
 
-    @Override // com.badlogic.gdx.physics.box2d.ContactListener
+    @Override
     public void preSolve(Contact arg0, Manifold arg1) {
     }
 }

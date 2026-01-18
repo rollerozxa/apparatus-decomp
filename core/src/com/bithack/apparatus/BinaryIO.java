@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
 public class BinaryIO {
     private static byte[] b = new byte[32];
     public static boolean debug = false;

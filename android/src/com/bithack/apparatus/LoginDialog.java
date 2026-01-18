@@ -24,7 +24,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
-/* loaded from: classes.dex */
 public class LoginDialog {
     final Activity activity;
     Dialog dialog;
@@ -35,7 +34,7 @@ public class LoginDialog {
         final View view = LayoutInflater.from(app).inflate(R.layout.logindialog, (ViewGroup) null);
         TextView register = (TextView) view.findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() { // from class: com.bithack.apparatus.LoginDialog.1
-            @Override // android.view.View.OnClickListener
+            @Override
             public void onClick(View v) {
                 if (LoginDialog.this.activity instanceof CommunityActivity) {
                     LoginDialog.this.activity.dismissDialog(1);
@@ -49,13 +48,13 @@ public class LoginDialog {
         builder.setTitle(L.get("login"));
         builder.setView(view);
         builder.setNeutralButton(L.get("login"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.LoginDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 LoginDialog.this.new LoginTask().execute(((TextView) view.findViewById(R.id.username)).getText().toString(), ((TextView) view.findViewById(R.id.password)).getText().toString());
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.LoginDialog.3
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
@@ -71,7 +70,7 @@ public class LoginDialog {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.os.AsyncTask
+        @Override
         public String doInBackground(String... params) throws IllegalStateException {
             String result = "";
             try {
@@ -98,7 +97,7 @@ public class LoginDialog {
             }
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         protected void onPreExecute() {
             if (LoginDialog.this.activity instanceof CommunityActivity) {
                 LoginDialog.this.activity.showDialog(2);
@@ -108,7 +107,7 @@ public class LoginDialog {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.os.AsyncTask
+        @Override
         public void onPostExecute(String result) {
             String result2 = result.trim();
             boolean error = false;

@@ -12,7 +12,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.net.HttpStatus;
 import com.bithack.apparatus.Game;
 
-/* loaded from: classes.dex */
 public class MiscRenderer {
     public static Mesh Acubemesh = null;
     public static Mesh Acylindermesh = null;

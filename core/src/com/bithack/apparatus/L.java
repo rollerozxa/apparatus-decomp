@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class L {
     protected static Map<String, String> strings = new HashMap<>();
 

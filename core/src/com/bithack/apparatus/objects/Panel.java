@@ -19,7 +19,6 @@ import com.bithack.apparatus.ui.WidgetValueCallback;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Panel extends GrabableObject implements FreeObject, WidgetValueCallback {
     protected static BodyDef _bd;
     protected static FixtureDef _fd;
@@ -144,7 +143,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         this.build_type = BodyDef.BodyType.DynamicBody;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         super.translate(x, y);
         for (int i = 0; i < this.connections.length; i++) {
@@ -220,7 +219,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -253,7 +252,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -268,21 +267,21 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("type")) {
             set_type(((Integer) value).intValue());
@@ -290,12 +289,12 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         super.set_property("type", this.type);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
@@ -308,11 +307,11 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
     }
 
-    @Override // com.bithack.apparatus.objects.FreeObject
+    @Override
     public void set_layer() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         init();
         disconnect_all();
@@ -346,7 +345,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         return get_available_socket(pos, c.__unique_id);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
         for (int x = 0; x < this.connections.length; x++) {
@@ -360,7 +359,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         }
     }
 
-    @Override // com.bithack.apparatus.ui.WidgetValueCallback
+    @Override
     public void on_widget_value_change(int id, float value) {
         Connection conn = this.connections[id];
         if (conn.type == 0) {
@@ -424,7 +423,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         for (int x = 0; x < this.connections.length; x++) {
             if (!this.connections[x].available) {
@@ -443,7 +442,7 @@ public class Panel extends GrabableObject implements FreeObject, WidgetValueCall
         return null;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

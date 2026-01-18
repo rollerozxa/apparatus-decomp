@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.objects.BaseObject;
 
-/* loaded from: classes.dex */
 public class PCameraHandler {
     final PerspectiveCamera camera;
     private BaseObject target;

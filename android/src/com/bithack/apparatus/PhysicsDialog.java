@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
-/* loaded from: classes.dex */
 public class PhysicsDialog {
     final ApparatusApplication activity;
     Dialog dialog;
@@ -30,7 +29,7 @@ public class PhysicsDialog {
         this.high = (RadioButton) this.view.findViewById(R.id.physics_high);
         this.medium.setChecked(true);
         this.low.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.bithack.apparatus.PhysicsDialog.1
-            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+            @Override
             public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
                 if (isChecked) {
                     PhysicsDialog.this.selected = 0;
@@ -38,7 +37,7 @@ public class PhysicsDialog {
             }
         });
         this.medium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.bithack.apparatus.PhysicsDialog.2
-            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+            @Override
             public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
                 if (isChecked) {
                     PhysicsDialog.this.selected = 1;
@@ -46,7 +45,7 @@ public class PhysicsDialog {
             }
         });
         this.high.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.bithack.apparatus.PhysicsDialog.3
-            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+            @Override
             public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
                 if (isChecked) {
                     PhysicsDialog.this.selected = 2;
@@ -54,11 +53,11 @@ public class PhysicsDialog {
             }
         });
         builder.setNeutralButton("OK", new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.PhysicsDialog.4
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 final int quality = PhysicsDialog.this.selected;
                 PhysicsDialog.this.activity.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.PhysicsDialog.4.1
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         Game.physics_stability = quality;
                     }
@@ -68,7 +67,7 @@ public class PhysicsDialog {
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.PhysicsDialog.5
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });

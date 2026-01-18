@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.objects.BaseObject;
 
-/* loaded from: classes.dex */
 public class CameraHandler {
     private final OrthographicCamera camera;
     public Vector3 camera_pos;

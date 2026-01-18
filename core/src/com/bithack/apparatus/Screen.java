@@ -3,7 +3,6 @@ package com.bithack.apparatus;
 import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public abstract class Screen {
     public static final int STATE_PAUSED = 1;
     public static final int STATE_RUNNING = 0;

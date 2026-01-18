@@ -17,7 +17,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Plank extends Bar implements FreeObject {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -77,7 +76,7 @@ public class Plank extends Bar implements FreeObject {
         _initialized = true;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         BaseObject.State s = get_state();
         Vector2 pos = s.position;
@@ -101,17 +100,17 @@ public class Plank extends Bar implements FreeObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         create_sensors();
         super.pause();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         destroy_sensors();
         super.play();
@@ -143,21 +142,21 @@ public class Plank extends Bar implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Body[] get_body_list() {
         return null;
     }
@@ -188,7 +187,7 @@ public class Plank extends Bar implements FreeObject {
         G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
     }
 
-    @Override // com.bithack.apparatus.objects.FreeObject
+    @Override
     public void set_layer() {
     }
 
@@ -247,7 +246,7 @@ public class Plank extends Bar implements FreeObject {
         return null;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("size")) {
             this.size.x = ((Float) value).floatValue();
@@ -256,18 +255,18 @@ public class Plank extends Bar implements FreeObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("size", Float.valueOf(this.size.x));
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);
     }
 
-    @Override // com.bithack.apparatus.objects.Bar, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         int i = 0;
         ApparatusApp.game.remove_potential_fixture_pair(this.body);
@@ -289,7 +288,7 @@ public class Plank extends Bar implements FreeObject {
         this._sz = i;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

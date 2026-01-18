@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/* loaded from: classes.dex */
 public class SaveDialog {
     ApparatusApplication app;
     Dialog dialog;
@@ -23,7 +22,7 @@ public class SaveDialog {
         builder.setView(view);
         this.textfield = (EditText) view.findViewById(R.id.filename);
         builder.setPositiveButton(L.get("save"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.SaveDialog.1
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface d, int which) {
                 final String filename = SaveDialog.this.textfield.getText().toString();
                 if (filename.length() <= 1) {
@@ -31,14 +30,14 @@ public class SaveDialog {
                     ApparatusApplication apparatusApplication = app;
                     final ApparatusApplication apparatusApplication2 = app;
                     apparatusApplication.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.SaveDialog.1.1
-                        @Override // java.lang.Runnable
+                        @Override
                         public void run() {
                             try {
                                 Thread.sleep(100L);
                             } catch (Exception e) {
                             }
                             apparatusApplication2.runOnUiThread(new Runnable() { // from class: com.bithack.apparatus.SaveDialog.1.1.1
-                                @Override // java.lang.Runnable
+                                @Override
                                 public void run() {
                                     ApparatusApp.backend.open_save_dialog();
                                 }
@@ -48,7 +47,7 @@ public class SaveDialog {
                     return;
                 }
                 app.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.SaveDialog.1.2
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         ApparatusApp.game.level_filename = filename;
                         ApparatusApp.game.save();
@@ -58,7 +57,7 @@ public class SaveDialog {
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.SaveDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });

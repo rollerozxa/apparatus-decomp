@@ -186,7 +186,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     ContactFilter falsefilter = new ContactFilter() {
         /* class com.bithack.apparatus.Game.AnonymousClass4 */
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactFilter
+        @Override
         public boolean shouldCollide(Fixture arg0, Fixture arg1) {
             return false;
         }
@@ -248,7 +248,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         QueryCallback query_find_object_exact = new QueryCallback() {
         /* class com.bithack.apparatus.Game.AnonymousClass1 */
 
-        @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+        @Override
         public boolean reportFixture(Fixture fixt) {
             Body b = fixt.getBody();
             if (b.getUserData() instanceof GrabableObject) {
@@ -284,7 +284,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     QueryCallback query_find_object = new QueryCallback() {
         /* class com.bithack.apparatus.Game.AnonymousClass2 */
 
-        @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+        @Override
         public boolean reportFixture(Fixture fixt) {
             Body b = fixt.getBody();
             if ((b.getUserData() instanceof GrabableObject) && ((Game.mode == 3 || ((!((GrabableObject) b.getUserData()).sandbox_only && !((GrabableObject) b.getUserData()).fixed_dynamic) || Game.sandbox)) && (Game.this.query_input_layer != 1 ? Game.this.query_input_layer != 2 ? Game.this.query_input_layer != 3 || ((GrabableObject) b.getUserData()).layer == 2 : ((GrabableObject) b.getUserData()).layer == 1 : ((GrabableObject) b.getUserData()).layer < 1))) {
@@ -305,7 +305,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     QueryCallback query_check_drag = new QueryCallback() {
         /* class com.bithack.apparatus.Game.AnonymousClass3 */
 
-        @Override // com.badlogic.gdx.physics.box2d.QueryCallback
+        @Override
         public boolean reportFixture(Fixture fixt) {
             Body b = fixt.getBody();
             if (b.getUserData() != Game.this.query_check) {
@@ -890,7 +890,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         helpify();
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public int tick() {
         if (!this.ready) {
             return 0;
@@ -1185,7 +1185,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void render() {
         if (this.ready) {
             G.set_clear_color(0.3f, 0.3f, 0.3f);
@@ -1883,7 +1883,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public void resume() {
         boolean z;
         boolean z2;
@@ -1955,12 +1955,12 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         MiscRenderer.update_quality();
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean screen_to_world(int x, int y, Vector2 out) {
         return false;
     }
 
-    @Override // com.bithack.apparatus.Screen
+    @Override
     public boolean ready() {
         return this.ready;
     }
@@ -2018,7 +2018,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         tracing = !tracing;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyDown(int key) {
         Widget w;
         Widget w2;
@@ -2179,12 +2179,12 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyTyped(char arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean keyUp(int key) {
         Widget w;
         Widget w2;
@@ -2673,7 +2673,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDown(int x, int y, int p, int button) {
         if (p >= this.widget.length) {
             return true;
@@ -3198,7 +3198,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         return ret;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchUp(int x, int y, int p, int button) {
         if (p < this.widget.length && p < 3) {
             this.num_touch_points--;
@@ -3385,7 +3385,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         this.um.commit_step();
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean touchDragged(int x, int y, int p) {
         if (p >= this.widget.length) {
             return true;
@@ -3594,18 +3594,18 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         return this.query_result;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean scrolled(int arg0) {
         return false;
     }
 
-    @Override // com.badlogic.gdx.InputProcessor
+    @Override
     public boolean mouseMoved(int x, int y) {
         this.fpos.set((float) x, (float) y);
         return true;
     }
 
-    @Override // com.bithack.apparatus.ui.WidgetValueCallback
+    @Override
     public void on_widget_value_change(int id, float value) {
         float f;
         int i = 2;
@@ -3823,7 +3823,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this();
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactFilter
+        @Override
         public boolean shouldCollide(Fixture f1, Fixture f2) {
             Body A = f1.getBody();
             Body B = f2.getBody();
@@ -3833,7 +3833,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             return f1.isSensor() || f2.isSensor() || ((BaseObject) A.getUserData()).layer == ((BaseObject) B.getUserData()).layer;
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactListener
+        @Override
         public void beginContact(Contact c) {
             if (Game.mode == 3) {
                 if ((c.getFixtureA().getBody().getUserData() instanceof Mine) && !c.getFixtureB().isSensor() && c.getFixtureA().getBody().getLinearVelocity().dst(c.getFixtureB().getBody().getLinearVelocity()) > 1.8f) {
@@ -3883,7 +3883,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             }
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactListener
+        @Override
         public void endContact(Contact c) {
             Fixture a = c.getFixtureA();
             Fixture b = c.getFixtureB();
@@ -3913,11 +3913,11 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             }
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactListener
+        @Override
         public void postSolve(Contact arg0, ContactImpulse arg1) {
         }
 
-        @Override // com.badlogic.gdx.physics.box2d.ContactListener
+        @Override
         public void preSolve(Contact arg0, Manifold arg1) {
         }
     }

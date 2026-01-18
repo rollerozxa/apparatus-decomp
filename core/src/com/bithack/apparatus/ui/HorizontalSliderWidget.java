@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bithack.apparatus.graphics.G;
 
-/* loaded from: classes.dex */
 public class HorizontalSliderWidget extends Widget {
     private float max;
     private float min;
@@ -39,7 +38,7 @@ public class HorizontalSliderWidget extends Widget {
         this.id = id;
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void render(Texture texture, SpriteBatch batch) {
         G.batch.begin();
         G.batch.setColor(Color.WHITE);
@@ -53,7 +52,7 @@ public class HorizontalSliderWidget extends Widget {
         G.batch.end();
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_down_local(int x, int y) {
         this.value = this.min + ((this.max - this.min) * ((float) x / this.width));
         if (this.snap != 0.0f) {
@@ -64,12 +63,12 @@ public class HorizontalSliderWidget extends Widget {
         }
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_drag_local(int x, int y) {
         touch_down_local(x, y);
     }
 
-    @Override // com.bithack.apparatus.ui.IWidget
+    @Override
     public void touch_up_local(int x, int y) {
     }
 }

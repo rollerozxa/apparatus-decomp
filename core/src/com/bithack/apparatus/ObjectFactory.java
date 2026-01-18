@@ -13,7 +13,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class ObjectFactory {
     private static BodyDef _anchor_bd;
     private static FixtureDef _anchor_fd;

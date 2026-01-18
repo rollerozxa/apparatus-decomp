@@ -15,7 +15,6 @@ import com.bithack.apparatus.graphics.MiscRenderer;
 import com.bithack.apparatus.objects.Hub;
 import com.bithack.apparatus.objects.Panel;
 
-/* loaded from: classes.dex */
 public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
     static final int BATTERY = 1;
     static final int BUTTON = 5;
@@ -81,7 +80,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -121,32 +120,32 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         render(0.0f);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.attached ? this.anchor : this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         detach();
         world.destroyBody(this.body);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         this.body.destroyFixture(this.f);
         this.f = this.body.createFixture(_fd);
@@ -279,7 +278,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.saved_oid = this.oid;
         super.play();
@@ -300,11 +299,11 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         if (!this.attached) {
             super.translate(x, y);
@@ -344,12 +343,12 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseCableEnd
+    @Override
     public int get_unique_id() {
         return this.__unique_id;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseCableEnd
+    @Override
     public void detach() {
         if (this.attached) {
             if (this.attached_type == 4) {
@@ -410,13 +409,13 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseCableEnd
+    @Override
     public void update_pos() {
         fix_anchor_pos();
         this.body.setTransform(this.anchor, this.body.getAngle());
     }
 
-    @Override // com.bithack.apparatus.objects.BaseRopeEnd
+    @Override
     public BaseRope get_baserope() {
         return this.cable;
     }
@@ -427,7 +426,7 @@ public class PanelCableEnd extends GrabableObject implements BaseCableEnd {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

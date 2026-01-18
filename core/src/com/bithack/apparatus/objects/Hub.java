@@ -13,7 +13,6 @@ import com.bithack.apparatus.objects.BaseObject;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class Hub extends GrabableObject implements FreeObject {
     protected static BodyDef _bd;
     protected static FixtureDef _fd;
@@ -89,7 +88,7 @@ public class Hub extends GrabableObject implements FreeObject {
         this.build_type = BodyDef.BodyType.DynamicBody;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         super.translate(x, y);
         for (int i = 0; i < this.connections.length; i++) {
@@ -140,7 +139,7 @@ public class Hub extends GrabableObject implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
@@ -173,7 +172,7 @@ public class Hub extends GrabableObject implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -188,26 +187,26 @@ public class Hub extends GrabableObject implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         super.write_to_stream(s);
     }
@@ -215,11 +214,11 @@ public class Hub extends GrabableObject implements FreeObject {
     public static void init_materials() {
     }
 
-    @Override // com.bithack.apparatus.objects.FreeObject
+    @Override
     public void set_layer() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         init();
         disconnect_all();
@@ -286,14 +285,14 @@ public class Hub extends GrabableObject implements FreeObject {
         return get_available_socket(pos, (BaseCableEnd) grabableObject);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         super.play();
         this.panel_output = 0.0f;
         update();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         for (int x = 0; x < this.connections.length; x++) {
             if (!this.connections[x].available) {
@@ -349,7 +348,7 @@ public class Hub extends GrabableObject implements FreeObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
@@ -377,7 +376,7 @@ public class Hub extends GrabableObject implements FreeObject {
         return false;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 

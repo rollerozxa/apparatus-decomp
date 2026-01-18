@@ -43,7 +43,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 
-/* loaded from: classes.dex */
 public class PublishDialog {
     final ApparatusApplication activity;
     Dialog dialog;
@@ -56,13 +55,13 @@ public class PublishDialog {
         builder.setTitle(L.get("publish_community_level"));
         builder.setView(this.view);
         builder.setNeutralButton(L.get("publish"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.PublishDialog.1
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 PublishDialog.this.new PublishTask().execute(((TextView) PublishDialog.this.view.findViewById(R.id.levelname)).getText().toString(), ((TextView) PublishDialog.this.view.findViewById(R.id.description)).getText().toString(), ((TextView) PublishDialog.this.view.findViewById(R.id.keywords)).getText().toString());
             }
         });
         builder.setNegativeButton(L.get("cancel"), new DialogInterface.OnClickListener() { // from class: com.bithack.apparatus.PublishDialog.2
-            @Override // android.content.DialogInterface.OnClickListener
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
@@ -124,15 +123,15 @@ public class PublishDialog {
             super(truststore);
             this.sslContext = SSLContext.getInstance("TLS");
             TrustManager tm = new X509TrustManager() { // from class: com.bithack.apparatus.PublishDialog.EasySSLSocketFactory.1
-                @Override // javax.net.ssl.X509TrustManager
+                @Override
                 public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
-                @Override // javax.net.ssl.X509TrustManager
+                @Override
                 public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
-                @Override // javax.net.ssl.X509TrustManager
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
@@ -140,12 +139,12 @@ public class PublishDialog {
             this.sslContext.init(null, new TrustManager[]{tm}, null);
         }
 
-        @Override // org.apache.http.conn.ssl.SSLSocketFactory, org.apache.http.conn.scheme.LayeredSocketFactory
+        @Override
         public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException {
             return this.sslContext.getSocketFactory().createSocket(socket, host, port, autoClose);
         }
 
-        @Override // org.apache.http.conn.ssl.SSLSocketFactory, org.apache.http.conn.scheme.SocketFactory
+        @Override
         public Socket createSocket() throws IOException {
             return this.sslContext.getSocketFactory().createSocket();
         }
@@ -241,21 +240,21 @@ public class PublishDialog {
             }
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         protected void onPreExecute() {
             PublishDialog.this.activity.dismissDialog(2);
             PublishDialog.this.activity.showDialog(3);
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.os.AsyncTask
+        @Override
         public void onPostExecute(String result) {
             String result2 = result.trim();
             boolean error = false;
             if (result2.length() > 0 && result2.substring(0, 3).equals("OK:")) {
                 final String token = result2.substring(3).trim();
                 PublishDialog.this.activity.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.PublishDialog.PublishTask.2
-                    @Override // java.lang.Runnable
+                    @Override
                     public void run() {
                         ApparatusApp.game.level.community_id = token;
                         ApparatusApp.game.save();

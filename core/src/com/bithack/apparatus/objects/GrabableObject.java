@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-/* loaded from: classes.dex */
 public abstract class GrabableObject extends BaseObject {
     private static Vector2 tmp = new Vector2();
     public Body body;
@@ -81,7 +80,7 @@ public abstract class GrabableObject extends BaseObject {
         pause();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         BodyDef.BodyType saved = this.body.getType();
         this.body.setType(BodyDef.BodyType.StaticBody);
@@ -90,7 +89,7 @@ public abstract class GrabableObject extends BaseObject {
         this._saved_pos.set(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_angle(float angle) {
         this._saved_angle = angle;
         BodyDef.BodyType saved = this.body.getType();
@@ -99,7 +98,7 @@ public abstract class GrabableObject extends BaseObject {
         this.body.setType(saved);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_angle() {
         return this.body.getAngle();
     }
@@ -119,7 +118,7 @@ public abstract class GrabableObject extends BaseObject {
         this.grabbed = false;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void rotate(float a) {
         this._saved_angle = this.body.getAngle();
         BodyDef.BodyType saved = this.body.getType();
@@ -135,7 +134,7 @@ public abstract class GrabableObject extends BaseObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void dispose(World world) {
         detach_cable();
         if (this.body != null) {

@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class Bucket extends GrabableObject {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -56,15 +55,15 @@ public class Bucket extends GrabableObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         Vector2 pos = get_state().position;
         float angle = get_state().angle;
@@ -104,44 +103,44 @@ public class Bucket extends GrabableObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void grab() {
         super.grab();
         this.body.setType(BodyDef.BodyType.DynamicBody);
         Gdx.app.log("set to dynamic", "");
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void release() {
         super.release();
         this.body.setType(BodyDef.BodyType.StaticBody);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.body.setType(BodyDef.BodyType.StaticBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }

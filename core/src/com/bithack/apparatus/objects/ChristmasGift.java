@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.jar.JarOutputStream;
 
-/* loaded from: classes.dex */
 public class ChristmasGift extends GrabableObject implements PrimaryObject {
     private static BodyDef _bd;
     private static FixtureDef _fd;
@@ -59,11 +58,11 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         texture = TextureFactory.load("data/christmaswrapping.jpg");
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void on_click() {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         BaseObject.State s = get_state();
         Vector2 pos = s.position;
@@ -84,27 +83,27 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void step(float deltatime) {
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Vector2 get_position() {
         return this.body.getPosition();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public float get_bb_radius() {
         return 0.0f;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         super.pause();
         if (Game.sandbox) {
@@ -114,19 +113,19 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void grab() {
         this.body.setType(BodyDef.BodyType.DynamicBody);
         this.grabbed = true;
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void release() {
         this.grabbed = false;
         this.body.setTransform(this.body.getPosition(), this.body.getAngle());
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public Body[] get_body_list() {
         return null;
     }
@@ -134,7 +133,7 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
     public static void init_materials() {
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void reshape() {
         if (this.f != null && this.body.getFixtureList().contains(this.f, false)) {
             this.body.destroyFixture(this.f);
@@ -143,12 +142,12 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         this.f = this.body.createFixture(_fd);
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void set_property(String name, Object value) {
         if (name.equals("sx")) {
             this.size.x = ((Float) value).floatValue();
@@ -164,13 +163,13 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         super.set_property(name, value);
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void update_properties() {
         set_property("sx", Float.valueOf(this.size.x));
         set_property("sy", Float.valueOf(this.size.y));
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void write_to_stream(JarOutputStream s) throws IOException {
         update_properties();
         super.write_to_stream(s);

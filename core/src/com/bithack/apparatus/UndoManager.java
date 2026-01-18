@@ -17,7 +17,6 @@ import com.bithack.apparatus.objects.StaticMotor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class UndoManager {
     public static final int ACTION_ADD = 1;
     public static final int ACTION_HINGE = 3;

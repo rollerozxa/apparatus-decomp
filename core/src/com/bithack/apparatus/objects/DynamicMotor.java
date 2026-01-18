@@ -12,7 +12,6 @@ import com.bithack.apparatus.ObjectFactory;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
 
-/* loaded from: classes.dex */
 public class DynamicMotor extends BaseMotor {
     static FixtureDef _fd;
     static PolygonShape _shape;
@@ -55,7 +54,7 @@ public class DynamicMotor extends BaseMotor {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void translate(float x, float y) {
         super.translate(x, y);
         if (this.cabled) {
@@ -67,7 +66,7 @@ public class DynamicMotor extends BaseMotor {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject, com.bithack.apparatus.objects.BaseObject
+    @Override
     public void rotate(float ro) {
         super.rotate(ro);
         if (this.cabled) {
@@ -97,7 +96,7 @@ public class DynamicMotor extends BaseMotor {
         this.ingame_type = BodyDef.BodyType.DynamicBody;
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor
+    @Override
     protected void create_body() {
         init();
         this.sensors = new Fixture[4];
@@ -107,14 +106,14 @@ public class DynamicMotor extends BaseMotor {
         create_sensors();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void play() {
         destroy_sensors();
         this.body.setType(BodyDef.BodyType.DynamicBody);
         super.play();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseMotor, com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void pause() {
         create_sensors();
         this.body.setType(BodyDef.BodyType.DynamicBody);
@@ -132,7 +131,7 @@ public class DynamicMotor extends BaseMotor {
         G.gl.glPopMatrix();
     }
 
-    @Override // com.bithack.apparatus.objects.BaseObject
+    @Override
     public void render() {
         if (!this.culled) {
             G.gl.glPushMatrix();
@@ -167,7 +166,7 @@ public class DynamicMotor extends BaseMotor {
         }
     }
 
-    @Override // com.bithack.apparatus.objects.GrabableObject
+    @Override
     public void tja_translate(float x, float y) {
         translate(x, y);
     }
