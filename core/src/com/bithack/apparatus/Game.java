@@ -1456,6 +1456,23 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         }
     }
 
+    /**
+     * Regenerate cache and update widgets position
+     */
+    public void refresh_ui(){
+        this.menu_cache.clear();
+        this.generate_caches();
+
+        this.widgets.update_widget(this.widget_size, G.width - 320, G.height - 48);
+        this.widgets.update_widget(this.widget_elasticity, (G.width - 320) - 100, G.height - 48);
+        this.widgets.update_widget(this.widget_current, G.width - 256, G.height - 48);
+        this.widgets.update_widget(this.widget_voltage, ((G.width - 256) - 180) - 16, G.height - 48);
+        this.widgets.update_widget(this.widget_thrust, G.width - 320, G.height - 48);
+        this.widgets.update_widget(this.widget_sizeb, (G.width - 320) - 250, G.height - 48);
+        this.widgets.update_widget(this.widget_dspeed, G.width - 320, G.height - 48);
+        this.widgets.update_widget(this.widget_dforce, ((G.width - 320) - 180) - 16, G.height - 48);
+    }
+
     private void render_menu() {
         G.cam_p.apply(G.gl);
         G.batch.setColor(Color.WHITE);

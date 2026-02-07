@@ -213,6 +213,10 @@ public class ApparatusApp implements ApplicationListener {
 
     @Override
     public void resize(int arg0, int arg1) {
+        G.refresh_size(arg0, arg1);
+        if(game != null) {
+            game.refresh_ui();
+        }
     }
 
     @Override

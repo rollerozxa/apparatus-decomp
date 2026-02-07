@@ -59,25 +59,6 @@ public class G {
     }
 
     public static void init(int width2, int height2) {
-        realwidth = width2;
-        realheight = height2;
-        if (width2 > 800) {
-            width = width2;
-            height = height2;
-            float d = (160.0f * Gdx.graphics.getDensity()) / 2.54f;
-            Gdx.app.log("density", new StringBuilder().append(d).toString());
-            float scale = 0.08f * d;
-            width = (int) (width2 * scale);
-            height = (int) (height2 * scale);
-        } else {
-            if (width2 < 800) {
-                smallscreen = true;
-            }
-            width = 800;
-            height = 480;
-        }
-        width = 800;
-        height = 480;
         gl = Gdx.graphics.getGL11();
         cam = new OrthographicCamera(width / 16.0f, height / 16.0f);
         cam.position.set(0.0f, 0.0f, 0.0f);
@@ -93,5 +74,39 @@ public class G {
         p_cam.direction.set(-1.8f, 2.0f, -1.0f).nor();
         p_cam.update();
         font = new BitmapFont();
+
+        refresh_size(width2, height2);
+    }
+
+    /**
+     * Call when we need to resize viewports
+     */
+    public static void refresh_size(int width2, int height2){
+        realwidth = width2;
+        realheight = height2;
+
+        float d = (160.0f * Gdx.graphics.getDensity()) / 2.54f;
+        float scale = 0.018f * d;
+
+        if (width2 < 800) {
+            smallscreen = true;
+        }
+
+        width = (int)Math.floor(realwidth * scale);
+        height = (int)Math.floor(realheight * scale);
+        Gdx.app.log("resize", "w: " + width + " h: " + height);
+
+        cam.viewportWidth = width / 16.0f;
+        cam.viewportHeight = height / 16.0f;
+        cam.update();
+
+        p_cam.viewportWidth = width / 16.0f;
+        p_cam.viewportHeight = height / 16.0f;
+        p_cam.update();
+
+        cam_p.viewportWidth = width;
+        cam_p.viewportHeight = height;
+        cam_p.position.set(width / 2, height / 2, 0.0f);
+        cam_p.update();
     }
 }

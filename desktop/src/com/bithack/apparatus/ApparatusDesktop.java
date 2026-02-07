@@ -23,6 +23,7 @@ public class ApparatusDesktop implements ApparatusApp.Backend {
         config.depth = 16;
         config.width = 1280;
         config.height = 720;
+        config.addIcon("data/icon.png", Files.FileType.Internal);
         //config.useGL20 = false;
         config.title = "Apparatus";
         ApparatusApp.backend = new ApparatusDesktop();

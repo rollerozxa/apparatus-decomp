@@ -214,6 +214,11 @@ public class WidgetManager {
         return false;
     }
 
+    public void update_widget(Widget w, int x, int y){
+        w.x = x;
+        w.y = y;
+    }
+
     public void add_widget(Widget w, int x, int y) {
         w.callback = this.w_callback;
         w.x = x;
