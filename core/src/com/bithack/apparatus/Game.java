@@ -1226,240 +1226,240 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
 
     @Override
     public void render() {
-        if (this.ready) {
-            G.set_clear_color(0.3f, 0.3f, 0.3f);
-            G.gl.glClearStencil(5);
-            if (enable_reflections) {
-                G.gl.glClear(1280);
-            } else {
-                G.gl.glClear(256);
-            }
-            G.gl.glClear(16384);
-            G.gl.glDisable(3042);
-            G.gl.glEnable(2929);
-            G.gl.glEnable(2884);
-            G.gl.glCullFace(1029);
-            G.gl.glDepthFunc(513);
-            G.gl.glDepthMask(true);
-            boundscheck_camera();
-            this.camera_h.update();
-            if (mode != MODE_PLAY || !enable_multithreading) {
-                cull_and_swap();
-            } else {
-                this.sim_thread.swap_state_buffers();
-                cull_objects();
-            }
-            G.gl.glEnable(16384);
-            G.gl.glLightfv(16384, GL10.GL_AMBIENT, this.light_ambient);
-            G.gl.glLightfv(16384, GL10.GL_SPECULAR, this.light_specular);
-            G.gl.glLightfv(16384, GL10.GL_DIFFUSE, this.light_diffuse);
-            G.gl.glLightfv(16384, GL10.GL_POSITION, this._light_pos);
-            G.p_cam.apply(G.gl);
-            IlluminationManager.render_scene(G.p_cam, this.hinges, this.om, enable_bg);
-            G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            if (enable_reflections) {
-                IlluminationManager.render_reflections(this.hinges, this.om);
-            }
-            G.gl.glDisable(GL10.GL_LIGHTING);
-            G.gl.glDisable(3042);
-            G.gl.glDisable(2960);
-            G.gl.glDisable(2884);
-            G.gl.glDisable(GL10.GL_NORMALIZE);
-            G.gl.glDisable(GL10.GL_LIGHTING);
-            G.gl.glCullFace(1029);
-            G.gl.glDepthMask(true);
-            G.p_cam.apply(G.gl);
-            G.gl.glDisable(2884);
-            G.gl.glMatrixMode(GL10.GL_PROJECTION);
-            G.gl.glLoadMatrixf(G.p_cam.combined.val, 0);
-            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
-            G.gl.glLoadIdentity();
-            if (enable_bloom) {
-                IlluminationManager.render_bloom(this.camera_h, this.om);
-            }
-            G.gl.glDisable(2929);
-            G.gl.glDepthMask(true);
-            G.gl.glBlendFunc(770, 771);
-            G.gl.glDisable(3553);
-            G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            if (enable_menu && !connectanims.isEmpty()) {
-                Iterator<ConnectAnim> i = connectanims.iterator();
-                while (i.hasNext()) {
-                    ConnectAnim x = i.next();
-                    if (!x.render()) {
-                        i.remove();
-                    }
-                }
-            }
-            if (!(mode == MODE_PLAY || this.grabbed_object == null)) {
-                G.gl.glDisable(3553);
-                G.gl.glEnable(3042);
-                G.gl.glPushMatrix();
-                G.gl.glLoadIdentity();
-                GrabableObject o = this.grabbed_object;
-                G.gl.glTranslatef(o.get_state().position.x, o.get_state().position.y, (float) (o.layer + 1));
-                G.gl.glRotatef((float) (((double) o.get_state().angle) * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                if (!this.grabbed_object.fixed_rotation && !(this.grabbed_object instanceof Wheel)) {
-                    G.gl.glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
-                    G.gl.glPushMatrix();
-                    float size = 2.0f;
-                    if (this.grabbed_object instanceof Bar) {
-                        size = (((Bar) this.grabbed_object).size.x / 2.0f) + 2.0f;
-                    }
-                    MiscRenderer.draw_line(0.0f, 0.0f, size, 0.0f);
-                    G.gl.glPopMatrix();
-                    G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                    G.gl.glPushMatrix();
-                    G.gl.glTranslatef(0.5f + size, 0.0f, 0.0f);
-                    G.gl.glScalef(0.5f, 0.5f, 1.0f);
-                    G.gl.glEnable(3553);
-                    rotatetex.bind();
-                    MiscRenderer.draw_textured_box();
-                    G.gl.glDisable(3553);
-                    G.gl.glPopMatrix();
-                }
-                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.2f);
-                if (o instanceof Bar) {
-                    G.gl.glScalef(((Bar) o).size.x + 0.2f, ((Bar) o).size.y + 0.2f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                } else if (o instanceof Wheel) {
-                    G.gl.glScalef(((Wheel) o).size + 0.1f, ((Wheel) o).size + 0.1f, 1.0f);
-                    MiscRenderer.draw_colored_ball();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_circle();
-                } else if ((o instanceof RopeEnd) || (o instanceof CableEnd) || (o instanceof PanelCableEnd) || (o instanceof Marble)) {
-                    G.gl.glScalef(0.65f, 0.65f, 1.0f);
-                    MiscRenderer.draw_colored_ball();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_circle();
-                } else if (o instanceof StaticMotor) {
-                    G.gl.glScalef(0.8f, 0.8f, 1.0f);
-                    MiscRenderer.draw_colored_ball();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_circle();
-                } else if (o instanceof Bucket) {
-                    G.gl.glScalef(5.0f, 3.0f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                } else if (o instanceof Battery) {
-                    if (((Battery) o).size == 1) {
-                        G.gl.glScalef(1.0f, 1.0f, 1.0f);
-                        MiscRenderer.draw_colored_box();
-                        G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                        MiscRenderer.draw_colored_square();
-                    } else {
-                        G.gl.glScalef(2.5f, 2.1f, 1.0f);
-                        MiscRenderer.draw_colored_box();
-                        G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                        MiscRenderer.draw_colored_square();
-                    }
-                } else if (o instanceof Weight) {
-                    G.gl.glScalef(2.0f, 1.5f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                } else if (o instanceof DynamicMotor) {
-                    G.gl.glScalef(1.5f, 1.5f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                } else if (o instanceof RocketEngine) {
-                    G.gl.glScalef(1.0f, 2.0f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                } else if (o instanceof Panel) {
-                    G.gl.glScalef(2.3f, 1.5f, 1.0f);
-                    MiscRenderer.draw_colored_box();
-                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
-                    MiscRenderer.draw_colored_square();
-                }
-                G.gl.glPopMatrix();
-            }
-            if (this.ghost_object != null) {
-                G.gl.glEnable(3042);
-                G.gl.glDisable(GL10.GL_LIGHTING);
-                G.gl.glDisable(3553);
-                G.gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-                if (this.ghost_object instanceof BaseRope) {
-                    ((BaseRope) this.ghost_object).render_edges();
-                } else {
-                    this.ghost_object.render();
-                }
-                G.gl.glDisable(3042);
-            } else if (this.active_panel != null) {
-                G.gl.glEnable(3042);
-                G.gl.glDisable(3553);
-                G.gl.glColor4f(0.0f, 1.0f, 0.0f, 0.3f);
-                this.active_panel.render();
-                G.gl.glDisable(3042);
-            }
-            G.gl.glLoadIdentity();
-            G.gl.glEnable(3553);
-            render_menu();
-            G.batch.setProjectionMatrix(G.cam_p.combined);
-            if (draw_fps) {
-                G.batch.begin();
-                G.font.draw(G.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0.0f, 24.0f);
-                G.batch.end();
-            }
-            if (this.do_autosave) {
-                G.batch.begin();
-                G.font.draw(G.batch, "Auto-saving...", 0.0f, 24.0f);
-                G.batch.end();
-            } else if (from_sandbox && mode != MODE_PLAY) {
-                G.batch.begin();
-                G.font.draw(G.batch, L.get("testingchallenge"), 0.0f, 24.0f);
-                G.batch.end();
-            }
-            if (this.pending_follow && mode == MODE_PLAY) {
-                G.batch.begin();
-                G.font.draw(G.batch, "Click on an object to follow it, or on the background to cancel.", 0.0f, 24.0f);
-                this.state = STATE_PAUSED;
-                G.batch.end();
-            }
-            if ((!this.pending_follow && this.state != STATE_PLAYING) || this.finished_fade > 0.0f) {
-                G.gl.glEnable(3042);
-                G.gl.glMatrixMode(GL10.GL_PROJECTION);
-                G.gl.glPushMatrix();
-                G.gl.glLoadIdentity();
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
-                G.gl.glPushMatrix();
-                G.gl.glLoadIdentity();
-                G.color(0.0f, 0.0f, 0.0f, 0.7f * this.finished_fade);
-                MiscRenderer.boxmesh.render(6);
-                G.gl.glMatrixMode(GL10.GL_PROJECTION);
-                G.gl.glPopMatrix();
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
-                G.gl.glPopMatrix();
-                if (this.state != STATE_PLAYING) {
-                    this.finished_fade += G.delta * 4.0f;
-                    if (this.finished_fade >= 1.0f) {
-                        this.finished_fade = 1.0f;
-                    }
-                } else if (this.state == STATE_PLAYING) {
-                    this.finished_fade -= G.delta * 4.0f;
-                    if (this.finished_fade <= 0.0f) {
-                        this.finished_fade = 0.0f;
-                    }
-                }
-            }
-            G.batch.begin();
-            if (this.finished_fade > 0.0f) {
-                G.batch.setColor(1.0f, 1.0f, 1.0f, this.finished_fade);
-                G.batch.draw(this.lvlcompletetex, 0.0f, 0.0f, 0.0f, 0.0f, G.width, G.height, 1.0f, 1.0f, 0.0f, 0, 0, this.lvlcompletetex.getWidth(), this.lvlcompletetex.getHeight(), false, false);
-                G.batch.setColor(Color.WHITE);
-            }
-            G.batch.end();
-            Gdx.app.getGraphics().getType();
-            Graphics.GraphicsType graphicsType = Graphics.GraphicsType.AndroidGL;
+        if (!this.ready)
+            return;
 
-            if (physics_debug)
-                debug.render(world, G.p_cam.combined);
+        G.set_clear_color(0.3f, 0.3f, 0.3f);
+        G.gl.glClearStencil(5);
+        if (enable_reflections) {
+            G.gl.glClear(1280);
+        } else {
+            G.gl.glClear(256);
         }
+        G.gl.glClear(16384);
+        G.gl.glDisable(3042);
+        G.gl.glEnable(2929);
+        G.gl.glEnable(2884);
+        G.gl.glCullFace(1029);
+        G.gl.glDepthFunc(513);
+        G.gl.glDepthMask(true);
+        boundscheck_camera();
+        this.camera_h.update();
+        if (mode != MODE_PLAY || !enable_multithreading) {
+            cull_and_swap();
+        } else {
+            this.sim_thread.swap_state_buffers();
+            cull_objects();
+        }
+        G.gl.glEnable(16384);
+        G.gl.glLightfv(16384, GL10.GL_AMBIENT, this.light_ambient);
+        G.gl.glLightfv(16384, GL10.GL_SPECULAR, this.light_specular);
+        G.gl.glLightfv(16384, GL10.GL_DIFFUSE, this.light_diffuse);
+        G.gl.glLightfv(16384, GL10.GL_POSITION, this._light_pos);
+        G.p_cam.apply(G.gl);
+        IlluminationManager.render_scene(G.p_cam, this.hinges, this.om, enable_bg);
+        G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        if (enable_reflections) {
+            IlluminationManager.render_reflections(this.hinges, this.om);
+        }
+        G.gl.glDisable(GL10.GL_LIGHTING);
+        G.gl.glDisable(3042);
+        G.gl.glDisable(2960);
+        G.gl.glDisable(2884);
+        G.gl.glDisable(GL10.GL_NORMALIZE);
+        G.gl.glDisable(GL10.GL_LIGHTING);
+        G.gl.glCullFace(1029);
+        G.gl.glDepthMask(true);
+        G.p_cam.apply(G.gl);
+        G.gl.glDisable(2884);
+        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glLoadMatrixf(G.p_cam.combined.val, 0);
+        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glLoadIdentity();
+        if (enable_bloom) {
+            IlluminationManager.render_bloom(this.camera_h, this.om);
+        }
+        G.gl.glDisable(2929);
+        G.gl.glDepthMask(true);
+        G.gl.glBlendFunc(770, 771);
+        G.gl.glDisable(3553);
+        G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        if (enable_menu && !connectanims.isEmpty()) {
+            Iterator<ConnectAnim> i = connectanims.iterator();
+            while (i.hasNext()) {
+                ConnectAnim x = i.next();
+                if (!x.render()) {
+                    i.remove();
+                }
+            }
+        }
+        if (!(mode == MODE_PLAY || this.grabbed_object == null)) {
+            G.gl.glDisable(3553);
+            G.gl.glEnable(3042);
+            G.gl.glPushMatrix();
+            G.gl.glLoadIdentity();
+            GrabableObject o = this.grabbed_object;
+            G.gl.glTranslatef(o.get_state().position.x, o.get_state().position.y, (float) (o.layer + 1));
+            G.gl.glRotatef((float) (((double) o.get_state().angle) * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
+            if (!this.grabbed_object.fixed_rotation && !(this.grabbed_object instanceof Wheel)) {
+                G.gl.glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+                G.gl.glPushMatrix();
+                float size = 2.0f;
+                if (this.grabbed_object instanceof Bar) {
+                    size = (((Bar) this.grabbed_object).size.x / 2.0f) + 2.0f;
+                }
+                MiscRenderer.draw_line(0.0f, 0.0f, size, 0.0f);
+                G.gl.glPopMatrix();
+                G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+                G.gl.glPushMatrix();
+                G.gl.glTranslatef(0.5f + size, 0.0f, 0.0f);
+                G.gl.glScalef(0.5f, 0.5f, 1.0f);
+                G.gl.glEnable(3553);
+                rotatetex.bind();
+                MiscRenderer.draw_textured_box();
+                G.gl.glDisable(3553);
+                G.gl.glPopMatrix();
+            }
+            G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.2f);
+            if (o instanceof Bar) {
+                G.gl.glScalef(((Bar) o).size.x + 0.2f, ((Bar) o).size.y + 0.2f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            } else if (o instanceof Wheel) {
+                G.gl.glScalef(((Wheel) o).size + 0.1f, ((Wheel) o).size + 0.1f, 1.0f);
+                MiscRenderer.draw_colored_ball();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_circle();
+            } else if ((o instanceof RopeEnd) || (o instanceof CableEnd) || (o instanceof PanelCableEnd) || (o instanceof Marble)) {
+                G.gl.glScalef(0.65f, 0.65f, 1.0f);
+                MiscRenderer.draw_colored_ball();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_circle();
+            } else if (o instanceof StaticMotor) {
+                G.gl.glScalef(0.8f, 0.8f, 1.0f);
+                MiscRenderer.draw_colored_ball();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_circle();
+            } else if (o instanceof Bucket) {
+                G.gl.glScalef(5.0f, 3.0f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            } else if (o instanceof Battery) {
+                if (((Battery) o).size == 1) {
+                    G.gl.glScalef(1.0f, 1.0f, 1.0f);
+                    MiscRenderer.draw_colored_box();
+                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                    MiscRenderer.draw_colored_square();
+                } else {
+                    G.gl.glScalef(2.5f, 2.1f, 1.0f);
+                    MiscRenderer.draw_colored_box();
+                    G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                    MiscRenderer.draw_colored_square();
+                }
+            } else if (o instanceof Weight) {
+                G.gl.glScalef(2.0f, 1.5f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            } else if (o instanceof DynamicMotor) {
+                G.gl.glScalef(1.5f, 1.5f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            } else if (o instanceof RocketEngine) {
+                G.gl.glScalef(1.0f, 2.0f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            } else if (o instanceof Panel) {
+                G.gl.glScalef(2.3f, 1.5f, 1.0f);
+                MiscRenderer.draw_colored_box();
+                G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.6f);
+                MiscRenderer.draw_colored_square();
+            }
+            G.gl.glPopMatrix();
+        }
+        if (this.ghost_object != null) {
+            G.gl.glEnable(3042);
+            G.gl.glDisable(GL10.GL_LIGHTING);
+            G.gl.glDisable(3553);
+            G.gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+            if (this.ghost_object instanceof BaseRope) {
+                ((BaseRope) this.ghost_object).render_edges();
+            } else {
+                this.ghost_object.render();
+            }
+            G.gl.glDisable(3042);
+        } else if (this.active_panel != null) {
+            G.gl.glEnable(3042);
+            G.gl.glDisable(3553);
+            G.gl.glColor4f(0.0f, 1.0f, 0.0f, 0.3f);
+            this.active_panel.render();
+            G.gl.glDisable(3042);
+        }
+        G.gl.glLoadIdentity();
+        G.gl.glEnable(3553);
+        render_menu();
+        G.batch.setProjectionMatrix(G.cam_p.combined);
+        if (draw_fps) {
+            G.batch.begin();
+            G.font.draw(G.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0.0f, 24.0f);
+            G.batch.end();
+        }
+        if (this.do_autosave) {
+            G.batch.begin();
+            G.font.draw(G.batch, "Auto-saving...", 0.0f, 24.0f);
+            G.batch.end();
+        } else if (from_sandbox && mode != MODE_PLAY) {
+            G.batch.begin();
+            G.font.draw(G.batch, L.get("testingchallenge"), 0.0f, 24.0f);
+            G.batch.end();
+        }
+        if (this.pending_follow && mode == MODE_PLAY) {
+            G.batch.begin();
+            G.font.draw(G.batch, "Click on an object to follow it, or on the background to cancel.", 0.0f, 24.0f);
+            this.state = STATE_PAUSED;
+            G.batch.end();
+        }
+        if ((!this.pending_follow && this.state != STATE_PLAYING) || this.finished_fade > 0.0f) {
+            G.gl.glEnable(3042);
+            G.gl.glMatrixMode(GL10.GL_PROJECTION);
+            G.gl.glPushMatrix();
+            G.gl.glLoadIdentity();
+            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+            G.gl.glPushMatrix();
+            G.gl.glLoadIdentity();
+            G.color(0.0f, 0.0f, 0.0f, 0.7f * this.finished_fade);
+            MiscRenderer.boxmesh.render(6);
+            G.gl.glMatrixMode(GL10.GL_PROJECTION);
+            G.gl.glPopMatrix();
+            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+            G.gl.glPopMatrix();
+            if (this.state != STATE_PLAYING) {
+                this.finished_fade += G.delta * 4.0f;
+                if (this.finished_fade >= 1.0f) {
+                    this.finished_fade = 1.0f;
+                }
+            } else if (this.state == STATE_PLAYING) {
+                this.finished_fade -= G.delta * 4.0f;
+                if (this.finished_fade <= 0.0f) {
+                    this.finished_fade = 0.0f;
+                }
+            }
+        }
+
+        G.batch.begin();
+        if (this.finished_fade > 0.0f) {
+            G.batch.setColor(1.0f, 1.0f, 1.0f, this.finished_fade);
+            G.batch.draw(this.lvlcompletetex, 0.0f, 0.0f, 0.0f, 0.0f, G.width, G.height, 1.0f, 1.0f, 0.0f, 0, 0, this.lvlcompletetex.getWidth(), this.lvlcompletetex.getHeight(), false, false);
+            G.batch.setColor(Color.WHITE);
+        }
+        G.batch.end();
+
+        if (physics_debug)
+            debug.render(world, G.p_cam.combined);
     }
 
     /**
