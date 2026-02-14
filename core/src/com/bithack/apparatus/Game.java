@@ -5,7 +5,7 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
@@ -1073,48 +1073,48 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     }
 
     void render_scene(boolean light) {
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
-        G.gl.glDisable(3042);
-        G.gl.glEnable(3553);
-        G.gl.glDisable(GL10.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_BLEND);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glDisable(GL11.GL_LIGHTING);
         G.p_cam.apply(G.gl);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
-        G.gl.glMatrixMode(5890);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glScalef(0.2f, 46.0f, 1.0f);
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(16384);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_COLOR_BUFFER_BIT);
         if (light) {
-            G.gl.glLightfv(16384, GL10.GL_AMBIENT, this.light_ambient);
-            G.gl.glLightfv(16384, GL10.GL_SPECULAR, this.light_specular);
-            G.gl.glLightfv(16384, GL10.GL_DIFFUSE, this.light_diffuse);
-            G.gl.glLightfv(16384, GL10.GL_POSITION, this._light_pos);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_AMBIENT, this.light_ambient);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_SPECULAR, this.light_specular);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_DIFFUSE, this.light_diffuse);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_POSITION, this._light_pos);
         } else {
-            G.gl.glLightfv(16384, GL10.GL_AMBIENT, this.light_ambient);
-            G.gl.glLightfv(16384, GL10.GL_SPECULAR, this.light_ambient);
-            G.gl.glLightfv(16384, GL10.GL_DIFFUSE, this.light_ambient);
-            G.gl.glLightfv(16384, GL10.GL_POSITION, this._light_pos);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_AMBIENT, this.light_ambient);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_SPECULAR, this.light_ambient);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_DIFFUSE, this.light_ambient);
+            G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_POSITION, this._light_pos);
         }
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, _def_material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _def_material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _def_material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _def_material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, _def_material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _def_material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _def_material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _def_material, 12);
         if (this.ghost_object != null) {
-            G.gl.glEnable(3042);
-            G.gl.glDisable(GL10.GL_LIGHTING);
-            G.gl.glDisable(3553);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glDisable(GL11.GL_LIGHTING);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
             if (this.ghost_object instanceof BaseRope) {
                 ((BaseRope) this.ghost_object).render_edges();
             } else {
                 this.ghost_object.render();
             }
-            G.gl.glEnable(GL10.GL_LIGHTING);
-            G.gl.glEnable(3553);
-            G.gl.glDisable(3042);
+            G.gl.glEnable(GL11.GL_LIGHTING);
+            G.gl.glEnable(GL11.GL_TEXTURE_2D);
+            G.gl.glDisable(GL11.GL_BLEND);
         }
     }
 
@@ -1232,16 +1232,16 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         G.set_clear_color(0.3f, 0.3f, 0.3f);
         G.gl.glClearStencil(5);
         if (enable_reflections) {
-            G.gl.glClear(1280);
+            G.gl.glClear(1280); // XXX
         } else {
-            G.gl.glClear(256);
+            G.gl.glClear(GL11.GL_DEPTH_BUFFER_BIT);
         }
-        G.gl.glClear(16384);
-        G.gl.glDisable(3042);
-        G.gl.glEnable(2929);
-        G.gl.glEnable(2884);
-        G.gl.glCullFace(1029);
-        G.gl.glDepthFunc(513);
+        G.gl.glClear(GL11.GL_COLOR_BUFFER_BIT);
+        G.gl.glDisable(GL11.GL_BLEND);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
+        G.gl.glEnable(GL11.GL_CULL_FACE);
+        G.gl.glCullFace(GL11.GL_BACK);
+        G.gl.glDepthFunc(GL11.GL_LESS);
         G.gl.glDepthMask(true);
         boundscheck_camera();
         this.camera_h.update();
@@ -1251,38 +1251,38 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this.sim_thread.swap_state_buffers();
             cull_objects();
         }
-        G.gl.glEnable(16384);
-        G.gl.glLightfv(16384, GL10.GL_AMBIENT, this.light_ambient);
-        G.gl.glLightfv(16384, GL10.GL_SPECULAR, this.light_specular);
-        G.gl.glLightfv(16384, GL10.GL_DIFFUSE, this.light_diffuse);
-        G.gl.glLightfv(16384, GL10.GL_POSITION, this._light_pos);
+        G.gl.glEnable(GL11.GL_COLOR_BUFFER_BIT);
+        G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_AMBIENT, this.light_ambient);
+        G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_SPECULAR, this.light_specular);
+        G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_DIFFUSE, this.light_diffuse);
+        G.gl.glLightfv(GL11.GL_COLOR_BUFFER_BIT, GL11.GL_POSITION, this._light_pos);
         G.p_cam.apply(G.gl);
         IlluminationManager.render_scene(G.p_cam, this.hinges, this.om, enable_bg);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         if (enable_reflections) {
             IlluminationManager.render_reflections(this.hinges, this.om);
         }
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glDisable(3042);
-        G.gl.glDisable(2960);
-        G.gl.glDisable(2884);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glCullFace(1029);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_BLEND);
+        G.gl.glDisable(GL11.GL_STENCIL_TEST);
+        G.gl.glDisable(GL11.GL_CULL_FACE);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glCullFace(GL11.GL_BACK);
         G.gl.glDepthMask(true);
         G.p_cam.apply(G.gl);
-        G.gl.glDisable(2884);
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glDisable(GL11.GL_CULL_FACE);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadMatrixf(G.p_cam.combined.val, 0);
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
         if (enable_bloom) {
             IlluminationManager.render_bloom(this.camera_h, this.om);
         }
-        G.gl.glDisable(2929);
+        G.gl.glDisable(GL11.GL_DEPTH_TEST);
         G.gl.glDepthMask(true);
-        G.gl.glBlendFunc(770, 771);
-        G.gl.glDisable(3553);
+        G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         if (enable_menu && !connectanims.isEmpty()) {
             Iterator<ConnectAnim> i = connectanims.iterator();
@@ -1294,8 +1294,8 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             }
         }
         if (!(mode == MODE_PLAY || this.grabbed_object == null)) {
-            G.gl.glDisable(3553);
-            G.gl.glEnable(3042);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
+            G.gl.glEnable(GL11.GL_BLEND);
             G.gl.glPushMatrix();
             G.gl.glLoadIdentity();
             GrabableObject o = this.grabbed_object;
@@ -1314,10 +1314,10 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(0.5f + size, 0.0f, 0.0f);
                 G.gl.glScalef(0.5f, 0.5f, 1.0f);
-                G.gl.glEnable(3553);
+                G.gl.glEnable(GL11.GL_TEXTURE_2D);
                 rotatetex.bind();
                 MiscRenderer.draw_textured_box();
-                G.gl.glDisable(3553);
+                G.gl.glDisable(GL11.GL_TEXTURE_2D);
                 G.gl.glPopMatrix();
             }
             G.gl.glColor4f(0.8f, 0.8f, 1.0f, 0.2f);
@@ -1382,25 +1382,25 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             G.gl.glPopMatrix();
         }
         if (this.ghost_object != null) {
-            G.gl.glEnable(3042);
-            G.gl.glDisable(GL10.GL_LIGHTING);
-            G.gl.glDisable(3553);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glDisable(GL11.GL_LIGHTING);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
             if (this.ghost_object instanceof BaseRope) {
                 ((BaseRope) this.ghost_object).render_edges();
             } else {
                 this.ghost_object.render();
             }
-            G.gl.glDisable(3042);
+            G.gl.glDisable(GL11.GL_BLEND);
         } else if (this.active_panel != null) {
-            G.gl.glEnable(3042);
-            G.gl.glDisable(3553);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(0.0f, 1.0f, 0.0f, 0.3f);
             this.active_panel.render();
-            G.gl.glDisable(3042);
+            G.gl.glDisable(GL11.GL_BLEND);
         }
         G.gl.glLoadIdentity();
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         render_menu();
         G.batch.setProjectionMatrix(G.cam_p.combined);
         if (draw_fps) {
@@ -1424,18 +1424,18 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             G.batch.end();
         }
         if ((!this.pending_follow && this.state != STATE_PLAYING) || this.finished_fade > 0.0f) {
-            G.gl.glEnable(3042);
-            G.gl.glMatrixMode(GL10.GL_PROJECTION);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glMatrixMode(GL11.GL_PROJECTION);
             G.gl.glPushMatrix();
             G.gl.glLoadIdentity();
-            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+            G.gl.glMatrixMode(GL11.GL_MODELVIEW);
             G.gl.glPushMatrix();
             G.gl.glLoadIdentity();
             G.color(0.0f, 0.0f, 0.0f, 0.7f * this.finished_fade);
             MiscRenderer.boxmesh.render(6);
-            G.gl.glMatrixMode(GL10.GL_PROJECTION);
+            G.gl.glMatrixMode(GL11.GL_PROJECTION);
             G.gl.glPopMatrix();
-            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+            G.gl.glMatrixMode(GL11.GL_MODELVIEW);
             G.gl.glPopMatrix();
             if (this.state != STATE_PLAYING) {
                 this.finished_fade += G.delta * 4.0f;
@@ -1526,8 +1526,8 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             this.active_panel.widgets.render_all(G.batch);
         }
         if (enable_menu) {
-            G.gl.glEnable(3042);
-            G.gl.glBlendFunc(770, 771);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             this.menu_cache.begin();
             if (mode != MODE_PLAY) {
                 if (this.msg != null) {

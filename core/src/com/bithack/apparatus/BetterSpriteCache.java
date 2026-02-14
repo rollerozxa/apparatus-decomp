@@ -5,7 +5,7 @@ import java.nio.FloatBuffer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Texture;
@@ -804,13 +804,13 @@ public class BetterSpriteCache extends SpriteCache {
 		if (drawing) throw new IllegalStateException("end must be called before begin.");
 
 		if (Gdx.graphics.isGL20Available() == false) {
-			GL10 gl = Gdx.gl10;
+			GL11 gl = Gdx.gl11;
 			gl.glDepthMask(false);
-			gl.glEnable(GL10.GL_TEXTURE_2D);
+			gl.glEnable(GL11.GL_TEXTURE_2D);
 
-			gl.glMatrixMode(GL10.GL_PROJECTION);
+			gl.glMatrixMode(GL11.GL_PROJECTION);
 			gl.glLoadMatrixf(projectionMatrix.val, 0);
-			gl.glMatrixMode(GL10.GL_MODELVIEW);
+			gl.glMatrixMode(GL11.GL_MODELVIEW);
 			gl.glLoadMatrixf(transformMatrix.val, 0);
 
 			mesh.bind();
@@ -844,9 +844,9 @@ public class BetterSpriteCache extends SpriteCache {
 		drawing = false;
 
 		if (Gdx.graphics.isGL20Available() == false) {
-			GL10 gl = Gdx.gl10;
+			GL11 gl = Gdx.gl11;
 			gl.glDepthMask(true);
-			gl.glDisable(GL10.GL_TEXTURE_2D);
+			gl.glDisable(GL11.GL_TEXTURE_2D);
 			mesh.unbind();
 		} else {
 			shader.end();
@@ -871,16 +871,16 @@ public class BetterSpriteCache extends SpriteCache {
 				int count = counts[i];
 				textures[i].bind();
 				if (customShader != null)
-					mesh.render(customShader, GL10.GL_TRIANGLES, offset, count);
+					mesh.render(customShader, GL11.GL_TRIANGLES, offset, count);
 				else
-					mesh.render(shader, GL10.GL_TRIANGLES, offset, count);
+					mesh.render(shader, GL11.GL_TRIANGLES, offset, count);
 				offset += count;
 			}
 		} else {
 			for (int i = 0, n = cache.textureCount; i < n; i++) {
 				int count = counts[i];
 				textures[i].bind();
-				mesh.render(GL10.GL_TRIANGLES, offset, count);
+				mesh.render(GL11.GL_TRIANGLES, offset, count);
 				offset += count;
 			}
 		}
@@ -908,9 +908,9 @@ public class BetterSpriteCache extends SpriteCache {
 				} else
 					length -= count;
 				if (customShader != null)
-					mesh.render(customShader, GL10.GL_TRIANGLES, offset, count);
+					mesh.render(customShader, GL11.GL_TRIANGLES, offset, count);
 				else
-					mesh.render(shader, GL10.GL_TRIANGLES, offset, count);
+					mesh.render(shader, GL11.GL_TRIANGLES, offset, count);
 				offset += count;
 			}
 		} else {
@@ -922,7 +922,7 @@ public class BetterSpriteCache extends SpriteCache {
 					count = length;
 				} else
 					length -= count;
-				mesh.render(GL10.GL_TRIANGLES, offset, count);
+				mesh.render(GL11.GL_TRIANGLES, offset, count);
 				offset += count;
 			}
 		}

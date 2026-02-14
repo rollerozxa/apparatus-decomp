@@ -1,5 +1,6 @@
 package com.bithack.apparatus.graphics;
 
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.bithack.apparatus.objects.BaseObject;
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class Pipeline {
     }
 
     public void render_all() {
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         for (Map.Entry<Integer, ArrayList> entry : this.texture_pipeline.entrySet()) {
             Integer k = entry.getKey();
             ArrayList<BaseObject> v = entry.getValue();
@@ -94,7 +95,7 @@ public class Pipeline {
                 o.render();
             }
         }
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         if (!this.color_pipeline.isEmpty()) {
             for (BaseObject o2 : this.color_pipeline) {
                 o2.render();

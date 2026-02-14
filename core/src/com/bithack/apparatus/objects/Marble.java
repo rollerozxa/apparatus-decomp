@@ -1,6 +1,6 @@
 package com.bithack.apparatus.objects;
 
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
@@ -81,24 +81,24 @@ public class Marble extends GrabableObject implements PrimaryObject {
     }
 
     public static void _init_materials() {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, material, 12);
     }
 
     public static void _init_diffuse_materials() {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, diffuse_material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, diffuse_material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, diffuse_material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, diffuse_material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, diffuse_material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, diffuse_material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, diffuse_material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, diffuse_material, 12);
     }
 
     public static void _init_diffuse_christmas_materials() {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, diffuse_christmas_material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, diffuse_christmas_material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, diffuse_christmas_material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, diffuse_christmas_material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, diffuse_christmas_material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, diffuse_christmas_material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, diffuse_christmas_material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, diffuse_christmas_material, 12);
     }
 
     public static void _init_materials(boolean shadowed) {

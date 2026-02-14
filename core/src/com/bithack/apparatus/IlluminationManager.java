@@ -3,7 +3,7 @@ package com.bithack.apparatus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -322,27 +322,27 @@ public class IlluminationManager {
 
     private static void render_projected_ropeend_umbra(RopeEnd e) {
         Vector2 pos = e.get_state().position;
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glPushMatrix();
         G.gl.glTranslatef(pos.x, pos.y, 0.0f);
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glPushMatrix();
         G.gl.glTranslatef(pos.x, pos.y, -0.499f);
         wheel_umbra.render(6, (e.layer * 75) + 0, 25);
         G.gl.glPopMatrix();
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glPopMatrix();
     }
 
     public static void render_projected_umbras_blended(ObjectManager om) {
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glEnable(2929);
-        G.gl.glDisable(2960);
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
+        G.gl.glDisable(GL11.GL_STENCIL_TEST);
+        G.gl.glDisable(GL11.GL_BLEND);
         G.gl.glColorMask(true, true, true, true);
         G.gl.glDepthMask(true);
         G.gl.glColor4f(0.39999998f, 0.39999998f, 0.39999998f, 1.0f);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         plank_umbra.bind();
         for (Plank w : om.layer0.planks) {
             if (!w.culled) {
@@ -575,16 +575,16 @@ public class IlluminationManager {
     }
 
     public static void render_projected_umbras(ObjectManager om) {
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glEnable(2929);
-        G.gl.glDisable(2960);
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
+        G.gl.glDisable(GL11.GL_STENCIL_TEST);
+        G.gl.glDisable(GL11.GL_BLEND);
         G.gl.glColorMask(true, true, true, true);
         G.gl.glDepthMask(true);
         G.gl.glColor4f(0.39999998f, 0.39999998f, 0.39999998f, 1.0f);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         Game.bgtex.bind();
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glLoadIdentity();
         G.gl.glScalef(9.765625E-4f, -0.00390625f, 1.0f);
         G.gl.glScalef(56.0f, 14.0f, 1.0f);
@@ -595,17 +595,17 @@ public class IlluminationManager {
             if (!w.culled) {
                 int start = (w.size.x < 2.1f ? 0 : w.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos = w.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos.x, pos.y, 0.0f);
                 G.gl.glRotatef((float) (w.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos.x, pos.y, -0.499f);
                 G.gl.glRotatef((float) (w.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 plank_umbra.render(6, start, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -615,17 +615,17 @@ public class IlluminationManager {
             if (!w2.culled) {
                 int start2 = (w2.size.x < 2.1f ? 0 : w2.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos2 = w2.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos2.x, pos2.y, 0.0f);
                 G.gl.glRotatef((float) (w2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos2.x, pos2.y, -0.499f);
                 G.gl.glRotatef((float) (w2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 plank_umbra.render(6, start2 + 12, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -635,15 +635,15 @@ public class IlluminationManager {
             Marble w3 = it3.next();
             if (!w3.culled) {
                 Vector2 pos3 = w3.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos3.x, pos3.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos3.x, pos3.y, -0.499f);
                 marble_umbra.render(6);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -652,15 +652,15 @@ public class IlluminationManager {
             Marble w4 = it4.next();
             if (!w4.culled) {
                 Vector2 pos4 = w4.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos4.x, pos4.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos4.x, pos4.y, -0.499f);
                 marble_umbra.render(6);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -675,15 +675,15 @@ public class IlluminationManager {
             if (!w6.culled) {
                 int start3 = (w6.size < 1.0f ? 0 : w6.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos5 = w6.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos5.x, pos5.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos5.x, pos5.y, -0.499f);
                 wheel_umbra.render(6, start3, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -691,15 +691,15 @@ public class IlluminationManager {
             if (!w7.culled) {
                 int start4 = (w7.size < 1.0f ? 0 : w7.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos6 = w7.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos6.x, pos6.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos6.x, pos6.y, -0.499f);
                 wheel_umbra.render(6, start4 + 75, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -707,15 +707,15 @@ public class IlluminationManager {
             if (!w8.culled) {
                 int start5 = (w8.size < 1.0f ? 0 : w8.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos7 = w8.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos7.x, pos7.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos7.x, pos7.y, -0.499f);
                 wheel_umbra.render(6, start5, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -725,15 +725,15 @@ public class IlluminationManager {
             if (!w9.culled) {
                 int start6 = (w9.size < 1.0f ? 0 : w9.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos8 = w9.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos8.x, pos8.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos8.x, pos8.y, -0.499f);
                 wheel_umbra.render(6, start6 + 75, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -743,15 +743,15 @@ public class IlluminationManager {
             if (!w10.culled) {
                 int start7 = (w10.size < 1.0f ? 0 : w10.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos9 = w10.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos9.x, pos9.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos9.x, pos9.y, -0.499f);
                 wheel_umbra.render(6, start7, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -761,15 +761,15 @@ public class IlluminationManager {
             if (!w11.culled) {
                 int start8 = (w11.size < 1.0f ? 0 : w11.size < 2.0f ? 1 : 2) * 25;
                 Vector2 pos10 = w11.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos10.x, pos10.y, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos10.x, pos10.y, -0.499f);
                 wheel_umbra.render(6, start8 + 75, 25);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -779,19 +779,19 @@ public class IlluminationManager {
             DynamicMotor m = it12.next();
             if (!m.culled) {
                 Vector2 pos11 = m.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos11.x, pos11.y, 0.0f);
                 G.gl.glRotatef((float) (m.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(SHADOW_FACTOR, SHADOW_FACTOR, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos11.x, pos11.y, -0.499f);
                 G.gl.glRotatef((float) (m.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(SHADOW_FACTOR, SHADOW_FACTOR, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -800,19 +800,19 @@ public class IlluminationManager {
             DynamicMotor m2 = it13.next();
             if (!m2.culled) {
                 Vector2 pos12 = m2.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos12.x, pos12.y, 0.0f);
                 G.gl.glRotatef((float) (m2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(SHADOW_FACTOR, SHADOW_FACTOR, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos12.x, pos12.y, -0.499f);
                 G.gl.glRotatef((float) (m2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(SHADOW_FACTOR, SHADOW_FACTOR, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -821,19 +821,19 @@ public class IlluminationManager {
             Button m3 = it14.next();
             if (!m3.culled) {
                 Vector2 pos13 = m3.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos13.x, pos13.y, 0.0f);
                 G.gl.glRotatef((float) (m3.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.8f, 0.4f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos13.x, pos13.y, -0.499f);
                 G.gl.glRotatef((float) (m3.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.8f, 0.4f, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -843,19 +843,19 @@ public class IlluminationManager {
                 ChristmasGift m4 = it15.next();
                 if (!m4.culled) {
                     Vector2 pos14 = m4.get_state().position;
-                    G.gl.glMatrixMode(5890);
+                    G.gl.glMatrixMode(GL11.GL_TEXTURE);
                     G.gl.glPushMatrix();
                     G.gl.glTranslatef(pos14.x, pos14.y, 0.0f);
                     G.gl.glRotatef((float) (m4.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                     G.gl.glScalef(m4.size.x * 2.0f, m4.size.y * 2.0f, 1.0f);
-                    G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                    G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                     G.gl.glPushMatrix();
                     G.gl.glTranslatef(pos14.x, pos14.y, -0.499f);
                     G.gl.glRotatef((float) (m4.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                     G.gl.glScalef(m4.size.x * 2.0f, m4.size.y * 2.0f, 1.0f);
                     misc_umbra.render(6, 0, 4);
                     G.gl.glPopMatrix();
-                    G.gl.glMatrixMode(5890);
+                    G.gl.glMatrixMode(GL11.GL_TEXTURE);
                     G.gl.glPopMatrix();
                 }
             }
@@ -865,19 +865,19 @@ public class IlluminationManager {
             Hub m5 = it16.next();
             if (!m5.culled) {
                 Vector2 pos15 = m5.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos15.x, pos15.y, 0.0f);
                 G.gl.glRotatef((float) (m5.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(2.0f, 0.5f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos15.x, pos15.y, -0.499f);
                 G.gl.glRotatef((float) (m5.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(2.0f, 0.5f, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -886,19 +886,19 @@ public class IlluminationManager {
             RocketEngine m6 = it17.next();
             if (!m6.culled) {
                 Vector2 pos16 = m6.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos16.x, pos16.y, 0.0f);
                 G.gl.glRotatef((float) (m6.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(1.0f, 2.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos16.x, pos16.y, -0.499f);
                 G.gl.glRotatef((float) (m6.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(1.0f, 2.0f, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -907,19 +907,19 @@ public class IlluminationManager {
             Panel m7 = it18.next();
             if (!m7.culled) {
                 Vector2 pos17 = m7.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos17.x, pos17.y, 0.0f);
                 G.gl.glRotatef((float) (m7.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(2.0f, SHADOW_FACTOR, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos17.x, pos17.y, -0.499f);
                 G.gl.glRotatef((float) (m7.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(1.8f, 1.1f, 1.0f);
                 misc_umbra.render(6, 0, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -928,11 +928,11 @@ public class IlluminationManager {
             Battery b = it19.next();
             if (!b.culled) {
                 Vector2 pos18 = b.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos18.x, pos18.y, 0.0f);
                 G.gl.glRotatef((float) (b.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos18.x, pos18.y, -0.499f);
                 G.gl.glRotatef((float) (b.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
@@ -942,7 +942,7 @@ public class IlluminationManager {
                     misc_umbra.render(6, 8, 8);
                 }
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -951,17 +951,17 @@ public class IlluminationManager {
             Weight b2 = it20.next();
             if (!b2.culled) {
                 Vector2 pos19 = b2.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos19.x, pos19.y, 0.0f);
                 G.gl.glRotatef((float) (b2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos19.x, pos19.y, -0.499f);
                 G.gl.glRotatef((float) (b2.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 misc_umbra.render(6, 4, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -970,19 +970,19 @@ public class IlluminationManager {
             Mine b3 = it21.next();
             if (!b3.culled && !b3.triggered) {
                 Vector2 pos20 = b3.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos20.x, pos20.y, 0.0f);
                 G.gl.glRotatef((float) (b3.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.5f, 0.5f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos20.x, pos20.y, -0.499f);
                 G.gl.glRotatef((float) (b3.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.5f, 0.5f, 1.0f);
                 misc_umbra.render(6, 4, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -991,19 +991,19 @@ public class IlluminationManager {
             Mine b4 = it22.next();
             if (!b4.culled && !b4.triggered) {
                 Vector2 pos21 = b4.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos21.x, pos21.y, 0.0f);
                 G.gl.glRotatef((float) (b4.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.5f, 0.5f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos21.x, pos21.y, -0.499f);
                 G.gl.glRotatef((float) (b4.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(0.5f, 0.5f, 1.0f);
                 misc_umbra.render(6, 4, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -1012,19 +1012,19 @@ public class IlluminationManager {
             Bucket b5 = it23.next();
             if (!b5.culled) {
                 Vector2 pos22 = b5.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos22.x, pos22.y, 0.0f);
                 G.gl.glRotatef((float) (b5.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glTranslatef(0.0f, -0.15f, 0.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos22.x, pos22.y, -0.499f);
                 G.gl.glRotatef((float) (b5.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 G.gl.glTranslatef(0.0f, -0.15f, 0.0f);
                 misc_umbra.render(6, 24, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -1036,17 +1036,17 @@ public class IlluminationManager {
             if (!m8.culled) {
                 int start9 = (m8.size.x < 2.1f ? 0 : m8.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos23 = m8.get_state().position;
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos23.x, pos23.y, 0.0f);
                 G.gl.glRotatef((float) (m8.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos23.x, pos23.y, -0.499f);
                 G.gl.glRotatef((float) (m8.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
                 metal_umbra.render(6, start9 + 12, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -1056,19 +1056,19 @@ public class IlluminationManager {
             if (!w12.culled) {
                 Vector2 pos24 = w12.get_position();
                 float angle = w12.g2.body.getPosition().cpy().sub(w12.g1.body.getPosition()).angle();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos24.x, pos24.y, 0.0f);
                 G.gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(((((PrismaticJoint) w12.joint1).getJointTranslation() + w12.size) + 0.5f) / 4.0f, 1.0f, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos24.x, pos24.y, -0.499f);
                 G.gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef(((((PrismaticJoint) w12.joint1).getJointTranslation() + w12.size) + 0.5f) / 4.0f, 1.0f, 1.0f);
                 metal_umbra.render(6, 16, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
@@ -1078,31 +1078,31 @@ public class IlluminationManager {
             if (!w13.culled) {
                 Vector2 pos25 = w13.get_position();
                 float angle2 = w13.g2.body.getPosition().cpy().sub(w13.g1.body.getPosition()).angle();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos25.x, pos25.y, 0.0f);
                 G.gl.glRotatef(angle2, 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef((((((PrismaticJoint) w13.joint1).getJointTranslation() + w13.size) + 0.5f) / 4.0f) + 0.1f, SHADOW_FACTOR2, 1.0f);
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos25.x, pos25.y, -0.499f);
                 G.gl.glRotatef(angle2, 0.0f, 0.0f, 1.0f);
                 G.gl.glScalef((((((PrismaticJoint) w13.joint1).getJointTranslation() + w13.size) + 0.5f) / 4.0f) + 0.1f, SHADOW_FACTOR2, 1.0f);
                 metal_umbra.render(6, 16, 4);
                 G.gl.glPopMatrix();
-                G.gl.glMatrixMode(5890);
+                G.gl.glMatrixMode(GL11.GL_TEXTURE);
                 G.gl.glPopMatrix();
             }
         }
         metal_umbra.unbind();
-        G.gl.glDisable(3553);
-        G.gl.glMatrixMode(5890);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
     }
 
     public static void render_projected_penumbras(ObjectManager om) {
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         G.gl.glDepthMask(false);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         marble_penumbra.bind();
@@ -1487,12 +1487,12 @@ public class IlluminationManager {
         }
         misc_penumbra.unbind();
         G.gl.glDepthMask(true);
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_BLEND);
     }
 
     private static void render_layer1_shadow_projections(ObjectManager om, float depth) {
         G.gl.glDepthFunc(518);
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         G.gl.glColor4f(0.0f, 0.0f, 0.0f, SHADOW_COLOR);
         G.gl.glDepthMask(false);
         ObjectManager.Layer l = om.layer2;
@@ -1503,7 +1503,7 @@ public class IlluminationManager {
             if (!w.culled) {
                 int start = (w.size.x < 2.1f ? 0 : w.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos = w.get_state().position;
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos.x, pos.y, depth);
                 G.gl.glRotatef((float) (w.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
@@ -1528,13 +1528,13 @@ public class IlluminationManager {
         }
         plank_penumbra.unbind();
         G.gl.glDepthMask(true);
-        G.gl.glDepthFunc(513);
-        G.gl.glDisable(3042);
+        G.gl.glDepthFunc(GL11.GL_LESS);
+        G.gl.glDisable(GL11.GL_BLEND);
     }
 
     private static void render_layer0_shadow_projections(ObjectManager om, float depth) {
         G.gl.glDepthFunc(518);
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         G.gl.glColor4f(0.0f, 0.0f, 0.0f, SHADOW_COLOR);
         G.gl.glDepthMask(false);
         ObjectManager.Layer l = om.layer1;
@@ -1544,7 +1544,7 @@ public class IlluminationManager {
             DynamicMotor m = it.next();
             if (!m.culled) {
                 Vector2 pos = m.get_state().position;
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos.x, pos.y, depth);
                 G.gl.glRotatef((float) (m.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
@@ -1597,7 +1597,7 @@ public class IlluminationManager {
             if (!w4.culled) {
                 int start4 = (w4.size.x < 2.1f ? 0 : w4.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos5 = w4.get_state().position;
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos5.x, pos5.y, depth);
                 G.gl.glRotatef((float) (w4.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
@@ -1611,7 +1611,7 @@ public class IlluminationManager {
             if (!w5.culled) {
                 int start5 = (w5.size.x < 2.1f ? 0 : w5.size.x < 4.1f ? 1 : 2) * 4;
                 Vector2 pos6 = w5.get_state().position;
-                G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+                G.gl.glMatrixMode(GL11.GL_MODELVIEW);
                 G.gl.glPushMatrix();
                 G.gl.glTranslatef(pos6.x, pos6.y, depth);
                 G.gl.glRotatef((float) (w5.get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
@@ -1699,19 +1699,19 @@ public class IlluminationManager {
             }
         }
         misc_penumbra.unbind();
-        G.gl.glDepthFunc(513);
-        G.gl.glDisable(3042);
+        G.gl.glDepthFunc(GL11.GL_LESS);
+        G.gl.glDisable(GL11.GL_BLEND);
         G.gl.glDepthMask(true);
     }
 
     private static void render_layer_bottom(ObjectManager.Layer layer, int layer_n, ObjectManager om) {
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         Marble._init_materials();
         MiscRenderer.spheremesh.setAutoBind(false);
         MiscRenderer.spheremesh.bind();
-        G.gl.glDisable(GL10.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
         render_marbles(layer.marbles);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         MiscRenderer.spheremesh.setAutoBind(true);
         if (layer.batteries.size() > 0 || (layer_n == 0 && !om.buttons.isEmpty())) {
             MiscRenderer.Acubemesh.setAutoBind(false);
@@ -1730,7 +1730,7 @@ public class IlluminationManager {
             }
             MiscRenderer.Acubemesh.setAutoBind(true);
         }
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         Plank.texture.bind();
         Plank.init_materials();
         if (layer_n < 2 && om.ropes.size() > 0) {
@@ -1751,9 +1751,9 @@ public class IlluminationManager {
         MiscRenderer.Aplankmesh.setAutoBind(false);
         MiscRenderer.Aplankmesh.bind();
         if (Game.enable_hqmeshes) {
-            G.gl.glDisable(GL10.GL_NORMALIZE);
+            G.gl.glDisable(GL11.GL_NORMALIZE);
             render_planks(layer.planks);
-            G.gl.glEnable(GL10.GL_NORMALIZE);
+            G.gl.glEnable(GL11.GL_NORMALIZE);
         } else {
             render_planks_lq(layer.planks);
         }
@@ -1834,7 +1834,7 @@ public class IlluminationManager {
         MiscRenderer.Acylindermesh.setAutoBind(false);
         MiscRenderer.Acylindermesh.bind();
         if (!layer.knobs.isEmpty()) {
-            G.gl.glDisable(3553);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
             Knob.init_materials();
             if (Game.enable_hqmeshes) {
@@ -1843,7 +1843,7 @@ public class IlluminationManager {
                 render_knobs_lq(layer.knobs);
             }
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            G.gl.glEnable(3553);
+            G.gl.glEnable(GL11.GL_TEXTURE_2D);
         }
         Plank.init_materials();
         Plank.texture.bind();
@@ -1877,7 +1877,7 @@ public class IlluminationManager {
         MiscRenderer.Acylindermesh.setAutoBind(true);
         MetalBar.texture.bind();
         if (Game.enable_hqmeshes) {
-            G.gl.glDisable(GL10.GL_NORMALIZE);
+            G.gl.glDisable(GL11.GL_NORMALIZE);
         }
         MiscRenderer.Ametalmesh.setAutoBind(false);
         MiscRenderer.Ametalmesh.bind();
@@ -1887,7 +1887,7 @@ public class IlluminationManager {
             render_metalbars_lq(layer.bars);
         }
         MiscRenderer.Ametalmesh.setAutoBind(true);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         Weight._texture.bind();
         MiscRenderer.Acubemesh.setAutoBind(false);
         MiscRenderer.Acubemesh.bind();
@@ -1910,7 +1910,7 @@ public class IlluminationManager {
             } else {
                 Marble._init_diffuse_materials();
             }
-            G.gl.glDisable(3553);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             int sz = layer.buckets.size();
             ArrayList<Bucket> buckets = layer.buckets;
             for (int x = 0; x < sz; x++) {
@@ -1919,7 +1919,7 @@ public class IlluminationManager {
                     m3.render();
                 }
             }
-            G.gl.glEnable(3553);
+            G.gl.glEnable(GL11.GL_TEXTURE_2D);
             MetalBar.init_materials();
         }
         MiscRenderer.Acubemesh.unbind();
@@ -1946,22 +1946,22 @@ public class IlluminationManager {
     }
 
     public static void render_reflections(ArrayList<Hinge> hinges, ObjectManager om) {
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glEnable(2929);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
         G.gl.glDepthMask(false);
         G.gl.glColorMask(false, false, false, false);
-        G.gl.glEnable(2960);
-        G.gl.glStencilFunc(519, 1, 255);
-        G.gl.glDisable(3553);
-        G.gl.glDisable(3042);
-        G.gl.glDepthFunc(515);
+        G.gl.glEnable(GL11.GL_STENCIL_TEST);
+        G.gl.glStencilFunc(GL11.GL_ALWAYS, 1, 255);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
+        G.gl.glDisable(GL11.GL_BLEND);
+        G.gl.glDepthFunc(GL11.GL_LEQUAL);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glStencilOp(7680, 7680, 7681);
+        G.gl.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
         MiscRenderer.boxmesh.setAutoBind(false);
         MiscRenderer.boxmesh.bind();
         ArrayList<MetalBar> bars = om.layer0.bars;
         int sz = bars.size();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         for (int x = 0; x < sz; x++) {
             MetalBar b = bars.get(x);
             if (!b.culled) {
@@ -1992,37 +1992,37 @@ public class IlluminationManager {
                 G.gl.glPopMatrix();
             }
         }
-        G.gl.glDisable(2929);
+        G.gl.glDisable(GL11.GL_DEPTH_TEST);
         G.gl.glDepthMask(false);
         G.gl.glColorMask(true, true, true, true);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         Game.newbgtex.bind();
-        G.gl.glStencilFunc(514, 1, 255);
-        G.gl.glStencilOp(7680, 7680, 7680);
+        G.gl.glStencilFunc(GL11.GL_EQUAL, 1, 255);
+        G.gl.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_KEEP);
         G.gl.glPushMatrix();
         G.gl.glScalef(512.0f, 128.0f, 1.0f);
         G.gl.glTranslatef(0.0f, 0.0f, -20.0f);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glMatrixMode(5890);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glScalef(2.0f, 1.0f, 1.0f);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, SHADOW_COLOR);
-        G.gl.glEnable(3042);
-        G.gl.glBlendFunc(770, 771);
+        G.gl.glEnable(GL11.GL_BLEND);
+        G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         G.gl.glStencilMask(0);
         MiscRenderer.boxmesh.render(6);
         G.gl.glStencilMask(255);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glPopMatrix();
         MiscRenderer.boxmesh.unbind();
         MiscRenderer.boxmesh.setAutoBind(true);
-        G.gl.glDisable(2960);
+        G.gl.glDisable(GL11.GL_STENCIL_TEST);
     }
 
     public static void render_scene(Camera cam, ArrayList<Hinge> hinges, ObjectManager om, boolean render_bg) {
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_BLEND);
         if (om.static_motors.size() > 0) {
             G.gl.glColor4f(0.1f, 0.1f, 0.1f, 1.0f);
             MiscRenderer.cylindermesh.setAutoBind(false);
@@ -2035,22 +2035,22 @@ public class IlluminationManager {
             MiscRenderer.cylindermesh.unbind();
             MiscRenderer.cylindermesh.setAutoBind(true);
         }
-        G.gl.glEnable(3553);
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         render_layer_bottom(om.layer0, 0, om);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         if (Game.enable_shadows) {
             render_layer0_shadow_projections(om, SHADOW_FACTOR);
         }
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(3553);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         render_layer_top(om.layer0, 0, om);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
         if (om.layer0.batteries.size() > 0) {
             render_battery_decos(om.layer0.batteries);
         }
@@ -2058,8 +2058,8 @@ public class IlluminationManager {
         if (Game.enable_shadows) {
             render_layer0_shadow_projections(om, 1.4f);
         }
-        G.gl.glDisable(3553);
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
+        G.gl.glDisable(GL11.GL_BLEND);
         MiscRenderer.cubemesh.setAutoBind(false);
         MiscRenderer.cubemesh.bind();
         Iterator<Cable> it2 = om.cables.iterator();
@@ -2080,33 +2080,33 @@ public class IlluminationManager {
         }
         MiscRenderer.cubemesh.unbind();
         MiscRenderer.cubemesh.setAutoBind(true);
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         render_layer_bottom(om.layer1, 1, om);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         if (Game.enable_shadows) {
             render_layer1_shadow_projections(om, 2.0f);
         }
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(3553);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         render_layer_top(om.layer1, 1, om);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         if (Game.enable_shadows) {
             render_layer1_shadow_projections(om, 2.35f);
         }
-        G.gl.glEnable(GL10.GL_LIGHTING);
-        G.gl.glEnable(3553);
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         render_layer_bottom(om.layer2, 2, om);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         MetalBar.init_materials();
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_BLEND);
         MiscRenderer.smallcylindermesh.setAutoBind(false);
         MiscRenderer.smallcylindermesh.bind();
         Iterator<Hinge> it5 = hinges.iterator();
@@ -2129,39 +2129,39 @@ public class IlluminationManager {
             DynamicMotor m5 = it8.next();
             m5.render_hinge();
         }
-        G.gl.glEnable(GL10.GL_NORMALIZE);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
         MiscRenderer.smallcylindermesh.unbind();
         MiscRenderer.smallcylindermesh.setAutoBind(true);
-        G.gl.glDisable(GL10.GL_NORMALIZE);
-        G.gl.glDisable(GL10.GL_LIGHTING);
-        G.gl.glEnable(3553);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        G.gl.glDisable(GL11.GL_LIGHTING);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         if (Game.enable_shadows) {
             render_projected_umbras(om);
         }
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         if (render_bg) {
             Game.bgtex.bind();
             G.gl.glPushMatrix();
             G.gl.glScalef(512.0f, 128.0f, 1.0f);
             G.gl.glTranslatef(0.0f, 0.0f, -0.6f);
-            G.gl.glMatrixMode(5890);
+            G.gl.glMatrixMode(GL11.GL_TEXTURE);
             G.gl.glScalef(56.0f, 14.0f, 1.0f);
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             G.gl.glDepthMask(false);
             MiscRenderer.boxmesh.render(6);
         }
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glPopMatrix();
         MiscRenderer.boxmesh.setAutoBind(false);
         MiscRenderer.boxmesh.bind();
         BaseMotor._dirtex.bind();
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-        G.gl.glDisable(2884);
-        G.gl.glDepthFunc(515);
+        G.gl.glDisable(GL11.GL_CULL_FACE);
+        G.gl.glDepthFunc(GL11.GL_LEQUAL);
         Iterator<StaticMotor> it9 = om.static_motors.iterator();
         while (it9.hasNext()) {
             StaticMotor m6 = it9.next();
@@ -2178,14 +2178,14 @@ public class IlluminationManager {
             DynamicMotor m8 = it11.next();
             m8.render_deco();
         }
-        G.gl.glEnable(2884);
+        G.gl.glEnable(GL11.GL_CULL_FACE);
         MiscRenderer.boxmesh.unbind();
         MiscRenderer.boxmesh.setAutoBind(true);
-        G.gl.glDisable(3553);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         if (Game.enable_shadows) {
             render_projected_penumbras(om);
         }
-        G.gl.glDisable(2884);
+        G.gl.glDisable(GL11.GL_CULL_FACE);
         render_ropes(cam, om.pcables, om.ropes, om.cables);
         G.batch.setProjectionMatrix(G.p_cam.combined);
         G.batch.setTransformMatrix(BaseRope.ztransform);
@@ -2195,7 +2195,7 @@ public class IlluminationManager {
         G.batch.setTransformMatrix(RocketEngine.ztransform_l);
         RocketEngine.render_lights();
         G.batch.setTransformMatrix(BaseRope.idttransform);
-        G.gl.glEnable(2884);
+        G.gl.glEnable(GL11.GL_CULL_FACE);
         G.gl.glLoadMatrixf(RocketEngine.ztransform_l.val, 0);
         G.gl.glDepthMask(true);
     }
@@ -2253,7 +2253,7 @@ public class IlluminationManager {
     private static void render_battery_decos(ArrayList<Battery> batteries) {
         MiscRenderer.boxmesh.setAutoBind(false);
         MiscRenderer.boxmesh.bind();
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         G.gl.glDepthMask(false);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         Battery._texture.bind();
@@ -2272,8 +2272,8 @@ public class IlluminationManager {
                 b3.render_light();
             }
         }
-        G.gl.glDisable(3553);
-        G.gl.glDisable(3042);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
+        G.gl.glDisable(GL11.GL_BLEND);
         Iterator<Battery> it3 = batteries.iterator();
         while (it3.hasNext()) {
             Battery b4 = it3.next();
@@ -2495,10 +2495,10 @@ public class IlluminationManager {
 
     public static void render_bloom(PCameraHandler camera, ObjectManager om) {
         G.gl.glDepthMask(false);
-        G.gl.glEnable(2929);
-        G.gl.glBlendFunc(770, 1);
-        G.gl.glEnable(3553);
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
+        G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, 1);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
+        G.gl.glEnable(GL11.GL_BLEND);
         Game.bloomtex.bind();
         Iterator<MetalBar> it = om.layer0.bars.iterator();
         while (it.hasNext()) {
@@ -2519,8 +2519,8 @@ public class IlluminationManager {
             }
         }
         G.gl.glColor4f(0.7882353f, 0.70980394f, 0.5372549f, 0.2f);
-        G.gl.glEnable(2929);
-        G.gl.glDisable(3553);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
+        G.gl.glDisable(GL11.GL_TEXTURE_2D);
         G.gl.glDepthMask(true);
     }
 }

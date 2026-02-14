@@ -38,7 +38,7 @@ public class G {
 
     public static void clear() {
         gl.glClear(16640);
-        gl.glDisable(2929);
+        gl.glDisable(GL11.GL_DEPTH_TEST);
     }
 
     public static void color(float r, float g, float b, float a) {

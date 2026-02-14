@@ -6,7 +6,7 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.math.Vector2;
@@ -117,16 +117,16 @@ public class LevelMenu extends Screen implements InputProcessor {
             G.cam.position.set(cam_pos.x, -95.0f, 0.0f);
         }
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         this.wintex.bind();
         MiscRenderer.draw_textured_box();
         G.cam.apply(G.gl);
-        G.gl.glEnable(3042);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_BLEND);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         this.btntex.bind();
         Iterator<Body> it = this.level_b.iterator();
         while (it.hasNext()) {
@@ -166,11 +166,11 @@ public class LevelMenu extends Screen implements InputProcessor {
             int i = l.highscore;
         }
         G.batch.end();
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
-        G.gl.glEnable(3042);
+        G.gl.glEnable(GL11.GL_BLEND);
         this.irender.begin(6);
         this.irender.color(0.0f, 0.0f, 0.0f, 0.0f);
         this.irender.vertex(0.7f, 0.734f, 0.0f);

@@ -3,7 +3,7 @@ package com.bithack.apparatus;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.bithack.apparatus.graphics.G;
 import com.bithack.apparatus.graphics.MiscRenderer;
@@ -187,18 +187,18 @@ public class ApparatusApp implements ApplicationListener {
                     this.fading = false;
                 }
             }
-            G.gl.glDisable(2929);
-            G.gl.glEnable(3042);
-            G.gl.glDisable(3553);
+            G.gl.glDisable(GL11.GL_DEPTH_TEST);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f - this.fade);
-            G.gl.glBlendFunc(770, 771);
-            G.gl.glMatrixMode(GL10.GL_PROJECTION);
+            G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            G.gl.glMatrixMode(GL11.GL_PROJECTION);
             G.gl.glLoadIdentity();
-            G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+            G.gl.glMatrixMode(GL11.GL_MODELVIEW);
             G.gl.glLoadIdentity();
             G.gl.glScalef(2.0f, 2.0f, 1.0f);
             MiscRenderer.draw_colored_box();
-            G.gl.glEnable(2929);
+            G.gl.glEnable(GL11.GL_DEPTH_TEST);
             if (this.load_next) {
                 G.batch.begin();
                 G.batch.setColor(Color.BLACK);

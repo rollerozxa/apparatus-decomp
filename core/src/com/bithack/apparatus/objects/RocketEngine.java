@@ -1,5 +1,6 @@
 package com.bithack.apparatus.objects;
 
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -237,7 +238,7 @@ public class RocketEngine extends GrabableObject {
     public static void render_fire() {
         int sz = fires.size();
         if (sz > 0) {
-            G.batch.setBlendFunction(770, 771);
+            G.batch.setBlendFunction(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             G.batch.begin();
             Iterator<Fire> i = fires.iterator();
             while (i.hasNext()) {
@@ -267,7 +268,7 @@ public class RocketEngine extends GrabableObject {
 
     public static void render_lights() {
         if (!lights.isEmpty()) {
-            G.batch.setBlendFunction(770, 771);
+            G.batch.setBlendFunction(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             G.batch.begin();
             for (Light l : lights) {
                 G.batch.setColor(1.0f, 0.99f, 0.99f, 0.3f);

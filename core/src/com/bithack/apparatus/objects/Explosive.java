@@ -1,7 +1,7 @@
 package com.bithack.apparatus.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -56,10 +56,10 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
     }
 
     public static void init_materials() {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, _material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, _material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _material, 12);
     }
 
     @Override
@@ -214,7 +214,7 @@ public abstract class Explosive extends GrabableObject implements QueryCallback,
 
     public static void render_explosions() {
         fires.size();
-        G.batch.setBlendFunction(770, 771);
+        G.batch.setBlendFunction(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         G.batch.begin();
         Iterator<Projectile> i = projectiles.iterator();
         while (i.hasNext()) {

@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.bithack.apparatus.ApparatusApp;
@@ -33,18 +33,18 @@ public class SandboxMenu extends Screen implements InputProcessor {
 
     @Override
     public void render() {
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
-        G.gl.glDisable(2929);
+        G.gl.glDisable(GL11.GL_DEPTH_TEST);
         G.gl.glDepthMask(false);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         this.bgtex.bind();
         MiscRenderer.draw_textured_box();
         G.gl.glDepthMask(true);
-        G.gl.glEnable(2929);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
     }
 
     @Override

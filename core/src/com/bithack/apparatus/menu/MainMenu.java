@@ -2,7 +2,7 @@ package com.bithack.apparatus.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.bithack.apparatus.ApparatusApp;
@@ -29,18 +29,18 @@ public class MainMenu extends Screen implements InputProcessor {
 
     @Override
     public void render() {
-        G.gl.glMatrixMode(GL10.GL_PROJECTION);
+        G.gl.glMatrixMode(GL11.GL_PROJECTION);
         G.gl.glLoadIdentity();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glLoadIdentity();
-        G.gl.glDisable(2929);
+        G.gl.glDisable(GL11.GL_DEPTH_TEST);
         G.gl.glDepthMask(false);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         this.bgtex.bind();
         MiscRenderer.draw_textured_box();
-        G.gl.glEnable(3042);
-        G.gl.glBlendFunc(770, 771);
+        G.gl.glEnable(GL11.GL_BLEND);
+        G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         LevelMenu.lchecktex.bind();
         if (Game.enable_sound) {
             G.gl.glPushMatrix();
@@ -57,7 +57,7 @@ public class MainMenu extends Screen implements InputProcessor {
             G.gl.glPopMatrix();
         }
         G.gl.glDepthMask(true);
-        G.gl.glEnable(2929);
+        G.gl.glEnable(GL11.GL_DEPTH_TEST);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.bithack.apparatus.objects;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -71,15 +71,15 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         G.gl.glTranslatef(pos.x, pos.y, 0.75f + this.layer);
         G.gl.glRotatef((float) (angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
         G.gl.glScalef(this.size.x * 2.0f, this.size.y * 2.0f, 1.0f);
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glPushMatrix();
         G.gl.glTranslatef(this.img / 4.0f, -0.25f, 0.0f);
         G.gl.glScalef(0.25f * this.size.x * 1.0f, this.size.y * 4.0f * 1.1f, 1.0f);
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         MiscRenderer.Acubemesh.render(4);
-        G.gl.glMatrixMode(5890);
+        G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glPopMatrix();
-        G.gl.glMatrixMode(GL10.GL_MODELVIEW);
+        G.gl.glMatrixMode(GL11.GL_MODELVIEW);
         G.gl.glPopMatrix();
     }
 

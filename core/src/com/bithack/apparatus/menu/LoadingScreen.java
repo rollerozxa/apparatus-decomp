@@ -2,6 +2,7 @@ package com.bithack.apparatus.menu;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
@@ -43,9 +44,9 @@ public class LoadingScreen extends Screen {
         G.set_clear_color(0.15294118f, 0.15294118f, 0.15294118f);
         G.clear();
         if (!this.rendered) {
-            G.gl.glEnable(3042);
-            G.gl.glBlendFunc(770, 771);
-            G.gl.glEnable(3553);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            G.gl.glEnable(GL11.GL_TEXTURE_2D);
             G.cam_p.apply(G.gl);
             G.gl.glTranslatef((float) G.width / 2, (float) G.height / 2, 0.0f);
             G.gl.glScalef(256.0f, 256.0f, 1.0f);
@@ -90,9 +91,9 @@ public class LoadingScreen extends Screen {
                     break;
             }
             this.init_counter++;
-            G.gl.glEnable(3042);
-            G.gl.glBlendFunc(770, 771);
-            G.gl.glEnable(3553);
+            G.gl.glEnable(GL11.GL_BLEND);
+            G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            G.gl.glEnable(GL11.GL_TEXTURE_2D);
             G.cam_p.apply(G.gl);
             G.gl.glTranslatef((float) G.width / 2, (float) G.height / 2, 0.0f);
             G.gl.glScalef(256.0f, 256.0f, 1.0f);
@@ -100,9 +101,9 @@ public class LoadingScreen extends Screen {
             MiscRenderer.draw_textured_box();
             return;
         }
-        G.gl.glEnable(3042);
-        G.gl.glBlendFunc(770, 771);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_BLEND);
+        G.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         G.cam_p.apply(G.gl);
         G.gl.glTranslatef((float) G.width / 2, (float) G.height / 2, 0.0f);
         G.gl.glScalef(256.0f, 256.0f, 1.0f);

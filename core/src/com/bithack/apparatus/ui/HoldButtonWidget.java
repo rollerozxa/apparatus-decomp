@@ -1,5 +1,6 @@
 package com.bithack.apparatus.ui;
 
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
@@ -46,8 +47,8 @@ public class HoldButtonWidget extends Widget {
 
     @Override
     public void render(Texture texture, SpriteBatch batch) {
-        G.gl.glEnable(3042);
-        G.gl.glEnable(3553);
+        G.gl.glEnable(GL11.GL_BLEND);
+        G.gl.glEnable(GL11.GL_TEXTURE_2D);
         G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         texture.bind();
         G.gl.glPushMatrix();

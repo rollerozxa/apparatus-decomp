@@ -1,6 +1,6 @@
 package com.bithack.apparatus.objects;
 
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -162,29 +162,29 @@ public class Plank extends Bar implements FreeObject {
     }
 
     public static void init_materials(boolean shadowed) {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, _material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, _material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _material, 12);
     }
 
     public static void init_materials() {
-        G.gl.glMaterialfv(1032, GL10.GL_AMBIENT, _material, 0);
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_AMBIENT, _material, 0);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _material, 12);
     }
 
     public static void init_dark_material() {
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _material, 13);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _material, 17);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 21);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _material, 13);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _material, 17);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _material, 21);
     }
 
     public static void init_light_material() {
-        G.gl.glMaterialfv(1032, GL10.GL_DIFFUSE, _material, 4);
-        G.gl.glMaterialfv(1032, GL10.GL_SPECULAR, _material, 8);
-        G.gl.glMaterialfv(1032, GL10.GL_SHININESS, _material, 12);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_DIFFUSE, _material, 4);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SPECULAR, _material, 8);
+        G.gl.glMaterialfv(GL11.GL_FRONT_AND_BACK, GL11.GL_SHININESS, _material, 12);
     }
 
     @Override
