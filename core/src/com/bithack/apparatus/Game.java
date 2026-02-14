@@ -124,6 +124,11 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
 
     private static final float T_EPSILON = 1.5f;
 
+    // Debug stuff
+    private Box2DDebugRenderer debug = new Box2DDebugRenderer();
+    private static boolean physics_debug = false;
+    private static boolean tracing = false;
+
     static final float[] _def_material = {0.5f, 0.5f, 0.5f, 1.0f, 0.75f, 0.75f, 0.75f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 10.0f, 0.0f, 0.0f, 0.0f};
     static final float[] _metal_material = {0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 0.2f, 0.2f, 1.0f, 0.8f, 0.8f, 0.8f, 1.0f, 3.0f, 0.0f, 0.0f, 0.0f};
     private static MouseJointDef _mjd = new MouseJointDef();
@@ -165,7 +170,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     private static boolean s_down = false;
     public static boolean sandbox = false;
     public static boolean testing_challenge = false;
-    static boolean tracing = false;
+
     private static boolean w_down = false;
     public static World world;
     static Plane yaxis = new Plane(new Vector3(0.0f, 0.0f, 1.0f), new Vector3(0.0f, 0.0f, 1.0f));
@@ -191,7 +196,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     public PCameraHandler camera_h;
     private boolean commit_next = false;
     ContactHandler contact_handler;
-    Box2DDebugRenderer debug = new Box2DDebugRenderer();
+
     public boolean disable_undo = false;
     private boolean do_autosave = false;
     private boolean do_save = false;
@@ -1453,6 +1458,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             G.batch.end();
             Gdx.app.getGraphics().getType();
             Graphics.GraphicsType graphicsType = Graphics.GraphicsType.AndroidGL;
+
+            if (physics_debug)
+                debug.render(world, G.p_cam.combined);
         }
     }
 
@@ -2187,6 +2195,9 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                 break;
             case Input.Keys.T:
                 toggle_tracing();
+                break;
+            case Input.Keys.F3:
+                physics_debug = !physics_debug;
                 break;
             case Input.Keys.U:
                 this.level_filename = "TESTLEVEL";
