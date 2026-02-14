@@ -66,7 +66,7 @@ public class L {
         strings.put("save_level", "Save level");
         strings.put("help1", "Get the blue ball to the goal!\nUse the play button in the top left corner to test the level and see how the marble fails to hit the goal.\nUse this knowledge to move wooden objects around to make a path for the marble.\nAll wooden objects can be moved.");
         strings.put("help2_1", "Drag your finger on the background to move the camera, use two fingers to zoom.");
-        strings.put("help2_2", "Drag your finger on the background to move the camera, use the zoom buttons toString zoom.");
+        strings.put("help2_2", "Drag your finger on the background to move the camera, use the scrollwheel to zoom.");
         strings.put("help3", "Move one edge of a plank close to the side of another, and a hammer icon will appear.\nClick the hammer icon to nail the two planks together.\nAfter attachment, a new button will appear in the top right corner. Click on this button to release the planks from each other.");
         strings.put("help4", "Select a plank by clicking on it. A small circular arrow will appear beside it, drag this button to rotate the object.");
         strings.put("help6", "Drag the edges of the cable to connect them to batteries and engines.\nDrag the plank over the round motor in the wall and a small wrench icon will appear. Click on it to attach the plank to the motor.\nThe small round arrow on the engine tells you which way the motor will rotate when it is connected to a battery.");

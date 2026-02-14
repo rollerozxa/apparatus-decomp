@@ -1599,9 +1599,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                     this.menu_cache.draw(this.left_menu_cache_id, 1, 2);
                 }
             }
-            if (!has_multitouch) {
-                this.menu_cache.draw(this.left_menu_cache_id, 4, 2);
-            }
             this.menu_cache.end();
             if (mode != MODE_PLAY) {
                 G.batch.begin();
@@ -3068,18 +3065,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
                         break;
                     }
                     break;
-                case 3:
-                    if (!has_multitouch) {
-                        this.camera_h.camera_pos.z += 4.0f;
-                    }
-                    r = true;
-                    break;
-                case 4:
-                    if (!has_multitouch) {
-                        this.camera_h.camera_pos.z -= 4.0f;
-                    }
-                    r = true;
-                    break;
             }
         } else if (p == 0 && sandbox && from_game && mode != MODE_PLAY && v.x < 208.0f && v.y > ((float) (h - 48))) {
             release_object();
@@ -3647,8 +3632,10 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     }
 
     @Override
-    public boolean scrolled(int arg0) {
-        return false;
+    public boolean scrolled(int amount) {
+        this.camera_h.camera_pos.z += ((float) amount) * 2.0f;
+        this.last_zoom = System.currentTimeMillis();
+        return true;
     }
 
     @Override
