@@ -1234,9 +1234,7 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             } else {
                 G.gl.glClear(256);
             }
-            if (!enable_bg) {
-                G.gl.glClear(16384);
-            }
+            G.gl.glClear(16384);
             G.gl.glDisable(3042);
             G.gl.glEnable(2929);
             G.gl.glEnable(2884);
