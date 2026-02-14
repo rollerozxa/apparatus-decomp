@@ -28,31 +28,6 @@ public class MetalWheel extends Wheel {
         }
     }
 
-    @Override
-    public void render_lq() {
-        if (!this.culled) {
-            G.gl.glPushMatrix();
-            Vector2 pos = get_state().position;
-            G.gl.glTranslatef(pos.x, pos.y, this.layer + 1);
-            G.gl.glRotatef((float) (get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-            G.gl.glScalef(this.size, this.size, 0.8f);
-            MiscRenderer.draw_cylinder();
-            G.gl.glPopMatrix();
-        }
-    }
-
-    public void render_inner_lq() {
-        if (!this.culled) {
-            G.gl.glPushMatrix();
-            Vector2 pos = get_state().position;
-            G.gl.glTranslatef(pos.x, pos.y, 1.125f + this.layer);
-            G.gl.glRotatef((float) (get_state().angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-            G.gl.glScalef(this.size / 2.0f, this.size / 2.0f, 0.7f);
-            MiscRenderer.draw_cylinder();
-            G.gl.glPopMatrix();
-        }
-    }
-
     public void render_inner() {
         if (!this.culled) {
             G.gl.glPushMatrix();

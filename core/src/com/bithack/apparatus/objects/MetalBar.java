@@ -147,18 +147,6 @@ public class MetalBar extends Bar {
         G.gl.glPopMatrix();
     }
 
-    public void render_lq() {
-        BaseObject.State s = get_state();
-        Vector2 pos = s.position;
-        float angle = s.angle;
-        G.gl.glPushMatrix();
-        G.gl.glTranslatef(pos.x, pos.y, (this.layer * 1.5f) + 0.5f);
-        G.gl.glRotatef((float) Math.toDegrees(angle), 0.0f, 0.0f, 1.0f);
-        G.gl.glScalef(this.size.x, this.size.y, 2.0f);
-        MiscRenderer.Ametalmesh.render(4);
-        G.gl.glPopMatrix();
-    }
-
     public static void _init() {
         _initialized = true;
         texture = TextureFactory.load_mipmapped("data/metal.jpg");

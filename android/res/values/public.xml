@@ -58,7 +58,6 @@
     <public type="id" name="shadows" id="0x7f04002e" />
     <public type="id" name="bloom" id="0x7f04002f" />
     <public type="id" name="reflection" id="0x7f040030" />
-    <public type="id" name="hqmeshes" id="0x7f040031" />
     <public type="id" name="bg" id="0x7f040032" />
     <public type="id" name="ropequality" id="0x7f040033" />
     <public type="id" name="drawfps" id="0x7f040034" />

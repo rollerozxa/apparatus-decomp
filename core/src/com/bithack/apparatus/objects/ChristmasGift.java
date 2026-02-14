@@ -76,7 +76,7 @@ public class ChristmasGift extends GrabableObject implements PrimaryObject {
         G.gl.glTranslatef(this.img / 4.0f, -0.25f, 0.0f);
         G.gl.glScalef(0.25f * this.size.x * 1.0f, this.size.y * 4.0f * 1.1f, 1.0f);
         G.gl.glMatrixMode(GL11.GL_MODELVIEW);
-        MiscRenderer.Acubemesh.render(4);
+        MiscRenderer.hqcubemesh.render(4);
         G.gl.glMatrixMode(GL11.GL_TEXTURE);
         G.gl.glPopMatrix();
         G.gl.glMatrixMode(GL11.GL_MODELVIEW);

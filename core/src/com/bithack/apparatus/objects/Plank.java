@@ -88,18 +88,6 @@ public class Plank extends Bar implements FreeObject {
         G.gl.glPopMatrix();
     }
 
-    public void render_lq() {
-        BaseObject.State s = get_state();
-        Vector2 pos = s.position;
-        float angle = s.angle;
-        G.gl.glPushMatrix();
-        G.gl.glTranslatef(pos.x, pos.y, this.layer + 1);
-        G.gl.glRotatef((float) Math.toDegrees(angle), 0.0f, 0.0f, 1.0f);
-        G.gl.glScalef(this.size.x, this.size.y, 0.5f);
-        MiscRenderer.Aplankmesh.render(4);
-        G.gl.glPopMatrix();
-    }
-
     @Override
     public void on_click() {
     }

@@ -145,7 +145,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
     public static boolean draw_fps = false;
     public static boolean enable_bg = true;
     public static boolean enable_bloom = true;
-    public static boolean enable_hqmeshes = true;
     public static boolean enable_menu = true;
     public static boolean enable_multithreading = false;
     public static boolean enable_music = false;
@@ -1798,7 +1797,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
         if (from_community && !this.om.layer0.controllers.isEmpty()) {
             this.msg = L.get("hascontrolpanel");
         }
-        MiscRenderer.update_quality();
         if (this.level_category == 2) {
             set_bg(10);
         } else {
@@ -1982,13 +1980,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             z2 = false;
         }
         enable_reflections = z2;
-        String tmp6 = Settings.get("hqmeshes");
-        if (tmp6.isEmpty() || tmp6.equals("yes")) {
-            z3 = true;
-        } else {
-            z3 = false;
-        }
-        enable_hqmeshes = z3;
         String tmp7 = Settings.get("enablebg");
         if (tmp7.isEmpty() || tmp7.equals("yes")) {
             z4 = true;
@@ -2005,7 +1996,6 @@ public class Game extends Screen implements InputProcessor, WidgetValueCallback 
             resume_world();
             set_mode(MODE_PLAY);
         }
-        MiscRenderer.update_quality();
     }
 
     @Override

@@ -13,10 +13,6 @@ import com.badlogic.gdx.net.HttpStatus;
 import com.bithack.apparatus.Game;
 
 public class MiscRenderer {
-    public static Mesh Acubemesh = null;
-    public static Mesh Acylindermesh = null;
-    public static Mesh Ametalmesh = null;
-    public static Mesh Aplankmesh = null;
     public static final int CYLINDER_DIV = 24;
     public static final int SMALLCYLINDER_DIV = 5;
     public static Mesh axesmesh;
@@ -394,22 +390,6 @@ public class MiscRenderer {
         } catch (Exception e) {
             Gdx.app.log("could not load stipple tex", "");
         }
-        update_quality();
-    }
-
-    public static void update_quality() {
-        Gdx.app.log("updating quality", new StringBuilder().append(Game.enable_hqmeshes).toString());
-        if (Game.enable_hqmeshes) {
-            Ametalmesh = hqmetalmesh;
-            Acubemesh = hqcubemesh;
-            Acylindermesh = hqcylindermesh;
-            Aplankmesh = hqplankmesh;
-            return;
-        }
-        Ametalmesh = cubemesh;
-        Acubemesh = cubemesh;
-        Acylindermesh = cylindermesh;
-        Aplankmesh = cubemesh;
     }
 
     public static void draw_line(float x1, float y1, float x2, float y2) {
@@ -506,18 +486,12 @@ public class MiscRenderer {
         circlemesh.render(6);
     }
 
-    public static void draw_axes() {
-    }
-
     public static void draw_colored_sphere() {
         spheremesh.render(5);
     }
 
     public static void draw_colored_cube() {
         cubemesh.render(4);
-    }
-
-    public static void draw_autocylinder() {
     }
 
     public static void draw_hqcylinder() {

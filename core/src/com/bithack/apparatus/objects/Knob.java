@@ -41,18 +41,6 @@ public class Knob extends Wheel {
     }
 
     @Override
-    public void render_lq() {
-        G.gl.glPushMatrix();
-        BaseObject.State s = get_state();
-        Vector2 pos = s.position;
-        G.gl.glTranslatef(pos.x, pos.y, this.layer + 1.0f);
-        G.gl.glRotatef((float) (s.angle * 57.29577951308232d), 0.0f, 0.0f, 1.0f);
-        G.gl.glScalef(this.size, this.size, 0.8f);
-        MiscRenderer.draw_cylinder();
-        G.gl.glPopMatrix();
-    }
-
-    @Override
     public void reshape() {
         ApparatusApp.game.remove_potential_fixture_pair(this.body);
         if (this.f != null) {

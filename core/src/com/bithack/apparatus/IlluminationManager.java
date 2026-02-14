@@ -1714,8 +1714,8 @@ public class IlluminationManager {
         G.gl.glEnable(GL11.GL_NORMALIZE);
         MiscRenderer.spheremesh.setAutoBind(true);
         if (layer.batteries.size() > 0 || (layer_n == 0 && !om.buttons.isEmpty())) {
-            MiscRenderer.Acubemesh.setAutoBind(false);
-            MiscRenderer.Acubemesh.bind();
+            MiscRenderer.hqcubemesh.setAutoBind(false);
+            MiscRenderer.hqcubemesh.bind();
             Iterator<Battery> it = layer.batteries.iterator();
             while (it.hasNext()) {
                 Battery m = it.next();
@@ -1728,14 +1728,14 @@ public class IlluminationManager {
                     m2.render_btn();
                 }
             }
-            MiscRenderer.Acubemesh.setAutoBind(true);
+            MiscRenderer.hqcubemesh.setAutoBind(true);
         }
         G.gl.glEnable(GL11.GL_TEXTURE_2D);
         Plank.texture.bind();
         Plank.init_materials();
         if (layer_n < 2 && om.ropes.size() > 0) {
-            MiscRenderer.Acylindermesh.setAutoBind(false);
-            MiscRenderer.Acylindermesh.bind();
+            MiscRenderer.hqcylindermesh.setAutoBind(false);
+            MiscRenderer.hqcylindermesh.bind();
             Iterator<Rope> it3 = om.ropes.iterator();
             while (it3.hasNext()) {
                 Rope r = it3.next();
@@ -1746,20 +1746,18 @@ public class IlluminationManager {
                     ((RopeEnd) r.g2).render_inner_half();
                 }
             }
-            MiscRenderer.Acylindermesh.setAutoBind(true);
+            MiscRenderer.hqcylindermesh.setAutoBind(true);
         }
-        MiscRenderer.Aplankmesh.setAutoBind(false);
-        MiscRenderer.Aplankmesh.bind();
-        if (Game.enable_hqmeshes) {
-            G.gl.glDisable(GL11.GL_NORMALIZE);
-            render_planks(layer.planks);
-            G.gl.glEnable(GL11.GL_NORMALIZE);
-        } else {
-            render_planks_lq(layer.planks);
-        }
-        MiscRenderer.Aplankmesh.setAutoBind(true);
-        MiscRenderer.Acubemesh.setAutoBind(false);
-        MiscRenderer.Acubemesh.bind();
+
+        MiscRenderer.hqplankmesh.setAutoBind(false);
+        MiscRenderer.hqplankmesh.bind();
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        render_planks(layer.planks);
+        G.gl.glEnable(GL11.GL_NORMALIZE);
+        MiscRenderer.hqplankmesh.setAutoBind(true);
+
+        MiscRenderer.hqcubemesh.setAutoBind(false);
+        MiscRenderer.hqcubemesh.bind();
         if (layer_n == 0) {
             Iterator<RocketEngine> it4 = om.rocketengines.iterator();
             while (it4.hasNext()) {
@@ -1826,32 +1824,26 @@ public class IlluminationManager {
                 }
             }
         }
-        MiscRenderer.Acubemesh.unbind();
-        MiscRenderer.Acubemesh.setAutoBind(true);
+        MiscRenderer.hqcubemesh.unbind();
+        MiscRenderer.hqcubemesh.setAutoBind(true);
     }
 
     private static void render_layer_top(ObjectManager.Layer layer, int layer_n, ObjectManager om) {
-        MiscRenderer.Acylindermesh.setAutoBind(false);
-        MiscRenderer.Acylindermesh.bind();
+        MiscRenderer.hqcylindermesh.setAutoBind(false);
+        MiscRenderer.hqcylindermesh.bind();
         if (!layer.knobs.isEmpty()) {
             G.gl.glDisable(GL11.GL_TEXTURE_2D);
             G.gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
             Knob.init_materials();
-            if (Game.enable_hqmeshes) {
-                render_knobs(layer.knobs);
-            } else {
-                render_knobs_lq(layer.knobs);
-            }
+            render_knobs(layer.knobs);
+
             G.gl.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             G.gl.glEnable(GL11.GL_TEXTURE_2D);
         }
         Plank.init_materials();
         Plank.texture.bind();
-        if (Game.enable_hqmeshes) {
-            render_wheels(layer.wheels);
-        } else {
-            render_wheels_lq(layer.wheels);
-        }
+        render_wheels(layer.wheels);
+
         Iterator<Rope> it = om.ropes.iterator();
         while (it.hasNext()) {
             Rope r = it.next();
@@ -1862,35 +1854,25 @@ public class IlluminationManager {
                 ((RopeEnd) r.g2).render();
             }
         }
-        if (Game.enable_hqmeshes) {
-            render_metalwheels_inner(layer.metalwheels);
-        } else {
-            render_metalwheels_inner_lq(layer.metalwheels);
-        }
+
+        render_metalwheels_inner(layer.metalwheels);
+
         Weight._texture.bind();
         MetalBar.init_materials();
-        if (Game.enable_hqmeshes) {
-            render_metalwheels(layer.metalwheels);
-        } else {
-            render_metalwheels_lq(layer.metalwheels);
-        }
-        MiscRenderer.Acylindermesh.setAutoBind(true);
+        render_metalwheels(layer.metalwheels);
+
+        MiscRenderer.hqcylindermesh.setAutoBind(true);
         MetalBar.texture.bind();
-        if (Game.enable_hqmeshes) {
-            G.gl.glDisable(GL11.GL_NORMALIZE);
-        }
-        MiscRenderer.Ametalmesh.setAutoBind(false);
-        MiscRenderer.Ametalmesh.bind();
-        if (Game.enable_hqmeshes) {
-            render_metalbars(layer.bars);
-        } else {
-            render_metalbars_lq(layer.bars);
-        }
-        MiscRenderer.Ametalmesh.setAutoBind(true);
+        G.gl.glDisable(GL11.GL_NORMALIZE);
+        MiscRenderer.hqmetalmesh.setAutoBind(false);
+        MiscRenderer.hqmetalmesh.bind();
+        render_metalbars(layer.bars);
+
+        MiscRenderer.hqmetalmesh.setAutoBind(true);
         G.gl.glEnable(GL11.GL_NORMALIZE);
         Weight._texture.bind();
-        MiscRenderer.Acubemesh.setAutoBind(false);
-        MiscRenderer.Acubemesh.bind();
+        MiscRenderer.hqcubemesh.setAutoBind(false);
+        MiscRenderer.hqcubemesh.bind();
         Iterator<Panel> it2 = layer.controllers.iterator();
         while (it2.hasNext()) {
             Panel m = it2.next();
@@ -1922,8 +1904,8 @@ public class IlluminationManager {
             G.gl.glEnable(GL11.GL_TEXTURE_2D);
             MetalBar.init_materials();
         }
-        MiscRenderer.Acubemesh.unbind();
-        MiscRenderer.Acubemesh.setAutoBind(true);
+        MiscRenderer.hqcubemesh.unbind();
+        MiscRenderer.hqcubemesh.setAutoBind(true);
         if (!layer.weights.isEmpty() || !layer.mines.isEmpty()) {
             Weight._mesh.setAutoBind(false);
             Weight._mesh.bind();
@@ -2284,27 +2266,11 @@ public class IlluminationManager {
         MiscRenderer.boxmesh.setAutoBind(true);
     }
 
-    private static void render_metalwheels_lq(ArrayList<MetalWheel> wheels) {
-        Iterator<MetalWheel> it = wheels.iterator();
-        while (it.hasNext()) {
-            MetalWheel w = it.next();
-            w.render_lq();
-        }
-    }
-
     private static void render_metalwheels(ArrayList<MetalWheel> wheels) {
         Iterator<MetalWheel> it = wheels.iterator();
         while (it.hasNext()) {
             MetalWheel w = it.next();
             w.render();
-        }
-    }
-
-    private static void render_metalwheels_inner_lq(ArrayList<MetalWheel> wheels) {
-        Iterator<MetalWheel> it = wheels.iterator();
-        while (it.hasNext()) {
-            MetalWheel w = it.next();
-            w.render_inner_lq();
         }
     }
 
@@ -2316,16 +2282,6 @@ public class IlluminationManager {
         }
     }
 
-    private static void render_knobs_lq(ArrayList<Knob> knobs) {
-        int sz = knobs.size();
-        for (int x = 0; x < sz; x++) {
-            Wheel w = knobs.get(x);
-            if (!w.culled) {
-                w.render_lq();
-            }
-        }
-    }
-
     private static void render_knobs(ArrayList<Knob> knobs) {
         int sz = knobs.size();
         for (int x = 0; x < sz; x++) {
@@ -2333,37 +2289,6 @@ public class IlluminationManager {
             if (!w.culled) {
                 w.render();
             }
-        }
-    }
-
-    private static void render_wheels_lq(ArrayList<Wheel> wheels) {
-        int num_fixed = 0;
-        int sz = wheels.size();
-        for (int x = 0; x < sz; x++) {
-            Wheel w = wheels.get(x);
-            if (!w.culled) {
-                if (w.fixed_dynamic) {
-                    num_fixed++;
-                } else {
-                    w.render_lq();
-                }
-            }
-        }
-        if (num_fixed > 0) {
-            Plank.init_dark_material();
-            for (int x2 = 0; x2 < sz; x2++) {
-                Wheel w2 = wheels.get(x2);
-                if (!w2.culled) {
-                    if (w2.fixed_dynamic) {
-                        w2.render_lq();
-                        num_fixed--;
-                    }
-                    if (num_fixed == 0) {
-                        break;
-                    }
-                }
-            }
-            Plank.init_light_material();
         }
     }
 
@@ -2398,16 +2323,6 @@ public class IlluminationManager {
         }
     }
 
-    private static void render_metalbars_lq(ArrayList<MetalBar> bars) {
-        int sz = bars.size();
-        for (int i = 0; i < sz; i++) {
-            MetalBar m = bars.get(i);
-            if (!m.culled) {
-                m.render_lq();
-            }
-        }
-    }
-
     private static void render_metalbars(ArrayList<MetalBar> bars) {
         int sz = bars.size();
         for (int i = 0; i < sz; i++) {
@@ -2425,37 +2340,6 @@ public class IlluminationManager {
             if (!m.culled) {
                 m.render();
             }
-        }
-    }
-
-    private static void render_planks_lq(ArrayList<Plank> planks) {
-        int num_fixed = 0;
-        int sz = planks.size();
-        for (int x = 0; x < sz; x++) {
-            Plank p = planks.get(x);
-            if (!p.culled) {
-                if (p.fixed_dynamic) {
-                    num_fixed++;
-                } else {
-                    p.render_lq();
-                }
-            }
-        }
-        if (num_fixed > 0) {
-            Plank.init_dark_material();
-            for (int x2 = 0; x2 < sz; x2++) {
-                Plank p2 = planks.get(x2);
-                if (!p2.culled) {
-                    if (p2.fixed_dynamic) {
-                        p2.render_lq();
-                        num_fixed--;
-                    }
-                    if (num_fixed == 0) {
-                        break;
-                    }
-                }
-            }
-            Plank.init_light_material();
         }
     }
 

@@ -15,7 +15,6 @@ public class GraphicsDialog {
     final CheckBox bg_cb;
     final CheckBox bloom_cb;
     Dialog dialog;
-    final CheckBox hqmeshes_cb;
     final CheckBox reflection_cb;
     int rope_quality = 0;
     final SeekBar sb;
@@ -34,7 +33,6 @@ public class GraphicsDialog {
         this.sf = (CheckBox) this.view.findViewById(R.id.drawfps);
         this.reflection_cb = (CheckBox) this.view.findViewById(R.id.reflection);
         this.bloom_cb = (CheckBox) this.view.findViewById(R.id.bloom);
-        this.hqmeshes_cb = (CheckBox) this.view.findViewById(R.id.hqmeshes);
         this.bg_cb = (CheckBox) this.view.findViewById(R.id.bg);
         this.sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.bithack.apparatus.GraphicsDialog.1
             @Override
@@ -54,7 +52,6 @@ public class GraphicsDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final boolean sf_checked = GraphicsDialog.this.sf.isChecked();
-                final boolean hqmeshes_checked = GraphicsDialog.this.hqmeshes_cb.isChecked();
                 final boolean bg_checked = GraphicsDialog.this.bg_cb.isChecked();
                 final boolean sh_checked = !bg_checked ? false : GraphicsDialog.this.sh.isChecked();
                 final boolean bloom_checked = GraphicsDialog.this.bloom_cb.isChecked();
@@ -64,7 +61,6 @@ public class GraphicsDialog {
                 Settings.set("enableshadows", sh_checked ? "yes" : "no");
                 Settings.set("ropequality", Integer.toString(rq));
                 Settings.set("enablebg", bg_checked ? "yes" : "no");
-                Settings.set("hqmeshes", hqmeshes_checked ? "yes" : "no");
                 Settings.set("bloom", bloom_checked ? "yes" : "no");
                 Settings.set("reflection", reflection_checked ? "yes" : "no");
                 GraphicsDialog.this.activity.run_on_gl_thread(new Runnable() { // from class: com.bithack.apparatus.GraphicsDialog.2.1
@@ -73,12 +69,10 @@ public class GraphicsDialog {
                         Game.draw_fps = sf_checked;
                         Game.enable_shadows = sh_checked;
                         Game.rope_quality = rq;
-                        Game.enable_hqmeshes = hqmeshes_checked;
                         Game.enable_bloom = bloom_checked;
                         Game.enable_reflections = reflection_checked;
                         Game.enable_bg = bg_checked;
                         ApparatusApp.game.update_ropes();
-                        MiscRenderer.update_quality();
                     }
                 });
                 Settings.save();
@@ -104,6 +98,5 @@ public class GraphicsDialog {
         this.bg_cb.setChecked(Game.enable_bg);
         this.bloom_cb.setChecked(Game.enable_bloom);
         this.reflection_cb.setChecked(Game.enable_reflections);
-        this.hqmeshes_cb.setChecked(Game.enable_hqmeshes);
     }
 }
